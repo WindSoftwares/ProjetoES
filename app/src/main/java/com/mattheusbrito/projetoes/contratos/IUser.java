@@ -5,4 +5,5 @@ package com.mattheusbrito.projetoes.contratos;
  */
 
 public interface IUser {
+    public String getName();
 }
