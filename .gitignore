@@ -24,5 +24,6 @@ hs_err_pid*
 
 #Android Studio configuration files
 
+build/
 .idea/
 local.properties
