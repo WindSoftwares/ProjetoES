@@ -1,6 +1,6 @@
-package com.widsoft.se.project.contratos;
+package com.windsoft.se.project.contracts;
 
-import com.widsoft.se.project.series.Serie;
+import com.windsoft.se.project.series.Serie;
 
 import java.util.Set;
 

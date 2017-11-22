@@ -1,4 +1,4 @@
-package com.widsoft.se.project.contratos;
+package com.windsoft.se.project.contracts;
 
 /**
  * Created by gersonsales on 07/11/17.

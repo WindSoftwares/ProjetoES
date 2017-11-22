@@ -1,4 +1,4 @@
-package com.widsoft.se.project.series;
+package com.windsoft.se.project.series;
 
 /**
  * Created by gersonsales on 07/11/17.

@@ -1,4 +1,4 @@
-package com.widsoft.se.project;
+package com.windsoft.se.project;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
