@@ -1,6 +1,6 @@
-package com.mattheusbrito.projetoes.contratos;
+package com.widsoft.se.project.contratos;
 
-import com.mattheusbrito.projetoes.model.series.Serie;
+import com.widsoft.se.project.series.Serie;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package com.mattheusbrito.projetoes.contratos;
+package com.widsoft.se.project.contratos;
 
 /**
  * Created by gersonsales on 07/11/17.

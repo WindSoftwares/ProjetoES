@@ -1,4 +1,4 @@
-package com.mattheusbrito.projetoes;
+package com.windsoft.se.project;
 
 import org.junit.Test;
 

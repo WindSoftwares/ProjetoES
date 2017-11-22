@@ -1,4 +1,4 @@
-package com.mattheusbrito.projetoes;
+package com.windsoft.se.project;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
