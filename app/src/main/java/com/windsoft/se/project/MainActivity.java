@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
                 // Chamar proximo método aqui - Igor Brasileiro
                 metodoTrocaDeTela();
             }
-        }, 1000);
+        }, 3000);
 
-        // codigo abaixo comentado, por que está crashando o APP. - Igor Brasileiro
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+/*        // codigo abaixo comentado, por que está crashando o APP. - Igor Brasileiro
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
