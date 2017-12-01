@@ -1,6 +1,8 @@
 package com.windsoft.se.project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +18,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.welcome_screen);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Chamar proximo método aqui - Igor Brasileiro
+                metodoTrocaDeTela();
+            }
+        }, 1000);
+
+        // codigo abaixo comentado, por que está crashando o APP. - Igor Brasileiro
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -27,7 +40,17 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
+    }
+
+    private void metodoTrocaDeTela() {
+        /*Intent intent = new Intent(MainActivity.this,
+                nextClass.class); // next class é a proxima classe que desejar
+
+        startActivity(intent);
+        finish();
+        */
+        finish();
     }
 
     @Override
