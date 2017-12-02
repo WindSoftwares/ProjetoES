@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import com.mattheusbrito.projetoes.R;
 
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 3000);
 
+        /*
+        Este codigo abaixo é referente a API do FACEBOOK para ANDROID
+         */
+
 /*        // codigo abaixo comentado, por que está crashando o APP. - Igor Brasileiro
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,13 +52,11 @@ public class MainActivity extends AppCompatActivity {
     
 
     private void metodoTrocaDeTela() {
-        /*Intent intent = new Intent(MainActivity.this,
-                nextClass.class); // next class é a proxima classe que desejar
+        Intent intent = new Intent(MainActivity.this,
+               FacebookButtonClassTest.class); // next class é a proxima classe que desejar
 
         startActivity(intent);
-        finish();
-        */
-        finish();
+        //finish();
     }
 
     @Override
