@@ -18,7 +18,8 @@ public class telaQuiz extends AppCompatActivity {
 
     private Button botao1Resposta,botao2Resposta,botao3Resposta,botao4Resposta;
     private TextView perguntaTxt;
-
+    //variavel para teste da tela
+    private int cont = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +37,19 @@ public class telaQuiz extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 perguntaTxt.setText("Pergunta do botao1 ");
-
+                cont++;
+                //onde vamos verificar se a resposta do usuário está correta
                 if(botao1Resposta.getText().equals("botao")){
                     botao1Resposta.setBackgroundColor(Color.parseColor("#33cc33"));
+                    //enable para não poder clicar em outros botoes
                     setClickButtons(false);
                 }else{
                     botao1Resposta.setBackgroundColor(Color.parseColor("#cc0000"));
+                    //enable para não poder clicar em outros botoes
                     setClickButtons(false);
                 }
+
+                //mudo a cor do background e seto tudo depois de 2 s
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -52,26 +58,29 @@ public class telaQuiz extends AppCompatActivity {
                         perguntaTxt.setText("pergunta botao1");
                         botao1Resposta.setBackgroundColor(Color.parseColor("#f5f5f0"));
                         setClickButtons(true);
+                        if(acabaQuiz(cont)){
+                            /*
+                            no nosso caso, teriamos o numero de jogadas do usuario e mudariamos para a tela da pontuacao
+                             */
+                            finish();
+                        }
                     }
-                },3000);
+                },2000);
 
             }
         });
         botao2Resposta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                //onde vamos verificar se a resposta do usuário está correta
+
                 if(botao2Resposta.getText().equals("botao")){
                     botao2Resposta.setBackgroundColor(Color.parseColor("#33cc33"));
-                    //enable para não poder clicar em oturos botoes
                     setClickButtons(false);
                 }else{
                     botao2Resposta.setBackgroundColor(Color.parseColor("#cc0000"));
-                    //enable para não poder clicar em oturos botoes
                     setClickButtons(false);
                 }
 
-                //mudo a cor do background e seto tudo depois de 3 s
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -80,8 +89,11 @@ public class telaQuiz extends AppCompatActivity {
                         perguntaTxt.setText("Pergunta do botao2");
                         botao2Resposta.setBackgroundColor(Color.parseColor("#f5f5f0"));
                         setClickButtons(true);
+                        if(acabaQuiz(cont)){
+                            finish();
+                        }
                     }
-                },3000);
+                },2000);
             }
         });
 
@@ -105,8 +117,11 @@ public class telaQuiz extends AppCompatActivity {
                         perguntaTxt.setText("pergunta botao3");
                         botao3Resposta.setBackgroundColor(Color.parseColor("#f5f5f0"));
                         setClickButtons(true);
+                        if(acabaQuiz(cont)){
+                            finish();
+                        }
                     }
-                },3000);
+                },2000);
 
             }
         });
@@ -131,13 +146,19 @@ public class telaQuiz extends AppCompatActivity {
                         perguntaTxt.setText("pergunta botao4");
                         botao4Resposta.setBackgroundColor(Color.parseColor("#f5f5f0"));
                         setClickButtons(true);
+                        if(acabaQuiz(cont)){
+                            finish();
+                        }
                     }
-                },3000);
+                },2000);
 
             }
         });
     }
-    //onde vamos mudar as respostas das questões
+
+    /**
+     * metodo onde vamos mudar todas as respostas dos botoes, para que o usuario possa responder
+     */
     public void mudaBotoes(){
         botao1Resposta.setText("outra resposta ");
         botao2Resposta.setText("outra resposta ");
@@ -145,10 +166,26 @@ public class telaQuiz extends AppCompatActivity {
         botao4Resposta.setText("outra resposta ");
     }
 
+    /**
+     * metodo em que vamos setar se o botao e "clicável" ou não
+     * @param enableOrNot
+     */
     public void setClickButtons(boolean enableOrNot){
         botao1Resposta.setClickable(enableOrNot);
         botao2Resposta.setClickable(enableOrNot);
         botao3Resposta.setClickable(enableOrNot);
         botao4Resposta.setClickable(enableOrNot);
+    }
+
+    /**
+     * metodo que vamos usar para saber quando o quiz acabada(alternativa)
+     * @return boolean
+     * @param jogadas
+     */
+    public boolean acabaQuiz(int jogadas){
+        if(jogadas == 10){
+            return true;
+        }
+        return false;
     }
 }
