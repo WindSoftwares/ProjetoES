@@ -7,10 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class telaQuiz extends AppCompatActivity {
@@ -18,17 +19,25 @@ public class telaQuiz extends AppCompatActivity {
 
     private Button botao1Resposta, botao2Resposta, botao3Resposta, botao4Resposta;
     private TextView perguntaTxt;
+    private Set<String> teste = new HashSet<String>();
+
     //variavel para teste da tela
     private int cont = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_quiz);
+        //teste sobre como pegar as respostas de uma pergunta
+        teste.add("safadeza1");
+        teste.add("safadeza2");
+        teste.add("safadeza3");
+        teste.add("safadeza4");
 
         carregaBotoes();
-        //primeira pergunta do quiz
-        perguntaTxt.setText("Primeira pergunta");
+        carregaPrimeiraPergunta();
+
 
 
         botao1Resposta.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +56,6 @@ public class telaQuiz extends AppCompatActivity {
                        inPlay(questao.getDescription())
                         */
                         inPlay("pergunta botao1",botao1Resposta);
-
                     }
                 }, 1000);
 
@@ -57,13 +65,12 @@ public class telaQuiz extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 cont++;
-              verificaResposta("botao",botao2Resposta);
+                verificaResposta("botao",botao2Resposta);
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
                         inPlay("pergunta botao2",botao2Resposta);
 
                     }
@@ -80,7 +87,6 @@ public class telaQuiz extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
                         inPlay("pergunta botao3",botao3Resposta);
                     }
                 }, 1000);
@@ -98,7 +104,6 @@ public class telaQuiz extends AppCompatActivity {
                     @Override
                     public void run() {
                         inPlay("pergunta botao4",botao4Resposta);
-
                     }
                 }, 1000);
 
@@ -110,10 +115,13 @@ public class telaQuiz extends AppCompatActivity {
      * metodo onde vamos mudar todas as respostas dos botoes, para que o usuario possa responder
      */
     public void mudaBotoes() {
-        botao1Resposta.setText("outra resposta ");
-        botao2Resposta.setText("outra resposta ");
-        botao3Resposta.setText("outra resposta ");
-        botao4Resposta.setText("outra resposta ");
+        //criar um arrayList para pegar cada botao que sera usado
+        List<String> list = new ArrayList<String>(teste);
+
+        botao1Resposta.setText(list.get(0));
+        botao2Resposta.setText(list.get(1));
+        botao3Resposta.setText(list.get(2));
+        botao4Resposta.setText(list.get(3));
     }
 
     /**
@@ -187,5 +195,14 @@ public class telaQuiz extends AppCompatActivity {
             //enable para não poder clicar em outros botoes
             setClickButtons(false);
         }
+    }
+
+    /**
+     * metodo que vai mostrar na tela a primeira questão do quiz
+     */
+    public void carregaPrimeiraPergunta(){
+        perguntaTxt.setText("primeira pergunta");
+        //modo para ler um array To do
+       // perguntaTxt.setText(Arrays.toString(list.toArray()));
     }
 }
