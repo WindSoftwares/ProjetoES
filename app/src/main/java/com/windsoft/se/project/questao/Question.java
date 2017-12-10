@@ -13,6 +13,7 @@ public class Question {
     private LEVEL level;
     private Set<String> choices = new HashSet<String>();
     private String correctAnswer;
+    //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
     public Question(String description,LEVEL level){
         this.description = description;
