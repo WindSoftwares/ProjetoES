@@ -6,13 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.windsoft.se.project.FacebookButtonClassTest">
 
-    <com.facebook.login.widget.LoginButton
+    <!--<com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="113dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="84dp" />-->
+
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Botao Teste Login"
+        android:layout_marginTop="100dp"/>
 
 </android.support.constraint.ConstraintLayout>
