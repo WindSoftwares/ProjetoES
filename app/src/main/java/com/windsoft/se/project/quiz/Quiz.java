@@ -4,9 +4,9 @@ import com.windsoft.se.project.questao.LEVEL;
 import com.windsoft.se.project.questao.Question;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by lucas on 11/12/2017.
@@ -26,17 +26,26 @@ public class Quiz {
 
     }
 
-    public void shufflequiz(){
-        Random random = new Random();
+    public Quiz(LEVEL level, ArrayList<Question> quiz ){
 
-        for (int i = 0; i < quiz.size(); i++) {
-            int n = random.nextInt(quiz.size());
-            Question questionMoment = quiz.get(n);
-            quiz.remove(questionMoment);
-            quiz.add(questionMoment);
-        }
+        this.quiz  = quiz;
+        this.level = level;
+        this.iterator = quiz.iterator();
+
     }
 
+
+    /**
+     * Modifica a ordens das questões no quiz.
+     */
+    public void shuffleQuiz(){
+        Collections.shuffle(quiz);
+    }
+
+    /**
+     * Retorna a próxima questão do quiz.
+     * @return Question
+     */
     public Question getNextQuestion(){
         if(iterator.hasNext()){
             return iterator.next();
