@@ -53,4 +53,8 @@ public class Quiz {
         return null;
     }
 
+    public List<Question> getQuestions(){
+        return this.quiz;
+    }
+
 }
