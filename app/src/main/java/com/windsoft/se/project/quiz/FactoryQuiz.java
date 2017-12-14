@@ -46,25 +46,15 @@ public class FactoryQuiz {
      */
     private ArrayList<Question> selectQuestions(ArrayList<Question> allQuestions, LEVEL level){
         ArrayList<Question> selects = new ArrayList<>();
-        ArrayList<Question> quiz = new ArrayList<>();
-
-        ArrayList<Integer> indices = new ArrayList<>();
-        for (int i = 0; i < NUMBER_QUESTION ; i++) {
-            indices.add(i);
-        }
-        Collections.shuffle(indices);
 
         for ( Question question : allQuestions) {
             if (question.getLevel() == level) {
                 selects.add(question);
             }
         }
+        Collections.shuffle(selects);
 
-        for(Integer indice : indices){
-            quiz.add(selects.get(indice));
-        }
-
-        return selects;
+        return (ArrayList<Question>)selects.subList(0, NUMBER_QUESTION);
     };
 
     public ArrayList<Question> getAllQuestions(){
