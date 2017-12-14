@@ -54,7 +54,7 @@ public class FactoryQuiz {
         }
         Collections.shuffle(selects);
 
-        return (ArrayList<Question>)selects.subList(0, NUMBER_QUESTION);
+        return new ArrayList<Question>(selects.subList(0, NUMBER_QUESTION));
     };
 
     public ArrayList<Question> getAllQuestions(){
