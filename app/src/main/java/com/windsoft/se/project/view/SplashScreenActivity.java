@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mattheusbrito.projetoes.R;
 
+import static com.windsoft.se.project.util.Constant.ONE_SECOND;
 import static java.lang.Thread.sleep;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -17,11 +18,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         Thread splashScreenDelay  = new Thread(() ->{
             try {
-                sleep(3000);
+                sleep(ONE_SECOND);
             }catch (InterruptedException e) {
                 e.printStackTrace();
             }finally {
-                Intent quizScreenIntent = new Intent(this, QuizActivity.class);
+                Intent quizScreenIntent = new Intent(this, MainActivity.class);
                 startActivity(quizScreenIntent);
                 finish();
             }
