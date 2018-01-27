@@ -4,14 +4,13 @@ package com.windsoft.se.project;
  * Created by João Lucas on 25/11/2017.
  */
 
-import com.windsoft.se.project.questao.LEVEL;
-import com.windsoft.se.project.questao.Question;
+import com.windsoft.se.project.model.LEVEL;
+import com.windsoft.se.project.model.Question;
 
 import org.junit.Test;
 
 import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Pattern;
+
 import static org.junit.Assert.*;
 
 public class QuestionTest {

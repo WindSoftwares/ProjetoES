@@ -1,4 +1,4 @@
-package com.windsoft.se.project.questao;
+package com.windsoft.se.project.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +39,6 @@ public class Question {
      * Metodo que vai apresentar um Set das questões erradas
      * @return set<String> wrongAnswer
      */
-
     public Set<String> getWrongAnswer(){
 
        Set<String> wrongAnswer = getChoices();

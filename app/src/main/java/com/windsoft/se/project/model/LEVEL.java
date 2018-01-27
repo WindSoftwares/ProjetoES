@@ -1,4 +1,4 @@
-package com.windsoft.se.project.questao;
+package com.windsoft.se.project.model;
 
 /**
  * Created by João Lucas on 24/11/2017.
