@@ -4,77 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mattheusbrito.projetoes.telaQuiz">
-
+    tools:context="com.windsoft.se.project.view.QuizActivity">
 
 
     <TextView
-        android:id="@+id/perguntaTxt"
-        android:layout_width="350dp"
-        android:layout_height="126dp"
+        android:id="@+id/question_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-        android:text="Questão do quiz"
         android:background="#e6e6e6"
-        android:textSize="20dp"
+        android:text="@string/quiz_question"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
 
     <Button
-        android:id="@+id/resposta1Button"
+        android:id="@+id/firstAlternative_button"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:background="#47476b"
-        android:text="Resposta 1"
+        android:text="@string/alternative"
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/perguntaTxt" />
+        app:layout_constraintTop_toBottomOf="@+id/question_text" />
 
     <Button
-        android:id="@+id/resposta2Button"
+        android:id="@+id/secondAlternative_button"
         android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:textColor="#ffffff"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="#47476b"
-        android:text="botao"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta1Button" />
-
-    <Button
-        android:id="@+id/resposta3Button"
-        android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:textColor="#ffffff"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="#47476b"
-        android:text="Resposta 3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta2Button" />
-
-    <Button
-        android:id="@+id/resposta4Button"
-        android:layout_width="0dp"
-        android:textColor="#ffffff"
         android:layout_height="65dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="#47476b"
-        android:text="Respota 4"
+        android:text="@string/alternative"
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta3Button" />
+        app:layout_constraintTop_toBottomOf="@+id/firstAlternative_button" />
+
+    <Button
+        android:id="@+id/thirdAlternative_button"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#47476b"
+        android:text="@string/alternative"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondAlternative_button" />
+
+    <Button
+        android:id="@+id/fourthAlternative_button"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#47476b"
+        android:text="@string/alternative"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thirdAlternative_button" />
 
 
 
