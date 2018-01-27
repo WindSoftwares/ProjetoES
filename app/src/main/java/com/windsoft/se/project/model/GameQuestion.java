@@ -1,6 +1,4 @@
-package com.windsoft.se.project;
-
-import com.windsoft.se.project.questao.Question;
+package com.windsoft.se.project.model;
 
 /**
  * Created by João Lucas on 10/12/2017.

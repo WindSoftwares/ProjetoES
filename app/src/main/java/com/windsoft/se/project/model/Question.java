@@ -1,7 +1,12 @@
-package com.windsoft.se.project.questao;
+package com.windsoft.se.project.model;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by João Lucas on 24/11/2017.
@@ -11,7 +16,7 @@ import java.util.Set;
 public class Question {
     private String description;
     private LEVEL level;
-    private Set<String> choices = new HashSet<String>();
+    private Queue<String> choices = new LinkedList<>();
     private String correctAnswer;
     //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
@@ -20,7 +25,11 @@ public class Question {
         this.level = level;
     }
 
-   public Question(String description,LEVEL level,Set<String> choices,String correctAnswer){
+   public Question(String description,LEVEL level,Queue<String> choices,String correctAnswer){
+        if (! choices.contains(correctAnswer)) {
+            throw new IllegalArgumentException("Choices must contains the correctAnswer!");
+        }
+
         this.description = description;
         this.level = level;
         this.choices = choices;
@@ -39,10 +48,9 @@ public class Question {
      * Metodo que vai apresentar um Set das questões erradas
      * @return set<String> wrongAnswer
      */
+    public Queue<String> getWrongAnswer(){
 
-    public Set<String> getWrongAnswer(){
-
-       Set<String> wrongAnswer = getChoices();
+       Queue<String> wrongAnswer = getChoices();
        wrongAnswer.remove(getCorrectAnswer());
        return wrongAnswer;
 
@@ -68,7 +76,17 @@ public class Question {
      * Vai retornar um Set de alternativas da questão
      * @return set<String> choices
      */
-    public Set<String> getChoices() {
+    public Queue<String> getChoices() {
         return choices;
+    }
+
+    public String pickAnswer() {
+        String result = choices.poll();
+        choices.add(result);
+        return result;
+    }
+
+    public void shuffle() {
+        Collections.shuffle((List<?>) choices);
     }
 }

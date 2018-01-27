@@ -1,8 +1,8 @@
 package com.windsoft.se.project.quiz;
 
-import com.windsoft.se.project.questao.LEVEL;
-import com.windsoft.se.project.questao.Question;
-import com.windsoft.se.project.quiz.Quiz;
+
+import com.windsoft.se.project.model.LEVEL;
+import com.windsoft.se.project.model.Question;
 
 import java.util.ArrayList;
 import java.util.Collections;
