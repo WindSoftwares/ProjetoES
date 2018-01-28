@@ -5,4 +5,5 @@
     <color name="colorAccent">#47476b</color>
     <color name="colorGreen">#11ff00</color>
     <color name="colorText">#FFFFFF</color>
+    <color name="colorDivider">#BDBDBD</color>
 </resources>
