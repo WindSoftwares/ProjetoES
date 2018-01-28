@@ -4,8 +4,8 @@ package com.windsoft.se.project;
  * Created by João Lucas on 25/11/2017.
  */
 
-import com.windsoft.se.project.model.LEVEL;
-import com.windsoft.se.project.model.Question;
+import com.windsoft.se.project.model.quiz.LEVEL;
+import com.windsoft.se.project.model.quiz.Question;
 
 import org.junit.Test;
 

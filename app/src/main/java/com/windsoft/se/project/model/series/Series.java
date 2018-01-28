@@ -1,7 +1,10 @@
-package com.windsoft.se.project.series;
+package com.windsoft.se.project.model.series;
 
 import android.graphics.Bitmap;
 
+import com.windsoft.se.project.model.series.season.Season;
+
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 

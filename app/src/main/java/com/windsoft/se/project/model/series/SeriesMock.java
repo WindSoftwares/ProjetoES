@@ -1,4 +1,4 @@
-package com.windsoft.se.project.series;
+package com.windsoft.se.project.model.series;
 
 import android.os.Build;
 

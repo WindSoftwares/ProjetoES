@@ -1,18 +1,21 @@
 package com.windsoft.se.project.view;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.mattheusbrito.projetoes.R;
-import com.windsoft.se.project.model.QuestioMock;
-import com.windsoft.se.project.model.Question;
+import com.windsoft.se.project.model.quiz.QuestioMock;
+import com.windsoft.se.project.model.quiz.Question;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +23,7 @@ import butterknife.OnClick;
 
 import static com.windsoft.se.project.util.Constant.TWO_SECONDS;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizFragment extends Fragment {
 
     @BindView(R.id.question_text)
     TextView questionText;
@@ -71,41 +74,52 @@ public class QuizActivity extends AppCompatActivity {
 
     synchronized private void goToTheNextQuestion() {
         Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            startActivity(getIntent());
-            finish();
-        }, TWO_SECONDS);
+        handler.postDelayed(() -> getActivity().getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainFragment, new QuizFragment())
+                .commit(), TWO_SECONDS);
     }
 
     private void disableInteraction() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     private void enableInteraction() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     private boolean isCorrect(String response) {
         return response.equalsIgnoreCase(mCorrectAnswer);
     }
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_quiz, container, false);
         enableInteraction();
-
-        ButterKnife.bind(this);
+        ButterKnife.bind(this, view);
         bindQuiz();
 
+        return view;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Find way to get quiz from mock.
-    }
+    //    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.fragment_quiz);
+//        enableInteraction();
+//
+//        ButterKnife.bind(this);
+//        bindQuiz();
+//
+//    }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        //Find way to get quiz from mock.
+//    }
 
     private void bindQuiz() {
         if (QuestioMock.hasNext()) {
@@ -122,10 +136,10 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    private void goToScoreScreen() {
+    private void goToScoreScreen() {//TODO
         Intent scoreScreenIntent = new Intent();//TODO
         startActivity(scoreScreenIntent);
-        finish();
+//        finish();
     }
 
 

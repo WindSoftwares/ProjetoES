@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.mattheusbrito.projetoes.R;
-import com.windsoft.se.project.series.SeriesMock;
-import com.windsoft.se.project.series.SeriesMockObserver;
+import com.windsoft.se.project.model.series.SeriesMock;
+import com.windsoft.se.project.model.series.SeriesMockObserver;
 
 /**
  * Created by GersonSales on 1/27/2018.
@@ -48,6 +48,8 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
 
         TextView textView = convertView.findViewById(R.id.series_textView);
         textView.setText(SeriesMock.getByPosition(position).getName());
+
+
         return convertView;
     }
 

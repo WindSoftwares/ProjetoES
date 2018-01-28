@@ -1,12 +1,9 @@
-package com.windsoft.se.project.model;
+package com.windsoft.se.project.model.quiz;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Created by João Lucas on 24/11/2017.

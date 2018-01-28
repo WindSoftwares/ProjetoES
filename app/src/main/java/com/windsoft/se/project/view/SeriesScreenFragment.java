@@ -1,20 +1,18 @@
 package com.windsoft.se.project.view;
 
 import android.app.Fragment;
-import android.media.MediaMetadata;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
 import com.mattheusbrito.projetoes.R;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
-import com.windsoft.se.project.series.Series;
-import com.windsoft.se.project.series.SeriesMock;
+import com.windsoft.se.project.model.series.Series;
+import com.windsoft.se.project.model.series.SeriesMock;
 
 import java.util.List;
 
