@@ -1,5 +1,6 @@
 package com.windsoft.se.project.view;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.mattheusbrito.projetoes.R;
 import com.windsoft.se.project.model.quiz.QuestioMock;
 import com.windsoft.se.project.model.quiz.Question;
+import com.windsoft.se.project.model.series.season.Season;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +41,10 @@ public class QuizFragment extends Fragment {
 
     @BindView(R.id.fourthAlternative_button)
     Button fourthAlternativeButton;
+
+
     private String mCorrectAnswer;
+    private Season mOwner;
 
     @OnClick(R.id.firstAlternative_button)
     void firstAlternativeChosen() {
@@ -72,13 +77,18 @@ public class QuizFragment extends Fragment {
         goToTheNextQuestion();
     }
 
+    @SuppressLint("ResourceType")
     synchronized private void goToTheNextQuestion() {
         Handler handler = new Handler();
-        handler.postDelayed(() -> getActivity().getFragmentManager()
-                .beginTransaction()
-                .remove(this)
-                .replace(R.id.mainFragment, new QuizFragment())
-                .commit(), TWO_SECONDS);
+        handler.postDelayed(() -> {
+            QuizFragment fragment = new QuizFragment();
+            fragment.setOwner(getOwner());
+            getActivity().getFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                    .replace(R.id.mainFragment, fragment)
+                    .commit();
+        }, TWO_SECONDS);
     }
 
     private void disableInteraction() {
@@ -124,7 +134,7 @@ public class QuizFragment extends Fragment {
 
     private void bindQuiz() {
         if (QuestioMock.hasNext()) {
-            Question question = QuestioMock.getNext();
+            Question question = mOwner.getNextQuestion();
             question.shuffle();
             questionText.setText(question.getDescription());
             mCorrectAnswer = question.getCorrectAnswer();
@@ -144,4 +154,11 @@ public class QuizFragment extends Fragment {
     }
 
 
+    public void setOwner(Season owner) {
+        mOwner = owner;
+    }
+
+    public Season getOwner() {
+        return mOwner;
+    }
 }

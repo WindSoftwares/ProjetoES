@@ -33,7 +33,7 @@ public class SeasonViewAdapter extends RecyclerView.Adapter<SeasonViewHolder> {
 
     @Override
     public void onBindViewHolder(SeasonViewHolder holder, int position) {
-        holder.bind(SeasonMock.getSeasonByPosition(position));
+        holder.bind(SeasonMock.getInstance().getSeasonByPosition(position));
         holder.itemView.setOnClickListener(v -> mListener.OnClick(position));
 
 

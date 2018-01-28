@@ -15,6 +15,7 @@ import com.windsoft.se.project.adapter.SeasonViewAdapter;
 import com.windsoft.se.project.model.series.Series;
 import com.windsoft.se.project.model.series.season.OnClickSeasonListener;
 import com.windsoft.se.project.model.series.season.Season;
+import com.windsoft.se.project.model.series.season.SeasonMock;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,19 +53,20 @@ public class SeasonScreenFragment extends Fragment {
         seasonView.setAdapter(new SeasonViewAdapter(getOnClickListener()));
         seasonView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        if (mOwner != null) {
-            seasonsOwner.setText(mOwner.getName());
-        }
-
+        seasonsOwner.setText(mOwner.getName());
     }
 
 
     private OnClickSeasonListener getOnClickListener() {
-        return position -> getActivity().getFragmentManager()
+        return position -> {
+            QuizFragment fragment = new QuizFragment();
+            Season season = SeasonMock.getInstance().getSeasonByPosition(position);
+            fragment.setOwner(season);
+            getActivity().getFragmentManager()
                 .beginTransaction()
                 .remove(this)
-                .replace(R.id.mainFragment, new QuizFragment())
-                .commit();
+                .replace(R.id.mainFragment, fragment)
+                .commit();};
     }
 
     public void setOwner(Series owner) {

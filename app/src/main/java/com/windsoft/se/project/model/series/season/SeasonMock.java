@@ -5,7 +5,17 @@ package com.windsoft.se.project.model.series.season;
  */
 
 public class SeasonMock {
-    public static Season getSeasonByPosition(int position) {
+    private static SeasonMock instance;
+
+    synchronized public static SeasonMock getInstance() {
+        if (instance == null) {
+            instance = new SeasonMock();
+        }
+        return instance;
+    }
+
+
+    public Season getSeasonByPosition(int position) {
         return new Season("Name", 1);
     }
 
