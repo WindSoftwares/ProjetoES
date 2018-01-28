@@ -18,6 +18,7 @@ import com.mattheusbrito.projetoes.R;
 import com.windsoft.se.project.model.quiz.QuestioMock;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.season.Season;
+import com.windsoft.se.project.view.holder.ScoreFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +45,8 @@ public class QuizFragment extends Fragment {
 
 
     private String mCorrectAnswer;
-    private Season mOwner;
+    private static Season mOwner;
+    private static int mGatheredScore;
 
     @OnClick(R.id.firstAlternative_button)
     void firstAlternativeChosen() {
@@ -71,6 +73,7 @@ public class QuizFragment extends Fragment {
         String response = button.getText().toString();
         if (isCorrect(response)) {
             button.setBackgroundColor(Color.GREEN);
+            mGatheredScore++;
         }else {
             button.setBackgroundColor(Color.RED);
         }
@@ -81,12 +84,10 @@ public class QuizFragment extends Fragment {
     synchronized private void goToTheNextQuestion() {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            QuizFragment fragment = new QuizFragment();
-            fragment.setOwner(getOwner());
             getActivity().getFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(R.id.mainFragment, fragment)
+                    .replace(R.id.mainFragment, new QuizFragment())
                     .commit();
         }, TWO_SECONDS);
     }
@@ -115,26 +116,9 @@ public class QuizFragment extends Fragment {
         return view;
     }
 
-    //    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_quiz);
-//        enableInteraction();
-//
-//        ButterKnife.bind(this);
-//        bindQuiz();
-//
-//    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        //Find way to get quiz from mock.
-//    }
-
     private void bindQuiz() {
-        if (QuestioMock.hasNext()) {
-            Question question = mOwner.getNextQuestion();
+        if (getOwner().hasNext()) {
+            Question question = getOwner().getNextQuestion();
             question.shuffle();
             questionText.setText(question.getDescription());
             mCorrectAnswer = question.getCorrectAnswer();
@@ -147,10 +131,19 @@ public class QuizFragment extends Fragment {
         }
     }
 
+    @SuppressLint("ResourceType")
     private void goToScoreScreen() {//TODO
-        Intent scoreScreenIntent = new Intent();//TODO
-        startActivity(scoreScreenIntent);
-//        finish();
+        ScoreFragment fragment = new ScoreFragment();
+        fragment.setObtainedScore(mGatheredScore);
+        fragment.setTargetScore(getOwner().size());
+        mGatheredScore = 0;
+
+        getActivity()
+                .getFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                .replace(R.id.mainFragment, fragment)
+                .commit();
     }
 
 
