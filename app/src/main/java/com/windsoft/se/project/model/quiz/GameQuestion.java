@@ -1,4 +1,4 @@
-package com.windsoft.se.project.model;
+package com.windsoft.se.project.model.quiz;
 
 /**
  * Created by João Lucas on 10/12/2017.
