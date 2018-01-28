@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -13,6 +14,8 @@ import com.mattheusbrito.projetoes.R;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
 import com.windsoft.se.project.model.series.Series;
 import com.windsoft.se.project.model.series.SeriesMock;
+import com.windsoft.se.project.model.series.season.Season;
+import com.windsoft.se.project.model.series.season.SeasonMock;
 
 import java.util.List;
 
@@ -22,50 +25,40 @@ import butterknife.OnItemClick;
 
 public class SeriesScreenFragment extends Fragment {
 
-
-
     @BindView(R.id.series_gridView)
     GridView seriesGridView;
 
-
-    private List<Series> mSeries;
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_serie_screen, container, false);
         ButterKnife.bind(this, view);
         seriesGridView.setAdapter(new SeriesViewAdapter(view.getContext()));
 
         tempGridBinder();
-
-
-
-        Button buttonTest = view.findViewById(R.id.button_test);
-        buttonTest.setOnClickListener(listener -> SeriesMock.addSeries(SeriesMock.getNewSeries()));
-
-//        buttonTest.setOnClickListener(listener -> getActivity()
-//                .getFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.mainFragment, new FavoritesSeriesFragment())
-//                .commit());
         return view;
     }
 
     private void tempGridBinder() {
-        seriesGridView.setOnItemClickListener((parent, view1, position, id) -> getActivity()
-                .getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainFragment, new SeasonScreenFragment())
-                .commit());
+        seriesGridView.setOnItemClickListener((parent, view, position, id) -> {
+            SeasonScreenFragment fragment = new SeasonScreenFragment();
+            Series series = (Series) seriesGridView.getAdapter().getItem(position);
+            fragment.setOwner(series);
+            getActivity()
+                    .getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainFragment, fragment)
+                    .commit();
+        });
     }
 
 
     @OnItemClick(R.id.series_gridView)
     public void onGridItemClick(int position) {
         System.out.println("CLICKED");
-        SeriesMock.getByPosition(position).setName("Clicked");
-        SeriesMock.notifyAllObservers();
+        SeriesMock.getInstance().getByPosition(position).setName("Clicked");
+        SeriesMock.getInstance().notifyAllObservers();
     }
 
 }

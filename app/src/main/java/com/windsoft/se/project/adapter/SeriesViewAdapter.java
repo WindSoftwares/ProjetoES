@@ -18,25 +18,28 @@ import com.windsoft.se.project.model.series.SeriesMockObserver;
 public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver {
 
     private Context mContext;
+    private SeriesMock mSeriesMock;
+
 
     public SeriesViewAdapter(Context mContext) {
         this.mContext = mContext;
-        SeriesMock.addObserver(this);
+        mSeriesMock = SeriesMock.getInstance();
+        mSeriesMock.addObserver(this);
     }
 
     @Override
     public int getCount() {
-        return SeriesMock.size();
+        return mSeriesMock.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return SeriesMock.getByPosition(position);
+        return mSeriesMock.getByPosition(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return SeriesMock.getByPosition(position).getId();
+        return mSeriesMock.getByPosition(position).getId();
     }
 
     @Override
@@ -47,7 +50,7 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
         }
 
         TextView textView = convertView.findViewById(R.id.series_textView);
-        textView.setText(SeriesMock.getByPosition(position).getName());
+        textView.setText(mSeriesMock.getByPosition(position).getName());
 
 
         return convertView;

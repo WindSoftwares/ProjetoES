@@ -76,6 +76,7 @@ public class QuizFragment extends Fragment {
         Handler handler = new Handler();
         handler.postDelayed(() -> getActivity().getFragmentManager()
                 .beginTransaction()
+                .remove(this)
                 .replace(R.id.mainFragment, new QuizFragment())
                 .commit(), TWO_SECONDS);
     }

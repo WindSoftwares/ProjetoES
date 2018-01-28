@@ -12,43 +12,58 @@ import java.util.Set;
  */
 
 public class SeriesMock {
-    private static int count;
 
-    private static List<Series> mSeries = new ArrayList<>();
-    private static Set<SeriesMockObserver> mObservers = new HashSet<>();
-    private static Set<Series> seriesTree;
+    private static SeriesMock instance;
 
-    public static Series getNewSeries() {
+    private  int count;
+    private  List<Series> mSeries = new ArrayList<>();
+    private  Set<SeriesMockObserver> mObservers = new HashSet<>();
+    private  Set<Series> seriesTree;
+
+    private SeriesMock() {
+        for (int i = 0; i < 10; i++) {
+            mSeries.add(getNewSeries());
+        }
+    }
+
+    static synchronized public SeriesMock getInstance() {
+        if (instance == null) {
+            instance = new SeriesMock();
+        }
+        return instance;
+    }
+
+    public  Series getNewSeries() {
         return new Series("Series Name" + count ++ , null, null);
     }
 
-    public static void addSeries(Series series) {
+    public  void addSeries(Series series) {
         mSeries.add(series);
         notifyAllObservers();
     }
 
-    public static Series getByPosition(int position) {
+    public  Series getByPosition(int position) {
         return mSeries.get(position);
     }
 
-    public static List<Series> getSeriesList() {
+    public  List<Series> getSeriesList() {
         return mSeries;
     }
 
-    public static void addObserver(SeriesMockObserver observer) {
+    public  void addObserver(SeriesMockObserver observer) {
         mObservers.add(observer);
     }
 
 
 
-    public static void notifyAllObservers() {
+    public  void notifyAllObservers() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mObservers.iterator().forEachRemaining(SeriesMockObserver::update);
         }
 
     }
 
-    public static int size() {
+    public  int size() {
         return mSeries.size();
     }
 }
