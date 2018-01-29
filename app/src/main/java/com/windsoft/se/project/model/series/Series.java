@@ -1,9 +1,16 @@
 package com.windsoft.se.project.model.series;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
+import android.provider.MediaStore;
 
 import com.windsoft.se.project.model.series.season.Season;
+import com.windsoft.se.project.util.MediaUtil;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,6 +25,7 @@ public class Series {
     private Bitmap mThumbnail;
     private Set<Season> mSeasons;
     private long mId;
+    private Bitmap thumbnail;
 
 
     public Series(String name, Bitmap thumbnail, TreeSet<Season> seasons) {
@@ -44,5 +52,9 @@ public class Series {
         return "Series{" +
                 "mName='" + mName + '\'' +
                 '}';
+    }
+
+    public Bitmap getThumbnail() {//TODO temp methot to simulate the series thumbail
+        return MediaUtil.getBitmapFromURL("https://lh4.googleusercontent.com/SxVOcR70jJ6kbqIlqI5xrW-tOsM8U7nkmw6ohQMPvw-4C0Z4SNVfPMZ6e6mbfA-DdU3l1qCtBIfyp5aJBv_S=w1920-h987");
     }
 }
