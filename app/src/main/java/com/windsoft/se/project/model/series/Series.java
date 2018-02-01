@@ -54,7 +54,7 @@ public class Series {
                 '}';
     }
 
-    public Bitmap getThumbnail() {//TODO temp methot to simulate the series thumbail
+    public Bitmap getThumbnail() {//TODO temp method to simulate the series thumbnail
         return MediaUtil.getBitmapFromURL("https://lh4.googleusercontent.com/SxVOcR70jJ6kbqIlqI5xrW-tOsM8U7nkmw6ohQMPvw-4C0Z4SNVfPMZ6e6mbfA-DdU3l1qCtBIfyp5aJBv_S=w1920-h987");
     }
 }

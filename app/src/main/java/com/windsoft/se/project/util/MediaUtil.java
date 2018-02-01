@@ -47,6 +47,7 @@ public class MediaUtil {
                 connection.setDoInput(true);
                 connection.connect();
                 InputStream input = connection.getInputStream();
+                connection.disconnect();
                 return BitmapFactory.decodeStream(input);
             } catch (IOException e) {
                 e.printStackTrace();
