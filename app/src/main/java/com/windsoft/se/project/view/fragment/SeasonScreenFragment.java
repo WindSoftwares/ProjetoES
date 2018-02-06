@@ -1,5 +1,6 @@
-package com.windsoft.se.project.view;
+package com.windsoft.se.project.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -57,6 +58,7 @@ public class SeasonScreenFragment extends Fragment {
     }
 
 
+    @SuppressLint("ResourceType")
     private OnClickSeasonListener getOnClickListener() {
         return position -> {
             QuizFragment fragment = new QuizFragment();
@@ -64,7 +66,7 @@ public class SeasonScreenFragment extends Fragment {
             fragment.setOwner(season);
             getActivity().getFragmentManager()
                 .beginTransaction()
-                .remove(this)
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
                 .replace(R.id.mainFragment, fragment)
                 .commit();};
     }

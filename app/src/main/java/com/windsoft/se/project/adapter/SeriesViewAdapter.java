@@ -28,12 +28,10 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
     @BindView(R.id.seriesThumbnail_imageView)
     ImageView seriesThumbnail;
 
-    private Context mContext;
     private SeriesMock mSeriesMock;
 
 
-    public SeriesViewAdapter(Context mContext) {
-        this.mContext = mContext;
+    public SeriesViewAdapter() {
         mSeriesMock = SeriesMock.getInstance();
         mSeriesMock.addObserver(this);
     }
@@ -56,7 +54,7 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             convertView = inflater.inflate(R.layout.view_item_serie_grid, null);
         }
 

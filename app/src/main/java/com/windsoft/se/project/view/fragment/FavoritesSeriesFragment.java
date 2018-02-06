@@ -1,4 +1,4 @@
-package com.windsoft.se.project.view;
+package com.windsoft.se.project.view.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;

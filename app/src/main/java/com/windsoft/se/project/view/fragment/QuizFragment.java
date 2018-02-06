@@ -1,8 +1,7 @@
-package com.windsoft.se.project.view;
+package com.windsoft.se.project.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -15,10 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mattheusbrito.projetoes.R;
-import com.windsoft.se.project.model.quiz.QuestioMock;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.season.Season;
-import com.windsoft.se.project.view.holder.ScoreFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

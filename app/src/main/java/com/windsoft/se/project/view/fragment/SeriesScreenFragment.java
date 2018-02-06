@@ -1,23 +1,19 @@
-package com.windsoft.se.project.view;
+package com.windsoft.se.project.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 
 import com.mattheusbrito.projetoes.R;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
 import com.windsoft.se.project.model.series.Series;
 import com.windsoft.se.project.model.series.SeriesMock;
-import com.windsoft.se.project.model.series.season.Season;
-import com.windsoft.se.project.model.series.season.SeasonMock;
-
-import java.util.List;
+import com.windsoft.se.project.view.fragment.SeasonScreenFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,12 +30,13 @@ public class SeriesScreenFragment extends Fragment {
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_serie_screen, container, false);
         ButterKnife.bind(this, view);
-        seriesGridView.setAdapter(new SeriesViewAdapter(view.getContext()));
+        seriesGridView.setAdapter(new SeriesViewAdapter());
 
         tempGridBinder();
         return view;
     }
 
+    @SuppressLint("ResourceType")
     private void tempGridBinder() {
         seriesGridView.setOnItemClickListener((parent, view, position, id) -> {
             SeasonScreenFragment fragment = new SeasonScreenFragment();
@@ -48,6 +45,7 @@ public class SeriesScreenFragment extends Fragment {
             getActivity()
                     .getFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
                     .replace(R.id.mainFragment, fragment)
                     .commit();
         });
