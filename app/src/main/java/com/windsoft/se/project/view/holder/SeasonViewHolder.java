@@ -4,8 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.mattheusbrito.projetoes.R;
-import com.windsoft.se.project.model.series.season.OnClickSeasonListener;
+import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.season.Season;
 
 import butterknife.BindView;

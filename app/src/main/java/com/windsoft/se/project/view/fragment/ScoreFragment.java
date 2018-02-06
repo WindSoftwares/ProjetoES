@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.mattheusbrito.projetoes.R;
+
+import com.windsoft.se.project.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

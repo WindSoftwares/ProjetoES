@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
+
 
 /**
  * Created by GersonSales on 1/27/2018.

@@ -1,6 +1,5 @@
 package com.windsoft.se.project.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.model.series.SeriesMockObserver;
-import com.windsoft.se.project.util.MediaUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

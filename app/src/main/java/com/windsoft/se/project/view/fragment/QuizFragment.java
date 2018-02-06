@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.season.Season;
 

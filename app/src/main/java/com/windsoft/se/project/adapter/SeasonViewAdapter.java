@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.season.OnClickSeasonListener;
 import com.windsoft.se.project.model.series.season.SeasonMock;
 import com.windsoft.se.project.view.holder.SeasonViewHolder;

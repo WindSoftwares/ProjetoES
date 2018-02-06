@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**

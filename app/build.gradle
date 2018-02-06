@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.mattheusbrito.projetoes"
+        applicationId "com.windsoft.se.project"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -35,5 +35,8 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    apply plugin: 'com.google.gms.google-services'
+
 
 }

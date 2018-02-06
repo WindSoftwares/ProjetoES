@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
 import com.windsoft.se.project.model.series.Series;
 import com.windsoft.se.project.model.series.SeriesMock;
