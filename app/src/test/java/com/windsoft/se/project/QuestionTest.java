@@ -39,7 +39,7 @@ public class QuestionTest {
     @Test(expected = NullPointerException.class)
     public void TesteNull(){
 
-        Question nullQuestion = new Question(null,null,null,null));
+        Question nullQuestion = new Question(null,null,null,null);
     }
 
 
