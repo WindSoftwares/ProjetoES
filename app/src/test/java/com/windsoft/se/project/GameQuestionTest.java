@@ -11,16 +11,16 @@ import com.windsoft.se.project.model.quiz.Question;
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.junit.Assert.*;
 
 public class GameQuestionTest {
 
-    HashSet<String> escolhas = new HashSet<String>();
+    Queue<String> escolhas = new LinkedList<>();
 
-    HashSet<String> respostasErradas = new HashSet<String>();
-
-    private Question question1 = new Question("Quanto eh 1 + 2?",LEVEL.HARD,escolhas,"3");
+    Queue<String> respostasErradas = new LinkedList<>();
 
     private GameQuestion gameQuestion = new GameQuestion() ;
 
@@ -31,6 +31,7 @@ public class GameQuestionTest {
         escolhas.add("3");
         escolhas.add("4");
 
+        Question question1 = new Question("Quanto eh 1 + 2?",LEVEL.HARD,escolhas,"3");
 
         gameQuestion.ehCerta("3",question1);
 

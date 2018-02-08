@@ -10,20 +10,17 @@ import com.windsoft.se.project.model.quiz.Question;
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.junit.Assert.*;
 
 public class QuestionTest {
-    HashSet<String> escolhas = new HashSet<String>();
-
-    HashSet<String> respostasErradas = new HashSet<String>();
-
-    private Question question1 = new Question("Quanto eh 1 + 2?",LEVEL.HARD,escolhas,"3");
-    private Question questaonull = new Question(null,null,null,null);
+    private Queue<String> escolhas = new LinkedList<>();
+    private Queue<String> respostasErradas = new LinkedList<>();
 
     @Test
     public void Testeinicial(){
-       assertEquals(question1.getLevel(),LEVEL.HARD);
 
        escolhas.add("3");
        escolhas.add("2");
@@ -32,14 +29,17 @@ public class QuestionTest {
        respostasErradas.add("2");
        respostasErradas.add("1");
 
+       Question question1 = new Question("Quanto eh 1 + 2?",LEVEL.HARD,escolhas,"3");
+       assertEquals(question1.getLevel(),LEVEL.HARD);
+
        assertEquals(question1.getCorrectAnswer(),"3");
        assertEquals(question1.getWrongAnswer(),respostasErradas);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void TesteNull(){
-        assertEquals(questaonull.getCorrectAnswer(),null);
-        assertEquals(questaonull.getLevel(),null);
+
+        Question nullQuestion = new Question(null,null,null,null);
     }
 
 

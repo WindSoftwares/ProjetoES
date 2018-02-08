@@ -4,8 +4,7 @@ package com.windsoft.se.project;
  * Created by maiana brito on 13/12/2017.
  */
 
-import com.windsoft.se.project.questao.LEVEL;
-import com.windsoft.se.project.questao.Question;
+import com.windsoft.se.project.model.quiz.*;
 import com.windsoft.se.project.quiz.*;
 
 import org.junit.BeforeClass;
@@ -13,13 +12,15 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import static org.junit.Assert.*;
 
 public class FactoryQuizTest {
 
-    public static HashSet<String> options = new HashSet<String>();
+    public static Queue<String> options = new LinkedList<>();
 
     public static Question questionE1 = new Question("description",LEVEL.EASY, options,"3");
     public static Question questionE2 = new Question("description",LEVEL.EASY, options,"3");
