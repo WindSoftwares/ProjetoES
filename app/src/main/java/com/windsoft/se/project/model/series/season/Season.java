@@ -20,7 +20,7 @@ public class Season implements Iterable<Question>{
     private List<Question> mQuestions;
     private List<Question> mBackup;
 
-    Season(String name, Integer number) {
+    public Season(String name, Integer number, List<Question> questions) {
         mName = name;
         mNumber = number;
         mQuestions = new ArrayList<>();

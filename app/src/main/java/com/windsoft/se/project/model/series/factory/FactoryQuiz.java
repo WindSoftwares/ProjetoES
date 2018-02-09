@@ -1,8 +1,9 @@
-package com.windsoft.se.project.quiz;
+package com.windsoft.se.project.model.series.factory;
 
 
 import com.windsoft.se.project.model.quiz.LEVEL;
 import com.windsoft.se.project.model.quiz.Question;
+import com.windsoft.se.project.quiz.Quiz;
 
 import java.util.ArrayList;
 import java.util.Collections;

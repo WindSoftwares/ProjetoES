@@ -1,5 +1,7 @@
 package com.windsoft.se.project.model.quiz;
 
+import com.windsoft.se.project.model.series.Answer;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +19,7 @@ public class Question {
     private String correctAnswer;
     //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
-    public Question(String description,LEVEL level){
+    public Question(String description, LEVEL level, List<Answer> answers){
         this.description = description;
         this.level = level;
     }
