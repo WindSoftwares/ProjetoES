@@ -1,6 +1,7 @@
 package com.windsoft.se.project.model.series.factory;
 
 import android.graphics.Bitmap;
+import android.os.Build;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,8 +12,7 @@ import com.windsoft.se.project.model.series.Series;
 import com.windsoft.se.project.model.series.season.Season;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import static com.windsoft.se.project.util.Constant.SERIES;
 
@@ -22,8 +22,11 @@ import static com.windsoft.se.project.util.Constant.SERIES;
 
 public class SeriesFactory {
 
-    public static SeriesFactory instance;
+    private static SeriesFactory instance;
+    private final FirebaseDatabase mDatabase;
+    private final DatabaseReference mReference;
     private DataSnapshot mSeriesSnapshot;
+    List<Series> mSeries;
 
     public static SeriesFactory getInstance() {
         if(instance == null) {
@@ -33,13 +36,17 @@ public class SeriesFactory {
     }
 
     private SeriesFactory() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference();
-        reference.addValueEventListener(new ValueEventListener() {
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+        mSeries = new ArrayList<>();
+    }
+
+    public List<Series> getSeries() {
+        mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null && dataSnapshot.hasChild(SERIES)) {
-                    mSeriesSnapshot = dataSnapshot.child(SERIES);
+                    mSeries = getSeriesList(dataSnapshot.child(SERIES));
                 }
             }
 
@@ -48,18 +55,27 @@ public class SeriesFactory {
 
             }
         });
+        return mSeries;
     }
 
-    public Set<Series> getSeriesSet() {
-        Set<Series> result = new HashSet<>();
-        for (DataSnapshot seriesSnapshot : mSeriesSnapshot.getChildren()) {
+
+
+
+    private List<Series> getSeriesList(DataSnapshot seriesSnapshots) {
+        List<Series> seriesList = new ArrayList<>();
+        for (DataSnapshot seriesSnapshot : seriesSnapshots.getChildren()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                seriesSnapshots.getChildren().forEach(System.out::println);
+            }
+
             String seriesName = seriesSnapshot.getKey();
+            System.out.println("seriesName: " + seriesName);
             Bitmap seriesThumbnail = null;
-            ArrayList<Season> seriesSeason = SeasonFactory.getInstance(mSeriesSnapshot).getSeasonList();
+            ArrayList<Season> seriesSeason = SeasonFactory.getInstance().getSeasonListFrom(seriesSnapshot);
             Series series = new Series(seriesSnapshot.getKey(), null, null);//TODO
-            result.add(series);
+            seriesList.add(series);
         }
-        return result;
+        return seriesList;
     }
 
 }

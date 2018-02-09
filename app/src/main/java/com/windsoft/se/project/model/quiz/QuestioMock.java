@@ -1,5 +1,7 @@
 package com.windsoft.se.project.model.quiz;
 
+import com.windsoft.se.project.model.series.factory.Difficulty;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -21,7 +23,7 @@ public class QuestioMock {
         choices.add("Alternative(3)");
         choices.add("Alternative(4)");
 
-        return new Question("Description", LEVEL.EASY, choices , "Alternative(1)");
+        return new Question("Description", Difficulty.EASY, choices , "Alternative(1)");
 //        return netx;
     }
 }

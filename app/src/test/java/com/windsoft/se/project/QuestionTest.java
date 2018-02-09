@@ -23,7 +23,7 @@ public class QuestionTest {
 
     @Test
     public void Testeinicial(){
-       assertEquals(question1.getLevel(),LEVEL.HARD);
+       assertEquals(question1.getDifficulty(),LEVEL.HARD);
 
        escolhas.add("3");
        escolhas.add("2");
@@ -39,7 +39,7 @@ public class QuestionTest {
     @Test
     public void TesteNull(){
         assertEquals(questaonull.getCorrectAnswer(),null);
-        assertEquals(questaonull.getLevel(),null);
+        assertEquals(questaonull.getDifficulty(),null);
     }
 
 

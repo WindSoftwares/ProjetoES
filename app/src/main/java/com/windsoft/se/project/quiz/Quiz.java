@@ -3,6 +3,7 @@ package com.windsoft.se.project.quiz;
 
 import com.windsoft.se.project.model.quiz.LEVEL;
 import com.windsoft.se.project.model.quiz.Question;
+import com.windsoft.se.project.model.series.factory.Difficulty;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,22 +16,22 @@ import java.util.List;
 
 public class Quiz {
 
-    private LEVEL level;
+    private  Difficulty mDifficulty;
     private List<Question> quiz;
     Iterator<Question> iterator;
 
-    public Quiz(LEVEL level){
+    public Quiz(Difficulty difficulty){
 
         this.quiz  = new ArrayList<Question>();
-        this.level = level;
+        mDifficulty = difficulty;
         this.iterator = quiz.iterator();
 
     }
 
-    public Quiz(LEVEL level, ArrayList<Question> quiz ){
+    public Quiz(Difficulty difficulty, ArrayList<Question> quiz ){
 
+        mDifficulty = difficulty;
         this.quiz  = quiz;
-        this.level = level;
         this.iterator = quiz.iterator();
 
     }

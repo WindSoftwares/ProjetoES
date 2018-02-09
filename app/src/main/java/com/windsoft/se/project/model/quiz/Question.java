@@ -1,6 +1,7 @@
 package com.windsoft.se.project.model.quiz;
 
 import com.windsoft.se.project.model.series.Answer;
+import com.windsoft.se.project.model.series.factory.Difficulty;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -14,23 +15,23 @@ import java.util.Queue;
 
 public class Question {
     private String description;
-    private LEVEL level;
+    private Difficulty mDifficulty;
     private Queue<String> choices = new LinkedList<>();
     private String correctAnswer;
     //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
-    public Question(String description, LEVEL level, List<Answer> answers){
+    public Question(String description, Difficulty difficulty, List<Answer> answers){
         this.description = description;
-        this.level = level;
+        mDifficulty = difficulty;
     }
 
-   public Question(String description,LEVEL level,Queue<String> choices,String correctAnswer){
+   public Question(String description,Difficulty difficulty,Queue<String> choices,String correctAnswer){
         if (! choices.contains(correctAnswer)) {
             throw new IllegalArgumentException("Choices must contains the correctAnswer!");
         }
 
         this.description = description;
-        this.level = level;
+        mDifficulty = difficulty;
         this.choices = choices;
         this.correctAnswer = correctAnswer;
     }
@@ -59,8 +60,8 @@ public class Question {
      * Retorna o enum LEVEL da questão
      * @return leve
      */
-    public LEVEL getLevel() {
-        return level;
+    public Difficulty getDifficulty() {
+        return mDifficulty;
     }
 
     /**

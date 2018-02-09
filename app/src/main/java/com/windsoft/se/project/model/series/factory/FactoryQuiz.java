@@ -24,17 +24,17 @@ public class FactoryQuiz {
     /** This method create the quiz.
      *
      * @param name - Series name
-     * @param season - Season of the series, when it is 0, the quiz is about all seasons
+     * @param season - Season of the mSeries, when it is 0, the quiz is about all seasons
      * @return Quiz
      */
-    public Quiz createQuiz(String name, Integer season, LEVEL level){
+    public Quiz createQuiz(String name, Integer season, Difficulty difficulty){
         /** TODO: Get questions from bd
          *  by: Maiana
          */
         // Set<Question> allQuestions = bd.getQuestions(name, season);
-        ArrayList<Question> questionsSelected = selectQuestions(this.allQuestions, level);
+        ArrayList<Question> questionsSelected = selectQuestions(this.allQuestions, difficulty);
 
-        Quiz quiz = new Quiz(level, questionsSelected);
+        Quiz quiz = new Quiz(difficulty, questionsSelected);
         quiz.shuffleQuiz();
 
         return quiz;
@@ -45,11 +45,11 @@ public class FactoryQuiz {
      * @param allQuestions All question where that will be select.
      * @return The selected questions.
      */
-    private ArrayList<Question> selectQuestions(ArrayList<Question> allQuestions, LEVEL level){
+    private ArrayList<Question> selectQuestions(ArrayList<Question> allQuestions, Difficulty difficulty){
         ArrayList<Question> selects = new ArrayList<>();
 
         for ( Question question : allQuestions) {
-            if (question.getLevel() == level) {
+            if (question.getDifficulty() == difficulty) {
                 selects.add(question);
             }
         }

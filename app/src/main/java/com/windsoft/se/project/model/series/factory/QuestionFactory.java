@@ -3,12 +3,12 @@ package com.windsoft.se.project.model.series.factory;
 import com.google.firebase.database.DataSnapshot;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.Answer;
-import com.windsoft.se.project.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.windsoft.se.project.util.Constant.QUESTION;
+import static com.windsoft.se.project.util.Constant.ANSWER;
+import static com.windsoft.se.project.util.Constant.DIFFICULTY;
 
 /**
  * Created by GersonSales on 2/9/2018.
@@ -16,29 +16,24 @@ import static com.windsoft.se.project.util.Constant.QUESTION;
 
 class QuestionFactory {
     public static QuestionFactory instance;
-    private DataSnapshot mQuestionSnapshot;
 
-    public static QuestionFactory getInstance(DataSnapshot seasonSnapshot) {
+    static QuestionFactory getInstance() {
         if (instance == null) {
-            instance = new QuestionFactory(seasonSnapshot);;
+            instance = new QuestionFactory();;
         }
         return instance;
     }
 
-    private QuestionFactory(DataSnapshot seasonSnapshot) {
-        if (seasonSnapshot != null && seasonSnapshot.hasChild(QUESTION)) {
-            mQuestionSnapshot = seasonSnapshot.child(QUESTION);
-        }
-
-
+    private QuestionFactory() {
     }
 
-    public List<Question> getQuestionsListOf() {
+    List<Question> getQuestionsListFrom(DataSnapshot seasonSnapshot) {
         List<Question> result = new ArrayList<>();
-        for (DataSnapshot questionSnapshot : mQuestionSnapshot.getChildren()) {
+        for (DataSnapshot questionSnapshot : seasonSnapshot.getChildren()) {
             String questionDescription = questionSnapshot.getKey();
-            List<Answer> answers = AnswerFactory.getInstance(mQuestionSnapshot).getAnswerList();
-            Question question = new Question(questionDescription, null, answers);
+            List<Answer> answers = AnswerFactory.getInstance().getAnswerListFrom(questionSnapshot.child(ANSWER));
+            Difficulty difficulty = Difficulty.valueOf(questionSnapshot.child(DIFFICULTY).getValue().toString());
+            Question question = new Question(questionDescription, difficulty, answers);
         }
 
 

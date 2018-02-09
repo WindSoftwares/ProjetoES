@@ -7,34 +7,29 @@ import com.windsoft.se.project.model.series.season.Season;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.windsoft.se.project.util.Constant.SEASON;
-
 /**
  * Created by GersonSales on 2/9/2018.
  */
 
 class SeasonFactory {
     private static SeasonFactory instance;
-    private DataSnapshot mSeasonSnapshot;
 
-    static SeasonFactory getInstance(DataSnapshot seriesSnapshot) {
+    static SeasonFactory getInstance() {
         if (instance == null) {
-            instance = new SeasonFactory(seriesSnapshot);
+            instance = new SeasonFactory();
         }
         return instance;
     }
 
-    private SeasonFactory(DataSnapshot seriesSnapshot) {
-        if (seriesSnapshot != null && seriesSnapshot.hasChild(SEASON)) {
-            mSeasonSnapshot = seriesSnapshot.child(SEASON);
-        }
+    private SeasonFactory() {
     }
 
-    ArrayList<Season> getSeasonList() {
+    ArrayList<Season> getSeasonListFrom(DataSnapshot seriesSnapshot) {
         ArrayList<Season> seasons = new ArrayList<>();
-        for (DataSnapshot seasonSnapshot : mSeasonSnapshot.getChildren()) {
+        for (DataSnapshot seasonSnapshot : seriesSnapshot.getChildren()) {
             String seasonName = seasonSnapshot.getKey();
-            List<Question> questions = QuestionFactory.getInstance(mSeasonSnapshot).getQuestionsListOf();
+            System.out.println("seasonName: " + seasonName);
+            List<Question> questions = QuestionFactory.getInstance().getQuestionsListFrom(seasonSnapshot);
             Season season = new Season(seasonName, 1, questions);
         }
         return seasons;

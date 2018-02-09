@@ -18,24 +18,22 @@ import static com.windsoft.se.project.util.Constant.ANSWER;
 
 class AnswerFactory {
     private static AnswerFactory instance;
-    private final DataSnapshot mAnswerSnapshot;
 
-    private AnswerFactory(DataSnapshot questionSnapshot) {
-        mAnswerSnapshot = questionSnapshot.child(ANSWER);
+    private AnswerFactory() {
     }
 
-    static AnswerFactory getInstance(DataSnapshot questionSnapshot) {
+    static AnswerFactory getInstance() {
         if (instance == null) {
-            instance = new AnswerFactory(questionSnapshot);
+            instance = new AnswerFactory();
         }
         return instance;
     }
 
-    List<Answer> getAnswerList() {
+    List<Answer> getAnswerListFrom(DataSnapshot questionSnapshot) {
         List<Answer> answers = new ArrayList<>();
-        for (DataSnapshot answerSnapshot : mAnswerSnapshot.getChildren()) {
+        for (DataSnapshot answerSnapshot : questionSnapshot.getChildren()) {
             String answerText = answerSnapshot.getKey();
-            Correctness correctness = Correctness.valueOf((""));
+            Correctness correctness = Correctness.valueOf(answerSnapshot.getValue().toString());
             Answer answer = new Answer(answerText, correctness);
             answers.add(answer);
         }

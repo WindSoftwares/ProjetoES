@@ -18,4 +18,12 @@ public class Answer {
     public boolean isCorrect() {
         return mCorrectness == Correctness.CORRECT;
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "mText='" + mText + '\'' +
+                ", mCorrectness=" + mCorrectness +
+                '}';
+    }
 }
