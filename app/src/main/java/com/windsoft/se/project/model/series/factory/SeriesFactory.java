@@ -59,21 +59,15 @@ public class SeriesFactory {
     }
 
 
-
-
     private List<Series> getSeriesList(DataSnapshot seriesSnapshots) {
         List<Series> seriesList = new ArrayList<>();
         for (DataSnapshot seriesSnapshot : seriesSnapshots.getChildren()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                seriesSnapshots.getChildren().forEach(System.out::println);
-            }
-
             String seriesName = seriesSnapshot.getKey();
-            System.out.println("seriesName: " + seriesName);
             Bitmap seriesThumbnail = null;
-            ArrayList<Season> seriesSeason = SeasonFactory.getInstance().getSeasonListFrom(seriesSnapshot);
-            Series series = new Series(seriesSnapshot.getKey(), null, null);//TODO
+            ArrayList<Season> seasons = SeasonFactory.getInstance().getSeasonListFrom(seriesSnapshot);
+            Series series = new Series(seriesName, seriesThumbnail, seasons);//TODO
             seriesList.add(series);
+            System.out.println(series);
         }
         return seriesList;
     }

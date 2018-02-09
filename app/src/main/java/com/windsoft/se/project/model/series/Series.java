@@ -23,12 +23,12 @@ public class Series {
 
     private String mName;
     private Bitmap mThumbnail;
-    private Set<Season> mSeasons;
+    private List<Season> mSeasons;
     private long mId;
     private Bitmap thumbnail;
 
 
-    public Series(String name, Bitmap thumbnail, TreeSet<Season> seasons) {
+    public Series(String name, Bitmap thumbnail, List<Season> seasons) {
         this.mName = name;
         this.mThumbnail = thumbnail;
         this.mSeasons = seasons;
@@ -47,14 +47,18 @@ public class Series {
         return mId;
     }
 
+    public Bitmap getThumbnail() {//TODO temp method to simulate the series thumbnail
+        return null;//MediaUtil.getBitmapFromURL("https://lh4.googleusercontent.com/SxVOcR70jJ6kbqIlqI5xrW-tOsM8U7nkmw6ohQMPvw-4C0Z4SNVfPMZ6e6mbfA-DdU3l1qCtBIfyp5aJBv_S=w1920-h987");
+    }
+
     @Override
     public String toString() {
         return "Series{" +
                 "mName='" + mName + '\'' +
+                ", mThumbnail=" + mThumbnail +
+                ", mSeasons=" + mSeasons +
+                ", mId=" + mId +
+                ", thumbnail=" + thumbnail +
                 '}';
-    }
-
-    public Bitmap getThumbnail() {//TODO temp method to simulate the series thumbnail
-        return null;//MediaUtil.getBitmapFromURL("https://lh4.googleusercontent.com/SxVOcR70jJ6kbqIlqI5xrW-tOsM8U7nkmw6ohQMPvw-4C0Z4SNVfPMZ6e6mbfA-DdU3l1qCtBIfyp5aJBv_S=w1920-h987");
     }
 }

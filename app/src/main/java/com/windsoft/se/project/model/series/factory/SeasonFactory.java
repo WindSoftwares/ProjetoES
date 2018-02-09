@@ -28,9 +28,9 @@ class SeasonFactory {
         ArrayList<Season> seasons = new ArrayList<>();
         for (DataSnapshot seasonSnapshot : seriesSnapshot.getChildren()) {
             String seasonName = seasonSnapshot.getKey();
-            System.out.println("seasonName: " + seasonName);
             List<Question> questions = QuestionFactory.getInstance().getQuestionsListFrom(seasonSnapshot);
             Season season = new Season(seasonName, 1, questions);
+            seasons.add(season);
         }
         return seasons;
     }

@@ -26,4 +26,8 @@ public class Answer {
                 ", mCorrectness=" + mCorrectness +
                 '}';
     }
+
+    public String getText() {
+        return mText;
+    }
 }

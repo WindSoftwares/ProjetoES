@@ -16,14 +16,14 @@ public class QuestioMock {
         return true;
     }
 
-    public static Question getNext() {
-        Queue<String> choices = new LinkedList<>();
-        choices.add("Alternative(1)");
-        choices.add("Alternative(2)");
-        choices.add("Alternative(3)");
-        choices.add("Alternative(4)");
-
-        return new Question("Description", Difficulty.EASY, choices , "Alternative(1)");
-//        return netx;
-    }
+//    public static Question getNext() {
+//        Queue<String> choices = new LinkedList<>();
+//        choices.add("Alternative(1)");
+//        choices.add("Alternative(2)");
+//        choices.add("Alternative(3)");
+//        choices.add("Alternative(4)");
+//
+//        return new Question("Description", Difficulty.EASY, choices , "Alternative(1)");
+////        return netx;
+//    }
 }

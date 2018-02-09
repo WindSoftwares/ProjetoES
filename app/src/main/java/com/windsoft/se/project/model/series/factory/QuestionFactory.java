@@ -34,9 +34,8 @@ class QuestionFactory {
             List<Answer> answers = AnswerFactory.getInstance().getAnswerListFrom(questionSnapshot.child(ANSWER));
             Difficulty difficulty = Difficulty.valueOf(questionSnapshot.child(DIFFICULTY).getValue().toString());
             Question question = new Question(questionDescription, difficulty, answers);
+            result.add(question);
         }
-
-
         return result;
     }
 }

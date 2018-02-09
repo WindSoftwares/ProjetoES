@@ -4,7 +4,6 @@ import com.windsoft.se.project.model.series.Answer;
 import com.windsoft.se.project.model.series.factory.Difficulty;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -14,28 +13,17 @@ import java.util.Queue;
 
 
 public class Question {
-    private String description;
+    private String mDescription;
     private Difficulty mDifficulty;
-    private Queue<String> choices = new LinkedList<>();
     private String correctAnswer;
+    private List<Answer> mAnswers;
     //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
     public Question(String description, Difficulty difficulty, List<Answer> answers){
-        this.description = description;
+        mDescription = description;
         mDifficulty = difficulty;
+        mAnswers = answers;
     }
-
-   public Question(String description,Difficulty difficulty,Queue<String> choices,String correctAnswer){
-        if (! choices.contains(correctAnswer)) {
-            throw new IllegalArgumentException("Choices must contains the correctAnswer!");
-        }
-
-        this.description = description;
-        mDifficulty = difficulty;
-        this.choices = choices;
-        this.correctAnswer = correctAnswer;
-    }
-
     /**
      * Medoto que retorna a questão correta daquela questão
      * @return correctAnswer
@@ -48,11 +36,8 @@ public class Question {
      * Metodo que vai apresentar um Set das questões erradas
      * @return set<String> wrongAnswer
      */
-    public Queue<String> getWrongAnswer(){
-
-       Queue<String> wrongAnswer = getChoices();
-       wrongAnswer.remove(getCorrectAnswer());
-       return wrongAnswer;
+    public List<Answer> getWrongAnswer(){
+        return getChoices();//TODO
 
     }
 
@@ -66,27 +51,35 @@ public class Question {
 
     /**
      * Da uma descrição, que no caso é uma pergunta
-     * @return description
+     * @return mDescription
      */
     public String getDescription() {
-        return description;
+        return mDescription;
     }
 
     /**
      * Vai retornar um Set de alternativas da questão
      * @return set<String> choices
      */
-    public Queue<String> getChoices() {
-        return choices;
+    public List<Answer> getChoices() {
+        return mAnswers;
     }
 
     public String pickAnswer() {
-        String result = choices.poll();
-        choices.add(result);
-        return result;
+        return mAnswers.get(0).getText();//TODO
     }
 
     public void shuffle() {
-        Collections.shuffle((List<?>) choices);
+        Collections.shuffle(mAnswers);
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "mDescription='" + mDescription + '\'' +
+                ", mDifficulty=" + mDifficulty +
+                ", choices=" + mAnswers +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                '}';
     }
 }
