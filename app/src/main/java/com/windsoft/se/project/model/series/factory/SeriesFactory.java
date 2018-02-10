@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.windsoft.se.project.model.series.Series;
 import com.windsoft.se.project.model.series.season.Season;
+import com.windsoft.se.project.util.MediaUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +64,9 @@ public class SeriesFactory {
         List<Series> seriesList = new ArrayList<>();
         for (DataSnapshot seriesSnapshot : seriesSnapshots.getChildren()) {
             String seriesName = seriesSnapshot.getKey();
-            Bitmap seriesThumbnail = null;
-            ArrayList<Season> seasons = SeasonFactory.getInstance().getSeasonListFrom(seriesSnapshot);
+            String thumbnailLink = seriesSnapshot.child("thumbnail").getValue().toString();
+            Bitmap seriesThumbnail = MediaUtil.getBitmapFromURL(thumbnailLink);
+            ArrayList<Season> seasons = SeasonFactory.getInstance().getSeasonListFrom(seriesSnapshot.child("seasons"));
             Series series = new Series(seriesName, seriesThumbnail, seasons);//TODO
             seriesList.add(series);
             System.out.println(series);
