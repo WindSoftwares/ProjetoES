@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.season.OnClickSeasonListener;
 import com.windsoft.se.project.model.series.season.SeasonMock;
+import com.windsoft.se.project.util.StaticFlow;
 import com.windsoft.se.project.view.holder.SeasonViewHolder;
 
 /**
@@ -33,7 +34,8 @@ public class SeasonViewAdapter extends RecyclerView.Adapter<SeasonViewHolder> {
 
     @Override
     public void onBindViewHolder(SeasonViewHolder holder, int position) {
-        holder.bind(SeasonMock.getInstance().getSeasonByPosition(position));
+        holder.bind(StaticFlow.getActualSeries().getSeasonByPosition(position));
+//        holder.bind(SeasonMock.getInstance().getSeasonByPosition(position));
         holder.itemView.setOnClickListener(v -> mListener.OnClick(position));
 
 
@@ -41,6 +43,6 @@ public class SeasonViewAdapter extends RecyclerView.Adapter<SeasonViewHolder> {
 
     @Override
     public int getItemCount() {
-        return SeasonMock.size();
+        return StaticFlow.getActualSeries().getSeasonCount();
     }
 }

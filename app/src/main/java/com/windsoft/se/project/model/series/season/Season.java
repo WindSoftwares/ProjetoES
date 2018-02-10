@@ -81,4 +81,8 @@ public class Season implements Iterable<Question>{
                 ", mQuestions=" + mQuestions +
                 '}';
     }
+
+    public List<Question> getQuestions() {
+        return mQuestions;
+    }
 }

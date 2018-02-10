@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.quiz.Question;
+import com.windsoft.se.project.model.series.Answer;
 import com.windsoft.se.project.model.series.season.Season;
+import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,8 +43,8 @@ public class QuizFragment extends Fragment {
     Button fourthAlternativeButton;
 
 
-    private String mCorrectAnswer;
-    private static Season mOwner;
+    private Answer mCorrectAnswer;
+//    private static Season mOwner;
     private static int mGatheredScore;
 
     @OnClick(R.id.firstAlternative_button)
@@ -99,7 +101,7 @@ public class QuizFragment extends Fragment {
     }
 
     private boolean isCorrect(String response) {
-        return response.equalsIgnoreCase(mCorrectAnswer);
+        return response.equalsIgnoreCase(mCorrectAnswer.getText());
     }
 
     @Nullable
@@ -114,8 +116,8 @@ public class QuizFragment extends Fragment {
     }
 
     private void bindQuiz() {
-        if (getOwner().hasNext()) {
-            Question question = getOwner().getNextQuestion();
+        if (StaticFlow.getActualQuiz().hasNext()) {
+            Question question = StaticFlow.getActualQuiz().getNextQuestion();
             question.shuffle();
             questionText.setText(question.getDescription());
             mCorrectAnswer = question.getCorrectAnswer();
@@ -130,25 +132,19 @@ public class QuizFragment extends Fragment {
 
     @SuppressLint("ResourceType")
     private void goToScoreScreen() {//TODO
-        ScoreFragment fragment = new ScoreFragment();
-        fragment.setObtainedScore(mGatheredScore);
-        fragment.setTargetScore(getOwner().size());
+
+//        fragment.setObtainedScore(mGatheredScore);
+//        fragment.setTargetScore(StaticFlow.getActualQuiz().getTopScore());
         mGatheredScore = 0;
 
         getActivity()
                 .getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                .replace(R.id.mainFragment, fragment)
+                .replace(R.id.mainFragment, new ScoreFragment())
                 .commit();
     }
 
 
-    public void setOwner(Season owner) {
-        mOwner = owner;
-    }
 
-    public Season getOwner() {
-        return mOwner;
-    }
 }
