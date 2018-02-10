@@ -20,59 +20,17 @@ public class SeriesMock {
     private  int count;
     private  List<Series> mSeries = new ArrayList<>();
     private  Set<SeriesMockObserver> mObservers = new HashSet<>();
-    private  Set<Series> seriesTree;
 
     private SeriesMock() {
-        for (int i = 0; i < 10; i++) {
-            mSeries.add(getNewSeries());
-        }
+        List<Series> series = SeriesFactory.getInstance().getSeriesList();
+        mSeries = new ArrayList<>(series);
     }
 
-    static synchronized public SeriesMock getInstance() {
+    static public SeriesMock getInstance() {
         if (instance == null) {
             instance = new SeriesMock();
-            instance.populate();
         }
         return instance;
-    }
-
-    private void populate() {
-
-
-        SeriesFactory.getInstance().getSeries();
-
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference reference = database.getReference();
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                DataSnapshot series = dataSnapshot.child("series");
-//                for (DataSnapshot serie : series.getChildren()) {
-//                    System.out.println("Series name :" + serie.getKey());
-//                    for (DataSnapshot season : serie.getChildren()) {
-//                        System.out.println("Season name: " + season.getKey());
-//                        for (DataSnapshot question : season.getChildren()) {
-//                            System.out.println("Question text: " + question.getKey());
-//                            for (DataSnapshot answerType : question.getChildren()) {
-//                                System.out.println("Answer type: " + answerType.getKey());
-//                                for (DataSnapshot answer : answerType.getChildren()) {
-//                                    System.out.println("Answer: " + answer.getValue());
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                }
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
     }
 
     public  Series getNewSeries() {

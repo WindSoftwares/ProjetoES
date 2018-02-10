@@ -46,7 +46,7 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
 
     @Override
     public long getItemId(int position) {
-        return mSeriesMock.getByPosition(position).getId();
+        return 0;//mSeriesMock.getByPosition(position).getId();
     }
 
     @Override
@@ -59,11 +59,7 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
         ButterKnife.bind(this, convertView);
 
         seriesName.setText(mSeriesMock.getByPosition(position).getName());
-
         seriesThumbnail.setImageBitmap(mSeriesMock.getByPosition(position).getThumbnail());
-
-
-
 
         return convertView;
     }

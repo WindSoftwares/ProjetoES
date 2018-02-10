@@ -8,8 +8,11 @@ import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.NetworkOnMainThreadException;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -47,17 +50,54 @@ public class MediaUtil {
                 connection.setDoInput(true);
                 connection.connect();
                 InputStream input = connection.getInputStream();
+                Bitmap result = BitmapFactory.decodeStream(input);
+                input.close();
                 connection.disconnect();
-                return BitmapFactory.decodeStream(input);
+                return result;
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
         }
     }
+
+    public static Bitmap getBitmapFromURL2(String url){
+        try {
+            return new NetworkAccess().execute(url).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return BitmapFactory.decodeStream(null);
+
+    }
+
     public static Bitmap getBitmapFromURL(String src) {
         try {
-            return new NetworkAccess().execute(src).get();
+            FileOutputStream out = null;
+            Bitmap result = new NetworkAccess().execute(src).get();
+            try {
+                String path = Environment.getExternalStorageDirectory().toString();
+                File file = new File(path + "/bitmap" + ".jpg");
+                out = new FileOutputStream(file);
+                result.copy(result.getConfig(), true)
+                        .compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+                // PNG is a lossless format, the compression factor (100) is ignored
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (out != null) {
+                        out.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return result;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
