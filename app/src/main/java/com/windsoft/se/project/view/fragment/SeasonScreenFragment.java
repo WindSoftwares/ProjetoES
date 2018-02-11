@@ -14,9 +14,13 @@ import android.widget.TextView;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.adapter.SeasonViewAdapter;
 import com.windsoft.se.project.model.series.Series;
+import com.windsoft.se.project.model.series.factory.Difficulty;
+import com.windsoft.se.project.model.series.factory.QuizFactory;
 import com.windsoft.se.project.model.series.season.OnClickSeasonListener;
 import com.windsoft.se.project.model.series.season.Season;
 import com.windsoft.se.project.model.series.season.SeasonMock;
+import com.windsoft.se.project.quiz.Quiz;
+import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,8 +37,6 @@ public class SeasonScreenFragment extends Fragment {
 
     @BindView(R.id.seasonView_recyclerView)
     RecyclerView seasonView;
-
-    private Series mOwner;
 
     public SeasonScreenFragment() {
     }
@@ -54,25 +56,19 @@ public class SeasonScreenFragment extends Fragment {
         seasonView.setAdapter(new SeasonViewAdapter(getOnClickListener()));
         seasonView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        seasonsOwner.setText(mOwner.getName());
+        seasonsOwner.setText(StaticFlow.getActualSeries().getName());
     }
 
 
     @SuppressLint("ResourceType")
     private OnClickSeasonListener getOnClickListener() {
         return position -> {
-            QuizFragment fragment = new QuizFragment();
-            Season season = SeasonMock.getInstance().getSeasonByPosition(position);
-            fragment.setOwner(season);
+            StaticFlow.setActualSeason(StaticFlow.getActualSeries().getSeasonByPosition(position));
             getActivity().getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                .replace(R.id.mainFragment, fragment)
+                .replace(R.id.mainFragment, new QuizFragment())
                 .commit();};
-    }
-
-    public void setOwner(Series owner) {
-        mOwner = owner;
     }
 
 }

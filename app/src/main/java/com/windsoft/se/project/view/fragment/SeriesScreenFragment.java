@@ -12,8 +12,7 @@ import android.widget.GridView;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
 import com.windsoft.se.project.model.series.Series;
-import com.windsoft.se.project.model.series.SeriesMock;
-import com.windsoft.se.project.view.fragment.SeasonScreenFragment;
+import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,14 +38,13 @@ public class SeriesScreenFragment extends Fragment {
     @SuppressLint("ResourceType")
     private void tempGridBinder() {
         seriesGridView.setOnItemClickListener((parent, view, position, id) -> {
-            SeasonScreenFragment fragment = new SeasonScreenFragment();
             Series series = (Series) seriesGridView.getAdapter().getItem(position);
-            fragment.setOwner(series);
+            StaticFlow.setActualSeries(series);
             getActivity()
                     .getFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(R.id.mainFragment, fragment)
+                    .replace(R.id.mainFragment, new SeasonScreenFragment())
                     .commit();
         });
     }
@@ -54,9 +52,6 @@ public class SeriesScreenFragment extends Fragment {
 
     @OnItemClick(R.id.series_gridView)
     public void onGridItemClick(int position) {
-        System.out.println("CLICKED");
-        SeriesMock.getInstance().getByPosition(position).setName("Clicked");
-        SeriesMock.getInstance().notifyAllObservers();
     }
 
 }

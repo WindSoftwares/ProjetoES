@@ -52,4 +52,12 @@ public class Series {
                 ", mSeasons=" + mSeasons +
                 '}';
     }
+
+    public Season getSeasonByPosition(int position) {
+        return mSeasons.get(position);
+    }
+
+    public int getSeasonCount() {
+        return mSeasons.size();
+    }
 }

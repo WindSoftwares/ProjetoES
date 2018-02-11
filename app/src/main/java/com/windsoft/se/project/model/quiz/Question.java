@@ -3,9 +3,11 @@ package com.windsoft.se.project.model.quiz;
 import com.windsoft.se.project.model.series.Answer;
 import com.windsoft.se.project.model.series.factory.Difficulty;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by João Lucas on 24/11/2017.
@@ -17,19 +19,28 @@ public class Question {
     private Difficulty mDifficulty;
     private String correctAnswer;
     private List<Answer> mAnswers;
+    private Stack<Answer> mAnswersStack;
     //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
     public Question(String description, Difficulty difficulty, List<Answer> answers){
         mDescription = description;
         mDifficulty = difficulty;
         mAnswers = answers;
+        mAnswersStack = new Stack<>();
+        mAnswersStack.addAll(mAnswers);
     }
     /**
      * Medoto que retorna a questão correta daquela questão
      * @return correctAnswer
      */
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public Answer getCorrectAnswer() {
+        for (Answer answer : mAnswers) {
+            if (answer.isCorrect()) {
+                return answer;
+            }
+        }
+
+        return mAnswers.get(0);//mAnswers.forEach(return);
     }
 
     /**
@@ -37,7 +48,13 @@ public class Question {
      * @return set<String> wrongAnswer
      */
     public List<Answer> getWrongAnswer(){
-        return getChoices();//TODO
+        List<Answer> result = new ArrayList<>();
+        mAnswers.forEach(answer -> {
+            if (!answer.isCorrect()) {
+                result.add(answer);
+            }
+        });
+        return result;
 
     }
 
@@ -66,7 +83,10 @@ public class Question {
     }
 
     public String pickAnswer() {
-        return mAnswers.get(0).getText();//TODO
+        if (mAnswersStack.isEmpty()) {
+            mAnswersStack.addAll(mAnswers);
+        }
+        return mAnswersStack.pop().getText();
     }
 
     public void shuffle() {

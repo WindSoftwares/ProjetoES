@@ -1,5 +1,7 @@
 package com.windsoft.se.project.model.series.season;
 
+import com.windsoft.se.project.util.StaticFlow;
+
 /**
  * Created by GersonSales on 1/27/2018.
  */
