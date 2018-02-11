@@ -6,10 +6,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
@@ -21,6 +19,8 @@ import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private boolean onFavoriteSeries;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,30 +44,46 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("ResourceType")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_home:
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.mainFragment, new SeriesScreenFragment())
-                        .commit();
+                goToSeriesScreen();
                 return true;
 
             case R.id.action_favorites:
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.mainFragment, new FavoritesSeriesFragment())
-                        .commit();
-
+                if (onFavoriteSeries) {
+                    item.setIcon(R.drawable.ic_star_border_black_24dp);
+                    goToSeriesScreen();
+                    onFavoriteSeries = false;
+                } else {
+                    item.setIcon(R.drawable.ic_star_black_24dp);
+                    goToFavoriteSeriesScreen();
+                    onFavoriteSeries = true;
+                }
                 return true;
 
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
+    }
+
+    @SuppressLint("ResourceType")
+    private void goToFavoriteSeriesScreen() {
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_top, R.anim.exit_to_bottom)
+                .replace(R.id.mainFragment, new FavoritesSeriesFragment())
+                .commit();
+    }
+    
+
+    @SuppressLint("ResourceType")
+    private void goToSeriesScreen() {
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
+                .replace(R.id.mainFragment, new SeriesScreenFragment())
+                .commit();
     }
 }
