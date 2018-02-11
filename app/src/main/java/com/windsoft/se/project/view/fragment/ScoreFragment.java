@@ -1,4 +1,4 @@
-package com.windsoft.se.project.view.holder;
+package com.windsoft.se.project.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -10,9 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.mattheusbrito.projetoes.R;
-import com.windsoft.se.project.util.Constant;
-import com.windsoft.se.project.view.SeriesScreenFragment;
+
+import com.windsoft.se.project.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,10 +37,10 @@ public class ScoreFragment extends Fragment {
     @BindView(R.id.targetScore_textView)
     TextView targetScore;
 
-    @BindView(R.id.button)
+    @BindView(R.id.backToHome_button)
     Button homeButton;
 
-    @BindView(R.id.button2)
+    @BindView(R.id.nextQuiz_button)
     Button nextQuizButton;
 
     @BindView(R.id.button3)
@@ -84,13 +83,24 @@ public class ScoreFragment extends Fragment {
     }
 
     @SuppressLint("ResourceType")
-    @OnClick(R.id.button)
+    @OnClick(R.id.backToHome_button)
     public void onClickHome() {
         getActivity()
                 .getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
                 .replace(R.id.mainFragment, new SeriesScreenFragment())
+                .commit();
+    }
+
+    @SuppressLint("ResourceType")
+    @OnClick(R.id.nextQuiz_button)
+    public void onClickNextQuiz() {
+        getActivity()
+                .getFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
+                .replace(R.id.mainFragment, new SeasonScreenFragment())
                 .commit();
     }
 

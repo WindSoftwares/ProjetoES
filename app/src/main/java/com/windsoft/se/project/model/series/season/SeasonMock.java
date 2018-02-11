@@ -1,5 +1,7 @@
 package com.windsoft.se.project.model.series.season;
 
+import com.windsoft.se.project.util.StaticFlow;
+
 /**
  * Created by GersonSales on 1/27/2018.
  */
@@ -16,7 +18,7 @@ public class SeasonMock {
 
 
     public Season getSeasonByPosition(int position) {
-        return new Season("Name", 1);
+        return new Season("Name", 1, null);
     }
 
     public static int size() {

@@ -5,7 +5,7 @@
     android:id="@+id/series_gridView_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.windsoft.se.project.view.SeriesScreenFragment">
+    tools:context="com.windsoft.se.project.view.fragment.SeriesScreenFragment">
 
 
     <GridView

@@ -2,6 +2,8 @@ package com.windsoft.se.project.model.series;
 
 import android.os.Build;
 
+import com.windsoft.se.project.model.series.factory.SeriesFactory;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,15 +20,16 @@ public class SeriesMock {
     private  int count;
     private  List<Series> mSeries = new ArrayList<>();
     private  Set<SeriesMockObserver> mObservers = new HashSet<>();
-    private  Set<Series> seriesTree;
 
     private SeriesMock() {
-        for (int i = 0; i < 10; i++) {
-            mSeries.add(getNewSeries());
+        List<Series> series = SeriesFactory.getInstance().getSeriesList();
+        mSeries = new ArrayList<>();
+        if (series != null) {
+            mSeries.addAll(series);
         }
     }
 
-    static synchronized public SeriesMock getInstance() {
+    static public SeriesMock getInstance() {
         if (instance == null) {
             instance = new SeriesMock();
         }
@@ -60,7 +63,6 @@ public class SeriesMock {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mObservers.iterator().forEachRemaining(SeriesMockObserver::update);
         }
-
     }
 
     public  int size() {

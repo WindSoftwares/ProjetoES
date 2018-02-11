@@ -1,13 +1,13 @@
 package com.windsoft.se.project.view;
 
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
+import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
  * Created by GersonSales on 1/18/2018.

@@ -1,9 +1,13 @@
 package com.windsoft.se.project.model.quiz;
 
+import com.windsoft.se.project.model.series.Answer;
+import com.windsoft.se.project.model.series.factory.Difficulty;
+
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by João Lucas on 24/11/2017.
@@ -11,45 +15,46 @@ import java.util.Queue;
 
 
 public class Question {
-    private String description;
-    private LEVEL level;
-    private Queue<String> choices = new LinkedList<>();
+    private String mDescription;
+    private Difficulty mDifficulty;
     private String correctAnswer;
+    private List<Answer> mAnswers;
+    private Stack<Answer> mAnswersStack;
     //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
-    public Question(String description,LEVEL level){
-        this.description = description;
-        this.level = level;
+    public Question(String description, Difficulty difficulty, List<Answer> answers){
+        mDescription = description;
+        mDifficulty = difficulty;
+        mAnswers = answers;
+        mAnswersStack = new Stack<>();
+        mAnswersStack.addAll(mAnswers);
     }
-
-   public Question(String description,LEVEL level,Queue<String> choices,String correctAnswer){
-        if (! choices.contains(correctAnswer)) {
-            throw new IllegalArgumentException("Choices must contains the correctAnswer!");
-        }
-
-        this.description = description;
-        this.level = level;
-        this.choices = choices;
-        this.correctAnswer = correctAnswer;
-    }
-
     /**
      * Medoto que retorna a questão correta daquela questão
      * @return correctAnswer
      */
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public Answer getCorrectAnswer() {
+        for (Answer answer : mAnswers) {
+            if (answer.isCorrect()) {
+                return answer;
+            }
+        }
+
+        return mAnswers.get(0);//mAnswers.forEach(return);
     }
 
     /**
      * Metodo que vai apresentar um Set das questões erradas
      * @return set<String> wrongAnswer
      */
-    public Queue<String> getWrongAnswer(){
-
-       Queue<String> wrongAnswer = getChoices();
-       wrongAnswer.remove(getCorrectAnswer());
-       return wrongAnswer;
+    public List<Answer> getWrongAnswer(){
+        List<Answer> result = new ArrayList<>();
+        mAnswers.forEach(answer -> {
+            if (!answer.isCorrect()) {
+                result.add(answer);
+            }
+        });
+        return result;
 
     }
 
@@ -57,33 +62,44 @@ public class Question {
      * Retorna o enum LEVEL da questão
      * @return leve
      */
-    public LEVEL getLevel() {
-        return level;
+    public Difficulty getDifficulty() {
+        return mDifficulty;
     }
 
     /**
      * Da uma descrição, que no caso é uma pergunta
-     * @return description
+     * @return mDescription
      */
     public String getDescription() {
-        return description;
+        return mDescription;
     }
 
     /**
      * Vai retornar um Set de alternativas da questão
      * @return set<String> choices
      */
-    public Queue<String> getChoices() {
-        return choices;
+    public List<Answer> getChoices() {
+        return mAnswers;
     }
 
     public String pickAnswer() {
-        String result = choices.poll();
-        choices.add(result);
-        return result;
+        if (mAnswersStack.isEmpty()) {
+            mAnswersStack.addAll(mAnswers);
+        }
+        return mAnswersStack.pop().getText();
     }
 
     public void shuffle() {
-        Collections.shuffle((List<?>) choices);
+        Collections.shuffle(mAnswers);
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "mDescription='" + mDescription + '\'' +
+                ", mDifficulty=" + mDifficulty +
+                ", choices=" + mAnswers +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                '}';
     }
 }

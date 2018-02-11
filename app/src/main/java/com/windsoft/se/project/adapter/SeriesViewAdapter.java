@@ -1,15 +1,18 @@
 package com.windsoft.se.project.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mattheusbrito.projetoes.R;
+import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.model.series.SeriesMockObserver;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by GersonSales on 1/27/2018.
@@ -17,12 +20,16 @@ import com.windsoft.se.project.model.series.SeriesMockObserver;
 
 public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver {
 
-    private Context mContext;
+    @BindView(R.id.seriesName_textView)
+    TextView seriesName;
+
+    @BindView(R.id.seriesThumbnail_imageView)
+    ImageView seriesThumbnail;
+
     private SeriesMock mSeriesMock;
 
 
-    public SeriesViewAdapter(Context mContext) {
-        this.mContext = mContext;
+    public SeriesViewAdapter() {
         mSeriesMock = SeriesMock.getInstance();
         mSeriesMock.addObserver(this);
     }
@@ -39,19 +46,20 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
 
     @Override
     public long getItemId(int position) {
-        return mSeriesMock.getByPosition(position).getId();
+        return 0;//mSeriesMock.getByPosition(position).getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             convertView = inflater.inflate(R.layout.view_item_serie_grid, null);
         }
 
-        TextView textView = convertView.findViewById(R.id.series_textView);
-        textView.setText(mSeriesMock.getByPosition(position).getName());
+        ButterKnife.bind(this, convertView);
 
+        seriesName.setText(mSeriesMock.getByPosition(position).getName());
+        seriesThumbnail.setImageBitmap(mSeriesMock.getByPosition(position).getThumbnail());
 
         return convertView;
     }

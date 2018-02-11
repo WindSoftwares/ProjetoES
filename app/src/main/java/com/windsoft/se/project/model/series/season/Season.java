@@ -18,18 +18,11 @@ public class Season implements Iterable<Question>{
     private Integer mNumber;
 
     private List<Question> mQuestions;
-    private List<Question> mBackup;
 
-    Season(String name, Integer number) {
+    public Season(String name, Integer number, List<Question> questions) {
         mName = name;
         mNumber = number;
-        mQuestions = new ArrayList<>();
-        mBackup = new ArrayList<>();
-
-        mQuestions.add(QuestioMock.getNext());
-
-
-        mBackup.addAll(mQuestions);
+        mQuestions = questions;
     }
 
 
@@ -77,6 +70,19 @@ public class Season implements Iterable<Question>{
     }
 
     public int size() {
-        return mBackup.size();
+        return mQuestions.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Season{" +
+                "mName='" + mName + '\'' +
+                ", mNumber=" + mNumber +
+                ", mQuestions=" + mQuestions +
+                '}';
+    }
+
+    public List<Question> getQuestions() {
+        return mQuestions;
     }
 }

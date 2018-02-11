@@ -4,9 +4,10 @@ package com.windsoft.se.project;
  * Created by maiana brito on 13/12/2017.
  */
 
-import com.windsoft.se.project.questao.LEVEL;
-import com.windsoft.se.project.questao.Question;
-import com.windsoft.se.project.quiz.*;
+import com.windsoft.se.project.model.quiz.LEVEL;
+import com.windsoft.se.project.model.quiz.Question;
+import com.windsoft.se.project.model.series.factory.QuizFactory;
+import com.windsoft.se.project.quiz.Quiz;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,23 +16,24 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class FactoryQuizTest {
+public class QuizFactoryTest {
 
     public static HashSet<String> options = new HashSet<String>();
 
     public static Question questionE1 = new Question("description",LEVEL.EASY, options,"3");
     public static Question questionE2 = new Question("description",LEVEL.EASY, options,"3");
     public static Question questionE3 = new Question("description",LEVEL.EASY, options,"3");
-    public static Question questionE4 = new Question("description",LEVEL.EASY, options,"3");
+    public static Question questionE4 = new Question("description", LEVEL.EASY, options,"3");
     public static Question questionH1 = new Question("description",LEVEL.HARD, options,"3");
     public static Question questionH2 = new Question("description",LEVEL.HARD, options,"3");
     public static Question questionH3 = new Question("description",LEVEL.HARD, options,"3");
     public static Question questionH4 = new Question("description",LEVEL.HARD, options,"3");
 
     public static ArrayList<Question> allQuestions = new ArrayList<>();
-    public static FactoryQuiz factoryQuiz = new FactoryQuiz();
+    public static QuizFactory quizFactory = new QuizFactory();
 
     @BeforeClass
     public static void createObjects(){
@@ -45,13 +47,13 @@ public class FactoryQuizTest {
         allQuestions.add(questionH3);
         allQuestions.add(questionH4);
 
-        factoryQuiz.setAllQuestions(allQuestions);
-        factoryQuiz.setNumberQuestion(4);
+        quizFactory.setAllQuestions(allQuestions);
+        quizFactory.setNumberQuestion(4);
     }
 
     @Test
     public void createQuizEasy(){
-        Quiz quiz = factoryQuiz.createQuiz("Name", 1, LEVEL.EASY);
+        Quiz quiz = quizFactory.createQuiz("Name", 1, LEVEL.EASY);
         List<Question> questions = quiz.getQuestions();
 
         assertEquals(questions.size(),4);
@@ -63,7 +65,7 @@ public class FactoryQuizTest {
 
     @Test
     public void createQuizHard(){
-        Quiz quiz = factoryQuiz.createQuiz("Name", 1, LEVEL.HARD);
+        Quiz quiz = quizFactory.createQuiz("Name", 1, LEVEL.HARD);
         List<Question> questions = quiz.getQuestions();
 
         assertEquals(questions.size(),4);
