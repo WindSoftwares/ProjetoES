@@ -72,7 +72,7 @@ public class QuizFragment extends Fragment {
         String response = button.getText().toString();
         if (isCorrect(response)) {
             button.setBackgroundColor(Color.GREEN);
-            mGatheredScore++;
+            StaticFlow.getActualQuiz().increaseScoreByOne();
         }else {
             button.setBackgroundColor(Color.RED);
         }
@@ -135,7 +135,6 @@ public class QuizFragment extends Fragment {
 
 //        fragment.setObtainedScore(mGatheredScore);
 //        fragment.setTargetScore(StaticFlow.getActualQuiz().getTopScore());
-        mGatheredScore = 0;
 
         getActivity()
                 .getFragmentManager()
