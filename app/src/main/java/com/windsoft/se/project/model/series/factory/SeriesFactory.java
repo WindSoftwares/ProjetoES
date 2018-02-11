@@ -47,12 +47,20 @@ public class SeriesFactory {
             String seriesName = seriesSnapshot.getKey();
             String thumbnailLink = seriesSnapshot.child(THUMBNAIL).getValue().toString();
             Bitmap seriesThumbnail = MediaUtil.getBitmapFromURL2(thumbnailLink);
-            ArrayList<Season> seasons = SeasonFactory.getInstance()
-                    .getSeasonListFrom(seriesSnapshot.child(SEASONS));
+            ArrayList<Season> seasons = getSeasonListFrom(seriesSnapshot);
             Series series = new Series(seriesName, seriesThumbnail, seasons);//TODO
             seriesList.add(series);
         }
         return seriesList;
+    }
+
+    private ArrayList<Season> getSeasonListFrom(DataSnapshot seriesSnapshot) {
+        ArrayList<Season> result = new ArrayList<>();
+        if (seriesSnapshot.hasChild(SEASONS)) {
+            result.addAll(SeasonFactory.getInstance()
+                    .getSeasonListFrom(seriesSnapshot.child(SEASONS)));
+        }
+        return result;
     }
 
     public void setSeriesSnapshot(DataSnapshot seriesDatabase) {
