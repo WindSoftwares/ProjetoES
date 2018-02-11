@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -39,13 +40,13 @@ public class ScoreFragment extends Fragment {
     TextView targetScore;
 
     @BindView(R.id.backToHome_button)
-    Button homeButton;
+    ImageButton homeButton;
 
     @BindView(R.id.nextQuiz_button)
-    Button nextQuizButton;
+    ImageButton nextQuizButton;
 
-    @BindView(R.id.button3)
-    Button shareScoreButton;
+    @BindView(R.id.shareScore_button)
+    ImageButton shareScoreButton;
 
     private int mObtainedScore;
     private int mTargetScore;
