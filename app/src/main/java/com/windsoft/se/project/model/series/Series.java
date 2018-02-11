@@ -24,11 +24,18 @@ public class Series {
     private String mName;
     private Bitmap mThumbnail;
     private List<Season> mSeasons;
+    private boolean mFavorite;
 
     public Series(String name, Bitmap thumbnail, List<Season> seasons) {
-        this.mName = name;
-        this.mThumbnail = thumbnail;
-        this.mSeasons = seasons;
+        mName = name;
+        mThumbnail = thumbnail;
+        mSeasons = seasons;
+        mFavorite = false;
+    }
+
+    public Series(String name, Bitmap thumbnail, List<Season> seasons, boolean isFavorite) {
+        this(name, thumbnail, seasons);
+        mFavorite = isFavorite;
     }
 
     public String getName() {
@@ -59,5 +66,13 @@ public class Series {
 
     public int getSeasonCount() {
         return mSeasons.size();
+    }
+
+    public boolean isFavorite() {
+        return mFavorite;
+    }
+
+    public void setAsFavorite() {
+        mFavorite = true;
     }
 }

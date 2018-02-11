@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
@@ -52,9 +53,14 @@ public class MainActivity extends AppCompatActivity {
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
                         .replace(R.id.mainFragment, new SeriesScreenFragment())
                         .commit();
-                Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+                return true;
+
+            case R.id.action_favorites:
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.mainFragment, new FavoritesSeriesFragment())
+                        .commit();
+
                 return true;
 
             default:

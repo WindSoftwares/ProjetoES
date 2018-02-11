@@ -69,7 +69,7 @@ public class MediaUtil {
             e.printStackTrace();
         }
 
-        return scaleDown(result, 200, true);
+        return scaleDown(result, 250, true);
     }
 
 

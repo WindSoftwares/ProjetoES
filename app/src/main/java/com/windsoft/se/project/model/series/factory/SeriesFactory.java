@@ -16,9 +16,11 @@ import com.windsoft.se.project.util.MediaUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.windsoft.se.project.util.Constant.FAVORITE;
 import static com.windsoft.se.project.util.Constant.SEASONS;
 import static com.windsoft.se.project.util.Constant.SERIES;
 import static com.windsoft.se.project.util.Constant.THUMBNAIL;
+import static com.windsoft.se.project.util.Constant.TRUE;
 
 /**
  * Created by GersonSales on 2/8/2018.
@@ -29,6 +31,7 @@ public class SeriesFactory {
     private static SeriesFactory instance;
     private DataSnapshot mSeriesSnapshot;
     List<Series> mSeries;
+    private List<Series> favoriteSeriesList;
 
     public synchronized  static SeriesFactory getInstance() {
         if(instance == null) {
@@ -47,8 +50,9 @@ public class SeriesFactory {
             String seriesName = seriesSnapshot.getKey();
             String thumbnailLink = seriesSnapshot.child(THUMBNAIL).getValue().toString();
             Bitmap seriesThumbnail = MediaUtil.getBitmapFromURL2(thumbnailLink);
+            boolean isFavorite = seriesSnapshot.child(FAVORITE).getValue().toString().equals(TRUE);
             ArrayList<Season> seasons = getSeasonListFrom(seriesSnapshot);
-            Series series = new Series(seriesName, seriesThumbnail, seasons);//TODO
+            Series series = new Series(seriesName, seriesThumbnail, seasons, isFavorite);//TODO
             seriesList.add(series);
         }
         return seriesList;
@@ -66,4 +70,5 @@ public class SeriesFactory {
     public void setSeriesSnapshot(DataSnapshot seriesDatabase) {
         mSeriesSnapshot = seriesDatabase;
     }
+
 }

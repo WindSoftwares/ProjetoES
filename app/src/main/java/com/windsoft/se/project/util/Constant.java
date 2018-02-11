@@ -13,6 +13,8 @@ public class Constant {
     public static final String DIFFICULTY = "difficulty";
     public static final String SEASONS = "seasons";
     public static final long FIVE_SECONDS = 5000;
+    public static final String FAVORITE = "favorite";
+    public static final String TRUE = "true";
     public static int ONE_SECOND = 1000;
     public static int TWO_SECONDS = 2000;
     public static String THUMBNAIL = "thumbnail";
