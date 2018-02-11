@@ -23,7 +23,10 @@ public class SeriesMock {
 
     private SeriesMock() {
         List<Series> series = SeriesFactory.getInstance().getSeriesList();
-        mSeries = new ArrayList<>(series);
+        mSeries = new ArrayList<>();
+        if (series != null) {
+            mSeries.addAll(series);
+        }
     }
 
     static public SeriesMock getInstance() {
