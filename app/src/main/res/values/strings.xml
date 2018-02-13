@@ -13,4 +13,7 @@
     <string name="you_are_great">You are great!</string>
     <string name="you_know_anything">You do not know anything!</string>
     <string name="action_favorite">favorite</string>
+    <string name="wants_to_reset_the_quiz">Deseja reiniciar o quiz?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
 </resources>

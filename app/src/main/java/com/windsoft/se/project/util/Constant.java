@@ -15,6 +15,7 @@ public class Constant {
     public static final long FIVE_SECONDS = 5000;
     public static final String FAVORITE = "favorite";
     public static final String TRUE = "true";
+    public static final String ANSWERED = "answered";
     public static int ONE_SECOND = 1000;
     public static int TWO_SECONDS = 2000;
     public static String THUMBNAIL = "thumbnail";

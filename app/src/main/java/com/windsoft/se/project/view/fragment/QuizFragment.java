@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.Answer;
-import com.windsoft.se.project.model.series.season.Season;
 import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
@@ -46,6 +45,7 @@ public class QuizFragment extends Fragment {
     private Answer mCorrectAnswer;
 //    private static Season mOwner;
     private static int mGatheredScore;
+    private Question mActualQuestion;
 
     @OnClick(R.id.firstAlternative_button)
     void firstAlternativeChosen() {
@@ -73,6 +73,7 @@ public class QuizFragment extends Fragment {
         if (isCorrect(response)) {
             button.setBackgroundColor(Color.GREEN);
             StaticFlow.getActualQuiz().increaseScoreByOne();
+            mActualQuestion.setCorrectAnswered(true);
         }else {
             button.setBackgroundColor(Color.RED);
         }
@@ -117,25 +118,21 @@ public class QuizFragment extends Fragment {
 
     private void bindQuiz() {
         if (StaticFlow.getActualQuiz().hasNext()) {
-            Question question = StaticFlow.getActualQuiz().getNextQuestion();
-            question.shuffle();
-            questionText.setText(question.getDescription());
-            mCorrectAnswer = question.getCorrectAnswer();
-            firstAlternativeButton.setText(question.pickAnswer());
-            secondAlternativeButton.setText(question.pickAnswer());
-            thirdAlternativeButton.setText(question.pickAnswer());
-            fourthAlternativeButton.setText(question.pickAnswer());
+            mActualQuestion = StaticFlow.getActualQuiz().getNextQuestion();
+            mActualQuestion.shuffle();
+            questionText.setText(mActualQuestion.getDescription());
+            mCorrectAnswer = mActualQuestion.getCorrectAnswer();
+            firstAlternativeButton.setText(mActualQuestion.pickAnswer());
+            secondAlternativeButton.setText(mActualQuestion.pickAnswer());
+            thirdAlternativeButton.setText(mActualQuestion.pickAnswer());
+            fourthAlternativeButton.setText(mActualQuestion.pickAnswer());
         }else {
             goToScoreScreen();
         }
     }
 
     @SuppressLint("ResourceType")
-    private void goToScoreScreen() {//TODO
-
-//        fragment.setObtainedScore(mGatheredScore);
-//        fragment.setTargetScore(StaticFlow.getActualQuiz().getTopScore());
-
+    private void goToScoreScreen() {
         getActivity()
                 .getFragmentManager()
                 .beginTransaction()

@@ -25,7 +25,12 @@ public class Quiz {
         mDifficulty = difficulty;
         mQuestions  = questions;
         mQuestionsStack = new Stack<>();
-        mQuestionsStack.addAll(mQuestions);
+        mQuestions.forEach(question -> {
+            if (!question.isCorrectAnswered()) {
+                mQuestionsStack.add(question);
+            }
+        });
+
         mGatheredScore = 0;
 
     }
@@ -64,6 +69,13 @@ public class Quiz {
     }
 
     public int getGatheredScore() {
-        return mGatheredScore;
+        int[] count = {0};
+        mQuestions.forEach(question -> count[0] = question.isCorrectAnswered() ? ++count[0] : count[0]);
+        return count[0];
+    }
+
+    public void reset() {
+        mQuestions.forEach(question -> question.setCorrectAnswered(false));
+        mQuestionsStack.addAll(mQuestions);
     }
 }

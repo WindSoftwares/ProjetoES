@@ -2,10 +2,8 @@ package com.windsoft.se.project.model.series.season;
 
 import android.support.annotation.NonNull;
 
-import com.windsoft.se.project.model.quiz.QuestioMock;
 import com.windsoft.se.project.model.quiz.Question;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -84,5 +82,15 @@ public class Season implements Iterable<Question>{
 
     public List<Question> getQuestions() {
         return mQuestions;
+    }
+
+    public int getAnsweredCount() {
+        final int[] count = {0};
+        mQuestions.forEach(question -> count[0] = question.isCorrectAnswered() ? count[0] + 1 : count[0]);
+        return count[0];
+    }
+
+    public int getQuestionsCount() {
+        return mQuestions.size();
     }
 }

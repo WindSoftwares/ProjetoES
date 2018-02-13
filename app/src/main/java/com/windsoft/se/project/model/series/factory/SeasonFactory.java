@@ -3,9 +3,13 @@ package com.windsoft.se.project.model.series.factory;
 import com.google.firebase.database.DataSnapshot;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.season.Season;
+import com.windsoft.se.project.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.windsoft.se.project.util.Constant.ANSWERED;
+import static com.windsoft.se.project.util.Constant.TRUE;
 
 /**
  * Created by GersonSales on 2/9/2018.

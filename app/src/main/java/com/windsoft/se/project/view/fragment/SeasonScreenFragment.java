@@ -1,6 +1,7 @@
 package com.windsoft.se.project.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,13 +14,8 @@ import android.widget.TextView;
 
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.adapter.SeasonViewAdapter;
-import com.windsoft.se.project.model.series.Series;
-import com.windsoft.se.project.model.series.factory.Difficulty;
-import com.windsoft.se.project.model.series.factory.QuizFactory;
 import com.windsoft.se.project.model.series.season.OnClickSeasonListener;
 import com.windsoft.se.project.model.series.season.Season;
-import com.windsoft.se.project.model.series.season.SeasonMock;
-import com.windsoft.se.project.quiz.Quiz;
 import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
@@ -60,15 +56,38 @@ public class SeasonScreenFragment extends Fragment {
     }
 
 
-    @SuppressLint("ResourceType")
     private OnClickSeasonListener getOnClickListener() {
         return position -> {
-            StaticFlow.setActualSeason(StaticFlow.getActualSeries().getSeasonByPosition(position));
-            getActivity().getFragmentManager()
+
+            Season actualSeason = StaticFlow.getActualSeries().getSeasonByPosition(position);
+            StaticFlow.setActualSeason(actualSeason);
+
+            if (actualSeason.getAnsweredCount() == actualSeason.getQuestionsCount()) {
+                new AlertDialog.Builder(SeasonScreenFragment.this.getContext())
+                        .setMessage(R.string.wants_to_reset_the_quiz)
+                        .setPositiveButton(R.string.yes, (dialog, which) -> {
+                            StaticFlow.getActualQuiz().reset();
+                            goToQuizScreen();
+                        })
+                        .setNegativeButton(R.string.no, (dialog, which) -> {})
+                        .show();
+            }else {
+                goToQuizScreen();
+            }
+
+
+
+
+        };
+    }
+
+    @SuppressLint("ResourceType")
+    private void goToQuizScreen() {
+        getActivity().getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
                 .replace(R.id.mainFragment, new QuizFragment())
-                .commit();};
+                .commit();
     }
 
 }
