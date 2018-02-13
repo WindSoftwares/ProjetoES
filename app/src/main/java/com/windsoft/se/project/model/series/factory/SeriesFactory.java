@@ -16,9 +16,11 @@ import com.windsoft.se.project.util.MediaUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.windsoft.se.project.util.Constant.FAVORITE;
 import static com.windsoft.se.project.util.Constant.SEASONS;
 import static com.windsoft.se.project.util.Constant.SERIES;
 import static com.windsoft.se.project.util.Constant.THUMBNAIL;
+import static com.windsoft.se.project.util.Constant.TRUE;
 
 /**
  * Created by GersonSales on 2/8/2018.
@@ -29,6 +31,7 @@ public class SeriesFactory {
     private static SeriesFactory instance;
     private DataSnapshot mSeriesSnapshot;
     List<Series> mSeries;
+    private List<Series> favoriteSeriesList;
 
     public synchronized  static SeriesFactory getInstance() {
         if(instance == null) {
@@ -47,15 +50,25 @@ public class SeriesFactory {
             String seriesName = seriesSnapshot.getKey();
             String thumbnailLink = seriesSnapshot.child(THUMBNAIL).getValue().toString();
             Bitmap seriesThumbnail = MediaUtil.getBitmapFromURL2(thumbnailLink);
-            ArrayList<Season> seasons = SeasonFactory.getInstance()
-                    .getSeasonListFrom(seriesSnapshot.child(SEASONS));
-            Series series = new Series(seriesName, seriesThumbnail, seasons);//TODO
+            boolean isFavorite = seriesSnapshot.child(FAVORITE).getValue().toString().equals(TRUE);
+            ArrayList<Season> seasons = getSeasonListFrom(seriesSnapshot);
+            Series series = new Series(seriesName, seriesThumbnail, seasons, isFavorite);//TODO
             seriesList.add(series);
         }
         return seriesList;
     }
 
+    private ArrayList<Season> getSeasonListFrom(DataSnapshot seriesSnapshot) {
+        ArrayList<Season> result = new ArrayList<>();
+        if (seriesSnapshot.hasChild(SEASONS)) {
+            result.addAll(SeasonFactory.getInstance()
+                    .getSeasonListFrom(seriesSnapshot.child(SEASONS)));
+        }
+        return result;
+    }
+
     public void setSeriesSnapshot(DataSnapshot seriesDatabase) {
         mSeriesSnapshot = seriesDatabase;
     }
+
 }

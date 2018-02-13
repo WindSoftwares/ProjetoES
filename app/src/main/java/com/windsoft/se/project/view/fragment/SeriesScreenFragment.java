@@ -2,6 +2,7 @@ package com.windsoft.se.project.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,10 +30,15 @@ public class SeriesScreenFragment extends Fragment {
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_serie_screen, container, false);
         ButterKnife.bind(this, view);
-        seriesGridView.setAdapter(new SeriesViewAdapter());
+        seriesGridView.setAdapter(getAdapter());
 
         tempGridBinder();
         return view;
+    }
+
+    @NonNull
+    SeriesViewAdapter getAdapter() {
+        return new SeriesViewAdapter();
     }
 
     @SuppressLint("ResourceType")

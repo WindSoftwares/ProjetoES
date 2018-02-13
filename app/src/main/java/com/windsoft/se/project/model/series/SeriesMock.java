@@ -18,11 +18,20 @@ public class SeriesMock {
     private static SeriesMock instance;
 
     private  int count;
-    private  List<Series> mSeries = new ArrayList<>();
     private  Set<SeriesMockObserver> mObservers = new HashSet<>();
+    List<Series> mSeries = new ArrayList<>();
+
+
 
     private SeriesMock() {
         List<Series> series = SeriesFactory.getInstance().getSeriesList();
+        mSeries = new ArrayList<>();
+        if (series != null) {
+            mSeries.addAll(series);
+        }
+    }
+
+    SeriesMock(List<Series> series) {
         mSeries = new ArrayList<>();
         if (series != null) {
             mSeries.addAll(series);
@@ -49,17 +58,13 @@ public class SeriesMock {
         return mSeries.get(position);
     }
 
-    public  List<Series> getSeriesList() {
-        return mSeries;
-    }
-
     public  void addObserver(SeriesMockObserver observer) {
         mObservers.add(observer);
     }
 
 
 
-    public  void notifyAllObservers() {
+    private void notifyAllObservers() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mObservers.iterator().forEachRemaining(SeriesMockObserver::update);
         }
@@ -68,4 +73,10 @@ public class SeriesMock {
     public  int size() {
         return mSeries.size();
     }
+
+    public List<Series> getAllSeries() {
+        return mSeries;
+    }
 }
+
+

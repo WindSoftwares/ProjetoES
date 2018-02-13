@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,16 +40,21 @@ public class ScoreFragment extends Fragment {
     TextView targetScore;
 
     @BindView(R.id.backToHome_button)
-    Button homeButton;
+    ImageButton homeButton;
 
     @BindView(R.id.nextQuiz_button)
-    Button nextQuizButton;
+    ImageButton nextQuizButton;
 
-    @BindView(R.id.button3)
-    Button shareScoreButton;
+    @BindView(R.id.shareScore_button)
+    ImageButton shareScoreButton;
 
     private int mObtainedScore;
     private int mTargetScore;
+
+    public ScoreFragment() {
+        mObtainedScore = StaticFlow.getActualQuiz().getGatheredScore();
+        mTargetScore = StaticFlow.getActualQuiz().getTopScore();
+    }
 
     @Nullable
     @Override
@@ -73,15 +80,6 @@ public class ScoreFragment extends Fragment {
             congratsMessageText.setText(R.string.you_know_anything);
         }
     }
-
-    public void setObtainedScore(int obtainedScore) {
-        this.mObtainedScore = obtainedScore;
-    }
-
-    public void setTargetScore(int targetScore) {
-        this.mTargetScore = targetScore;
-    }
-
     @SuppressLint("ResourceType")
     @OnClick(R.id.backToHome_button)
     public void onClickHome() {

@@ -18,6 +18,7 @@ public class Quiz {
     private  Difficulty mDifficulty;
     private List<Question> mQuestions;
     private Stack<Question> mQuestionsStack;
+    private int mGatheredScore;
 
 
     public Quiz(Difficulty difficulty, ArrayList<Question> questions ){
@@ -25,6 +26,7 @@ public class Quiz {
         mQuestions  = questions;
         mQuestionsStack = new Stack<>();
         mQuestionsStack.addAll(mQuestions);
+        mGatheredScore = 0;
 
     }
 
@@ -54,6 +56,14 @@ public class Quiz {
     }
 
     public int getTopScore() {
-        return 100;//TODO
+        return mQuestions.size();
+    }
+
+    public void increaseScoreByOne() {
+        mGatheredScore++;
+    }
+
+    public int getGatheredScore() {
+        return mGatheredScore;
     }
 }

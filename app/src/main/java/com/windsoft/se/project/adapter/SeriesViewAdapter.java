@@ -34,6 +34,11 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
         mSeriesMock.addObserver(this);
     }
 
+    SeriesViewAdapter(SeriesMock seriesMock) {
+        mSeriesMock = seriesMock;
+        mSeriesMock.addObserver(this);
+    }
+
     @Override
     public int getCount() {
         return mSeriesMock.size();
