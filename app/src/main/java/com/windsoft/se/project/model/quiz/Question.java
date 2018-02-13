@@ -6,7 +6,6 @@ import com.windsoft.se.project.model.series.factory.Difficulty;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -20,6 +19,7 @@ public class Question {
     private String correctAnswer;
     private List<Answer> mAnswers;
     private Stack<Answer> mAnswersStack;
+    private boolean mCorrectAnswered;
     //private SeasonQuestion seasonQuestion = new SeasonQuestion
 
     public Question(String description, Difficulty difficulty, List<Answer> answers){
@@ -28,11 +28,19 @@ public class Question {
         mAnswers = answers;
         mAnswersStack = new Stack<>();
         mAnswersStack.addAll(mAnswers);
+        mCorrectAnswered = false;
     }
-    /**
-     * Medoto que retorna a questão correta daquela questão
-     * @return correctAnswer
-     */
+
+
+    public Question(String description, Difficulty difficulty, List<Answer> answers, boolean answered) {
+        this(description, difficulty, answers);
+        mCorrectAnswered = answered;
+    }
+
+        /**
+         * Medoto que retorna a questão correta daquela questão
+         * @return correctAnswer
+         */
     public Answer getCorrectAnswer() {
         for (Answer answer : mAnswers) {
             if (answer.isCorrect()) {
@@ -56,6 +64,10 @@ public class Question {
         });
         return result;
 
+    }
+
+    public boolean isCorrectAnswered() {
+        return mCorrectAnswered;
     }
 
     /**
@@ -101,5 +113,9 @@ public class Question {
                 ", choices=" + mAnswers +
                 ", correctAnswer='" + correctAnswer + '\'' +
                 '}';
+    }
+
+    public void setCorrectAnswered(boolean answered) {
+        mCorrectAnswered = answered;
     }
 }

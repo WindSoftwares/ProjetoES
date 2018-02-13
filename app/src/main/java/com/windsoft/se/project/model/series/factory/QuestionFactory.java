@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.windsoft.se.project.util.Constant.ANSWER;
+import static com.windsoft.se.project.util.Constant.ANSWERED;
 import static com.windsoft.se.project.util.Constant.DIFFICULTY;
+import static com.windsoft.se.project.util.Constant.TRUE;
 
 /**
  * Created by GersonSales on 2/9/2018.
@@ -33,7 +35,9 @@ class QuestionFactory {
             String questionDescription = questionSnapshot.getKey();
             List<Answer> answers = AnswerFactory.getInstance().getAnswerListFrom(questionSnapshot.child(ANSWER));
             Difficulty difficulty = Difficulty.valueOf(questionSnapshot.child(DIFFICULTY).getValue().toString());
-            Question question = new Question(questionDescription, difficulty, answers);
+            boolean answered = questionSnapshot.hasChild(ANSWERED) &&
+                    questionSnapshot.child(ANSWERED).getValue().toString().equals(TRUE);
+            Question question = new Question(questionDescription, difficulty, answers, answered);
             result.add(question);
         }
         return result;

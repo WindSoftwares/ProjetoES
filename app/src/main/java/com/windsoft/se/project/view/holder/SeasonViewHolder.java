@@ -19,6 +19,9 @@ public class SeasonViewHolder extends RecyclerView.ViewHolder implements View.On
     @BindView(R.id.seasonName_textView)
     TextView seasonName;
 
+    @BindView(R.id.seasonScore_textView)
+    TextView seasonScore;
+
 
     public SeasonViewHolder(View itemView) {
         super(itemView);
@@ -28,6 +31,12 @@ public class SeasonViewHolder extends RecyclerView.ViewHolder implements View.On
 
     public void bind(Season season) {
         seasonName.setText(season.getName());
+        int answeredQuestionsCount = season.getAnsweredCount();
+        int totalQuestionsCount = season.getQuestionsCount();
+        String result = String.valueOf(answeredQuestionsCount)
+                .concat("/")
+                .concat(String.valueOf(totalQuestionsCount));
+        seasonScore.setText(result);
 
     }
 

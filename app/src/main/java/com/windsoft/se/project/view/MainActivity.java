@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
+import com.windsoft.se.project.view.fragment.ScoreFragment;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
@@ -67,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_top, R.anim.exit_to_bottom)
                 .replace(R.id.mainFragment, new FavoritesSeriesFragment())
+                .addToBackStack("favoriteScreen")
                 .commit();
         mOnHomeScreen = false;
         mOnFavoritesScreen = true;
