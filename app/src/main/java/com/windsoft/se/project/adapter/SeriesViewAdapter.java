@@ -20,8 +20,6 @@ import butterknife.ButterKnife;
 
 public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver {
 
-    @BindView(R.id.seriesName_textView)
-    TextView seriesName;
 
     @BindView(R.id.seriesThumbnail_imageView)
     ImageView seriesThumbnail;
@@ -63,7 +61,6 @@ public class SeriesViewAdapter extends BaseAdapter implements SeriesMockObserver
 
         ButterKnife.bind(this, convertView);
 
-        seriesName.setText(mSeriesMock.getByPosition(position).getName());
         seriesThumbnail.setImageBitmap(mSeriesMock.getByPosition(position).getThumbnail());
 
         return convertView;
