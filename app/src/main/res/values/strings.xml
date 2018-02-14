@@ -16,4 +16,6 @@
     <string name="wants_to_reset_the_quiz">Deseja reiniciar o quiz?</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="app_label">ProjetoES</string>
+    <string name="search_hint">Buscar séries</string>
 </resources>

@@ -77,6 +77,19 @@ public class SeriesMock {
     public List<Series> getAllSeries() {
         return mSeries;
     }
+
+    public Series getByName(String seriesName) {
+        Series[] result = {null};
+        mSeries.forEach(series -> {
+            if (series.getName().equalsIgnoreCase(seriesName)) {
+                result[0] = series;
+            }
+        });
+
+        return result[0];
+
+
+    }
 }
 
 

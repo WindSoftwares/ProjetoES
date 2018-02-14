@@ -3,16 +3,16 @@ package com.windsoft.se.project.view;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
-import android.content.ClipData;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
-import com.windsoft.se.project.view.fragment.ScoreFragment;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean mOnFavoritesScreen = false;
     private boolean mOnHomeScreen = true;
     MenuItem favoriteIcon;
+    private SearchView mSeriesSearch;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +34,27 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.app_toolbar));
 
         bindFragment();
+        bindSearchable();
+
+    }
+
+    private void bindSearchable() {
+
+        mSeriesSearch = findViewById(R.id.seriesSearch_searchView);
+
+        mSeriesSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(MainActivity.this, "onQueryTextSubmit", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Toast.makeText(MainActivity.this, "onQueryTextChange", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
 
     private void bindFragment() {
