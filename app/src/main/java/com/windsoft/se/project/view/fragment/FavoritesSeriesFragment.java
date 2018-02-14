@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.windsoft.se.project.adapter.FavoriteSeriesViewAdapter;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
+import com.windsoft.se.project.model.series.FavoriteSeriesMock;
+import com.windsoft.se.project.model.series.SeriesMock;
 
 
 /**
@@ -28,4 +31,24 @@ public class FavoritesSeriesFragment extends SeriesScreenFragment{
     SeriesViewAdapter getAdapter() {
         return new FavoriteSeriesViewAdapter();
     }
+
+
+
+    @Override
+    void bindSearchable() {
+        mSeriesSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                FavoriteSeriesMock.getInstance().filterByName(newText);
+                return false;
+            }
+        });
+    }
+
+
 }

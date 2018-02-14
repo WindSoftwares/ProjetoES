@@ -12,6 +12,7 @@ import java.util.List;
 
 public class FavoriteSeriesMock extends SeriesMock {
     private static FavoriteSeriesMock instance;
+    private  ArrayList<Series> newMSeries;
 
     public static FavoriteSeriesMock getInstance() {
         if (instance == null) {
@@ -23,7 +24,7 @@ public class FavoriteSeriesMock extends SeriesMock {
 
     private FavoriteSeriesMock() {
         super(SeriesMock.getInstance().getAllSeries());
-        List<Series> newMSeries = new ArrayList<>();
+        newMSeries = new ArrayList<>();
         if (mSeries != null) {
             mSeries.forEach(seriesItem -> {
                 if (seriesItem.isFavorite()) {
@@ -31,8 +32,20 @@ public class FavoriteSeriesMock extends SeriesMock {
                 }
             });
         }
-        System.out.println(newMSeries);
-
         mSeries = newMSeries;
     }
+
+    @Override
+    public void filterByName(String seriesName) {
+        List<Series> result = new ArrayList<>();
+        newMSeries.forEach(series -> {
+            if (series.getName().toLowerCase().contains(seriesName.toLowerCase())) {
+                result.add(series);
+            }
+        });
+
+        mSeries = result;
+        notifyAllObservers();
+    }
+
 }

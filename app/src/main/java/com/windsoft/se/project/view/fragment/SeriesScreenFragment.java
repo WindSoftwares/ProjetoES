@@ -9,11 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
+import com.windsoft.se.project.model.series.FavoriteSeriesMock;
 import com.windsoft.se.project.model.series.Series;
+import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.util.StaticFlow;
+import com.windsoft.se.project.view.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +29,9 @@ public class SeriesScreenFragment extends Fragment {
     @BindView(R.id.series_gridView)
     GridView seriesGridView;
 
+    @BindView(R.id.seriesSearch_searchView)
+    SearchView mSeriesSearch;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -33,6 +41,7 @@ public class SeriesScreenFragment extends Fragment {
         seriesGridView.setAdapter(getAdapter());
 
         tempGridBinder();
+        bindSearchable();
         return view;
     }
 
@@ -58,6 +67,23 @@ public class SeriesScreenFragment extends Fragment {
 
     @OnItemClick(R.id.series_gridView)
     public void onGridItemClick(int position) {
+    }
+
+
+    void bindSearchable() {
+
+        mSeriesSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                SeriesMock.getInstance().filterByName(newText);
+                return false;
+            }
+        });
     }
 
 }

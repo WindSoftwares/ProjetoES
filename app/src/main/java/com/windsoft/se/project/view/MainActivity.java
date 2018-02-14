@@ -12,6 +12,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
@@ -34,28 +35,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.app_toolbar));
 
         bindFragment();
-        bindSearchable();
-
     }
 
-    private void bindSearchable() {
 
-        mSeriesSearch = findViewById(R.id.seriesSearch_searchView);
-
-        mSeriesSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, "onQueryTextSubmit", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Toast.makeText(MainActivity.this, "onQueryTextChange", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-    }
 
     private void bindFragment() {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

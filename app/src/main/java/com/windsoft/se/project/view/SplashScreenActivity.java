@@ -38,29 +38,23 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
 
         Thread splashScreenDelay  = new Thread(() ->{
-            try {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference();
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        SeriesFactory.getInstance().setSeriesSnapshot(dataSnapshot.child(SERIES));
-                    }
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference();
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    SeriesFactory.getInstance().setSeriesSnapshot(dataSnapshot.child(SERIES));
+                    Intent quizScreenIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                    startActivity(quizScreenIntent);
+                    finish();
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                }
+            });
 
-                sleep(FIVE_SECONDS);//TODO
-            }catch (InterruptedException e) {
-                e.printStackTrace();
-            }finally {
-                Intent quizScreenIntent = new Intent(this, MainActivity.class);
-                startActivity(quizScreenIntent);
-                finish();
-            }
         });
 
 

@@ -16,6 +16,7 @@ import java.util.Set;
 public class SeriesMock {
 
     private static SeriesMock instance;
+    List<Series> seriesDataBase;
 
     private  int count;
     private  Set<SeriesMockObserver> mObservers = new HashSet<>();
@@ -24,10 +25,10 @@ public class SeriesMock {
 
 
     private SeriesMock() {
-        List<Series> series = SeriesFactory.getInstance().getSeriesList();
+        seriesDataBase = SeriesFactory.getInstance().getSeriesList();
         mSeries = new ArrayList<>();
-        if (series != null) {
-            mSeries.addAll(series);
+        if (seriesDataBase != null) {
+            mSeries.addAll(seriesDataBase);
         }
     }
 
@@ -43,6 +44,19 @@ public class SeriesMock {
             instance = new SeriesMock();
         }
         return instance;
+    }
+
+
+    public void filterByName(String seriesName) {
+        List<Series> result = new ArrayList<>();
+        seriesDataBase.forEach(series -> {
+            if (series.getName().toLowerCase().contains(seriesName.toLowerCase())) {
+                result.add(series);
+            }
+        });
+
+        mSeries = result;
+        notifyAllObservers();
     }
 
     public  Series getNewSeries() {
@@ -64,7 +78,7 @@ public class SeriesMock {
 
 
 
-    private void notifyAllObservers() {
+    void notifyAllObservers() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mObservers.iterator().forEachRemaining(SeriesMockObserver::update);
         }
