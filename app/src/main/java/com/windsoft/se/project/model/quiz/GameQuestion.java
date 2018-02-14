@@ -14,7 +14,7 @@ public class GameQuestion {
 
 
     public void ehCerta(String resposta,Question question){
-        if(question.getCorrectAnswer().equals(resposta)){
+        if(question.getCorrectAnswer().getText().equals(resposta)){
             score = score + 1;
         }
     }
