@@ -28,27 +28,13 @@ public class FavoritesSeriesFragment extends SeriesScreenFragment{
 
     @NonNull
     @Override
-    SeriesViewAdapter getAdapter() {
+    SeriesViewAdapter getNewAdapter() {
         return new FavoriteSeriesViewAdapter();
     }
 
 
-
     @Override
-    void bindSearchable() {
-        mSeriesSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                FavoriteSeriesMock.getInstance().filterByName(newText);
-                return false;
-            }
-        });
+    void filterSeriesByName(String newText) {
+        FavoriteSeriesMock.getInstance().filterByName(newText);
     }
-
-
 }

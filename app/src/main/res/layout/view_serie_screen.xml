@@ -16,9 +16,11 @@
         android:layout_marginTop="8dp"
         android:columnWidth="100dp"
         android:gravity="center"
+        android:horizontalSpacing="1dp"
         android:numColumns="auto_fit"
         android:stretchMode="spacingWidthUniform"
-        android:verticalSpacing="10dp"
+        android:verticalSpacing="2dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/seriesSearch_searchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +34,29 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
+    </SearchView>
 
+    <TextView
+        android:id="@+id/noSeriesFound_tectView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/no_series_found"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/seriesSearch_searchView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

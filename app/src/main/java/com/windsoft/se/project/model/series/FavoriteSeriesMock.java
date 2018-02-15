@@ -14,6 +14,8 @@ public class FavoriteSeriesMock extends SeriesMock {
     private static FavoriteSeriesMock instance;
     private  ArrayList<Series> newMSeries;
 
+
+
     public static FavoriteSeriesMock getInstance() {
         if (instance == null) {
             instance = new FavoriteSeriesMock();
@@ -35,17 +37,9 @@ public class FavoriteSeriesMock extends SeriesMock {
         mSeries = newMSeries;
     }
 
+
     @Override
-    public void filterByName(String seriesName) {
-        List<Series> result = new ArrayList<>();
-        newMSeries.forEach(series -> {
-            if (series.getName().toLowerCase().contains(seriesName.toLowerCase())) {
-                result.add(series);
-            }
-        });
-
-        mSeries = result;
-        notifyAllObservers();
+    List<Series> getSeriesDataBase() {
+        return newMSeries;
     }
-
 }

@@ -18,4 +18,5 @@
     <string name="no">Não</string>
     <string name="app_label">ProjetoES</string>
     <string name="search_hint">Buscar séries</string>
+    <string name="no_series_found">No Series Found</string>
 </resources>

@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
     @SuppressLint("ResourceType")
     private void goToSeriesScreen() {
         goToSeriesScreen(R.anim.enter_from_right, R.anim.exit_to_left);

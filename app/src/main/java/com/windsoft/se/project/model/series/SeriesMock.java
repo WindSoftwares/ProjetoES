@@ -49,7 +49,7 @@ public class SeriesMock {
 
     public void filterByName(String seriesName) {
         List<Series> result = new ArrayList<>();
-        seriesDataBase.forEach(series -> {
+        getSeriesDataBase().forEach(series -> {
             if (series.getName().toLowerCase().contains(seriesName.toLowerCase())) {
                 result.add(series);
             }
@@ -103,6 +103,10 @@ public class SeriesMock {
         return result[0];
 
 
+    }
+
+    List<Series> getSeriesDataBase() {
+        return seriesDataBase;
     }
 }
 
