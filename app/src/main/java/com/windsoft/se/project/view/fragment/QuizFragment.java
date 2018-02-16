@@ -3,9 +3,11 @@ package com.windsoft.se.project.view.fragment;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,18 @@ import android.widget.TextView;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.Answer;
+import com.windsoft.se.project.quiz.Quiz;
 import com.windsoft.se.project.util.StaticFlow;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.windsoft.se.project.util.Constant.FIVE_SECONDS;
 import static com.windsoft.se.project.util.Constant.TWO_SECONDS;
 
 public class QuizFragment extends Fragment {
@@ -46,6 +54,7 @@ public class QuizFragment extends Fragment {
 //    private static Season mOwner;
     private static int mGatheredScore;
     private Question mActualQuestion;
+    private Handler handler = new Handler();
 
     @OnClick(R.id.firstAlternative_button)
     void firstAlternativeChosen() {
@@ -82,15 +91,16 @@ public class QuizFragment extends Fragment {
 
     @SuppressLint("ResourceType")
     synchronized private void goToTheNextQuestion() {
-        Handler handler = new Handler();
         handler.postDelayed(() -> {
-            getActivity().getFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(R.id.mainFragment, new QuizFragment())
-                    .commit();
+                getActivity().getFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.mainFragment, new QuizFragment())
+                        .commitAllowingStateLoss();
         }, TWO_SECONDS);
+
     }
+
 
     private void disableInteraction() {
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -138,7 +148,7 @@ public class QuizFragment extends Fragment {
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
                 .replace(R.id.mainFragment, new ScoreFragment())
-                .commit();
+                .commitAllowingStateLoss();
     }
 
 
