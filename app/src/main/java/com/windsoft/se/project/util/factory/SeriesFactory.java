@@ -11,7 +11,9 @@ import com.windsoft.se.project.util.MediaUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.windsoft.se.project.util.Constant.FAVORITE;
 import static com.windsoft.se.project.util.Constant.SEASONS;
@@ -48,20 +50,20 @@ public class SeriesFactory {
             FileUtil.requestPermission();
         }
 
+        Map<String, Bitmap> thumbnails = new HashMap<>();
+
         for (DataSnapshot seriesSnapshot : mSeriesSnapshot.getChildren()) {
 
             String seriesName = seriesSnapshot.getKey();
             String thumbnailLink = seriesSnapshot.child(THUMBNAIL).getValue().toString();
             Bitmap seriesThumbnail = MediaUtil.getBitmapFromURL2(thumbnailLink);
-            FileUtil.persistBitmap(seriesThumbnail);
+            FileUtil.persistBitmap(seriesName, seriesThumbnail);
             boolean isFavorite = seriesSnapshot.child(FAVORITE).getValue().toString().equals(TRUE);
             ArrayList<Season> seasons = getSeasonListFrom(seriesSnapshot);
             Series series = new Series(seriesName, seriesThumbnail, seasons, isFavorite);//TODO
             seriesList.add(series);
-
-
-
         }
+
         return seriesList;
     }
 

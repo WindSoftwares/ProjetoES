@@ -18,6 +18,7 @@ import com.windsoft.se.project.view.SplashScreenActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -62,24 +63,7 @@ public class FileUtil{
         }
     }
 
-    public static void persistBitmap(Bitmap bitmap) {
-        FileOutputStream out = null;
-        try {
-            out = new FileOutputStream(createImageFile(context));
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
-            // PNG is a lossless format, the compression factor (100) is ignored
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
 
 
 
@@ -136,17 +120,14 @@ public class FileUtil{
         FileUtil.activity = activity;
     }
 
-    public static File createImageFile(Context context) {
-        return createMediaFile(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), PNG);
+    public static File createImageFile(String fileName) {
+        return createMediaFile(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),fileName,  PNG);
     }
 
-    private static File createMediaFile(File storageDirectory, String extension)  {
-        @SuppressLint("SimpleDateFormat") String timeStamp =
-                new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-
-        String fileName = extension.toUpperCase() + "_" + timeStamp + "_";
+    private static File createMediaFile(File storageDirectory, String fileName, String extension)  {
         File mediaFile = null;
         try {
+
             mediaFile = File.createTempFile(
                     fileName,  /* prefix */
                     "." + extension,         /* suffix */
@@ -157,5 +138,24 @@ public class FileUtil{
             e.printStackTrace();
         }
         return mediaFile;
+    }
+    
+    public static void persistBitmap(String fileName, Bitmap bitmap) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(createImageFile(fileName));
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
