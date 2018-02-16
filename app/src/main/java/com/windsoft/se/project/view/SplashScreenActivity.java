@@ -1,8 +1,8 @@
 package com.windsoft.se.project.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -12,14 +12,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.windsoft.se.project.R;
-import com.windsoft.se.project.model.series.factory.SeriesFactory;
-import com.windsoft.se.project.util.Constant;
-import com.windsoft.se.project.util.EnvironmentUtil;
+import com.windsoft.se.project.model.series.Series;
+import com.windsoft.se.project.util.FileUtil;
+import com.windsoft.se.project.util.factory.SeriesFactory;
 
-import static com.windsoft.se.project.util.Constant.FIVE_SECONDS;
-import static com.windsoft.se.project.util.Constant.ONE_SECOND;
+import java.util.HashSet;
+import java.util.Set;
+
 import static com.windsoft.se.project.util.Constant.SERIES;
-import static com.windsoft.se.project.util.Constant.TWO_SECONDS;
 import static com.windsoft.se.project.util.EnvironmentUtil.isNetworkAvailable;
 import static com.windsoft.se.project.util.EnvironmentUtil.toastShortMessage;
 import static java.lang.Thread.sleep;
@@ -29,6 +29,12 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FileUtil.setSharedPreferences(getSharedPreferences("Files", 0));
+        FileUtil.setContext(this);
+        FileUtil.setActivity(this);
+
+
         setContentView(R.layout.activity_splash_screen);
 
         if (!isNetworkAvailable(this)){

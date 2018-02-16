@@ -1,8 +1,5 @@
 package com.windsoft.se.project.model.series;
 
-import com.google.firebase.FirebaseApp;
-import com.windsoft.se.project.model.series.factory.SeriesFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 
