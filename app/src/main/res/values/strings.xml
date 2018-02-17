@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjetoES</string>
+    <string name="app_name">Do I Know?</string>
     <string name="action_settings">Settings</string>
     <string name="do_i_know">Do I Know</string>
     <string name="tv_shows">TV Shows</string>
@@ -16,9 +16,10 @@
     <string name="wants_to_reset_the_quiz">Deseja reiniciar o quiz?</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
-    <string name="app_label">ProjetoES</string>
+    <string name="app_label">Do I Know?</string>
     <string name="search_hint">Buscar séries</string>
     <string name="no_series_found">No Series Found</string>
     <string name="necessary_storage_permissio">Storage permission is necessary.</string>
     <string name="no_network_access">No network access.</string>
+    <string name="action_search">Search</string>
 </resources>

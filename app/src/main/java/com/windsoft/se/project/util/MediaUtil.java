@@ -68,22 +68,23 @@ public class MediaUtil {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+        return ThumbnailUtils.extractThumbnail(result, 100,150);
+//        return scaleDown(result, 1000, true);
 
-        return scaleDown(result, 250, true);
     }
 
 
     private static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
                                    boolean filter) {
+        if (realImage == null) return null;
         float ratio = Math.min(
-                (float) maxImageSize / realImage.getWidth(),
-                (float) maxImageSize / realImage.getHeight());
-        int width = Math.round((float) ratio * realImage.getWidth());
-        int height = Math.round((float) ratio * realImage.getHeight());
+                maxImageSize / realImage.getWidth(),
+                maxImageSize / realImage.getHeight());
+        int width = Math.round(ratio * realImage.getWidth());
+        int height = Math.round(ratio * realImage.getHeight());
 
-        Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
+        return Bitmap.createScaledBitmap(realImage, width,
                 height, filter);
-        return newBitmap;
     }
 
     public static Bitmap getBitmapFromURL(String src) {

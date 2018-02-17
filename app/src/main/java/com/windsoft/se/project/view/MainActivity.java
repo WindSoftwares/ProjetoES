@@ -25,9 +25,6 @@ import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 public class MainActivity extends AppCompatActivity {
 
 
-    private boolean mOnFavoritesScreen = false;
-    private boolean mOnHomeScreen = true;
-    MenuItem favoriteIcon;
     private SearchView mSeriesSearch;
 
     @Override
@@ -36,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.app_toolbar));
         bindFragment();
+
     }
 
 
@@ -46,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+
+
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        favoriteIcon = menu.findItem(R.id.action_favorites);
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -61,32 +59,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_home:
                 goToSeriesScreen();
                 return true;
-
-            case R.id.action_favorites:
-                if (mOnFavoritesScreen) {
-                    item.setIcon(R.drawable.ic_star_border_black_24dp);
-                    goToSeriesScreen(R.anim.enter_from_bottom, R.anim.exit_to_top);
-                } else {
-                    item.setIcon(R.drawable.ic_star_black_24dp);
-                    goToFavoriteSeriesScreen();
-                }
-                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    @SuppressLint("ResourceType")
-    private void goToFavoriteSeriesScreen() {
-        getFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_top, R.anim.exit_to_bottom)
-                .replace(R.id.mainFragment, new FavoritesSeriesFragment())
-                .addToBackStack("favoriteScreen")
-                .commit();
-        mOnHomeScreen = false;
-        mOnFavoritesScreen = true;
-    }
+
 
 
     @SuppressLint("ResourceType")
@@ -99,9 +77,5 @@ public class MainActivity extends AppCompatActivity {
                 .setCustomAnimations(enterAnimation, exitAnimation)
                 .replace(R.id.mainFragment, new SeriesScreenFragment())
                 .commit();
-
-        mOnHomeScreen = true;
-        mOnFavoritesScreen = false;
-        favoriteIcon.setIcon(R.drawable.ic_star_border_black_24dp);
     }
 }

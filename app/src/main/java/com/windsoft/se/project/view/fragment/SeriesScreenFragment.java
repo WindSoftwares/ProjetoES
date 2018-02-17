@@ -6,10 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 
 import com.windsoft.se.project.R;
@@ -30,9 +33,6 @@ public class SeriesScreenFragment extends Fragment {
     @BindView(R.id.series_gridView)
     GridView mSeriesGridView;
 
-    @BindView(R.id.seriesSearch_searchView)
-    SearchView mSeriesSearch;
-
     @BindView(R.id.noSeriesFound_tectView)
     TextView mNoSeriesFound;
 
@@ -40,19 +40,41 @@ public class SeriesScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (!(savedInstanceState == null)) return getView();
         View view = inflater.inflate(R.layout.view_serie_screen, container, false);
         ButterKnife.bind(this, view);
+        setHasOptionsMenu(true);
+        getActivity().setTitle(R.string.app_label);
+
         mSeriesGridView.setAdapter(getNewAdapter());
 
 
         updateNoSeriesFound();
         tempGridBinder();
-        bindSearchable();
         return view;
     }
 
     private void updateNoSeriesFound() {
         mNoSeriesFound.setVisibility(mSeriesGridView.getAdapter().isEmpty() ? VISIBLE : GONE);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.removeItem(R.id.action_home);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_favorites:
+                goToFavoriteSeriesScreen();
+                return true;
+
+                default: return super.onOptionsItemSelected(item);
+        }
+
+
     }
 
     @NonNull
@@ -78,13 +100,17 @@ public class SeriesScreenFragment extends Fragment {
     }
 
 
-    @OnItemClick(R.id.series_gridView)
-    public void onGridItemClick(int position) {
-    }
 
 
-    void bindSearchable() {
-        mSeriesSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu__main_search, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -97,10 +123,20 @@ public class SeriesScreenFragment extends Fragment {
                 return false;
             }
         });
+
     }
 
     void filterSeriesByName(String newText) {
         SeriesMock.getInstance().filterByName(newText);
+    }
+
+    @SuppressLint("ResourceType")
+    private void goToFavoriteSeriesScreen() {
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                .replace(R.id.mainFragment, new FavoritesSeriesFragment())
+                .addToBackStack("favoriteScreen")
+                .commit();
     }
 
 }

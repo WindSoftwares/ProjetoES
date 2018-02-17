@@ -28,9 +28,6 @@ import butterknife.ButterKnife;
 public class SeasonScreenFragment extends Fragment {
 
 
-    @BindView(R.id.serieSeason_textView)
-    TextView seasonsOwner;
-
     @BindView(R.id.seasonView_recyclerView)
     RecyclerView seasonView;
 
@@ -40,7 +37,11 @@ public class SeasonScreenFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (!(savedInstanceState == null)) return getView();
+
         View view =  inflater.inflate(R.layout.fragment_series_season, container, false);
+        getActivity().setTitle(StaticFlow.getActualSeries().getName());
+
 
         ButterKnife.bind(this, view);
         bindView(view);
@@ -51,8 +52,6 @@ public class SeasonScreenFragment extends Fragment {
     private void bindView(View view) {
         seasonView.setAdapter(new SeasonViewAdapter(getOnClickListener()));
         seasonView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-        seasonsOwner.setText(StaticFlow.getActualSeries().getName());
     }
 
 
