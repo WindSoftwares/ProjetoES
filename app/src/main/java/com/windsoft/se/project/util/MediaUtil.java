@@ -131,4 +131,24 @@ public class MediaUtil {
 
         return bitmap;
     }
+
+
+    public static void persistBitmap(Bitmap bitmap) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(bitmap.toString());
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

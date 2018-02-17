@@ -3,16 +3,19 @@ package com.windsoft.se.project.view;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
-import android.content.ClipData;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
-import com.windsoft.se.project.view.fragment.ScoreFragment;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
@@ -25,15 +28,17 @@ public class MainActivity extends AppCompatActivity {
     private boolean mOnFavoritesScreen = false;
     private boolean mOnHomeScreen = true;
     MenuItem favoriteIcon;
+    private SearchView mSeriesSearch;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.app_toolbar));
-
         bindFragment();
     }
+
+
 
     private void bindFragment() {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

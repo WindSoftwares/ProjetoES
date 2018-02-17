@@ -1,7 +1,7 @@
 package com.windsoft.se.project.model.quiz;
 
 import com.windsoft.se.project.model.series.Answer;
-import com.windsoft.se.project.model.series.factory.Difficulty;
+import com.windsoft.se.project.util.factory.Difficulty;
 
 import java.util.ArrayList;
 import java.util.Collections;

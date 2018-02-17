@@ -2,7 +2,7 @@ package com.windsoft.se.project.model.series;
 
 import android.os.Build;
 
-import com.windsoft.se.project.model.series.factory.SeriesFactory;
+import com.windsoft.se.project.util.factory.SeriesFactory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,18 +16,19 @@ import java.util.Set;
 public class SeriesMock {
 
     private static SeriesMock instance;
+    List<Series> seriesDataBase;
 
     private  int count;
     private  Set<SeriesMockObserver> mObservers = new HashSet<>();
     List<Series> mSeries = new ArrayList<>();
-
+    private List<Series> seriesList;
 
 
     private SeriesMock() {
-        List<Series> series = SeriesFactory.getInstance().getSeriesList();
+        seriesDataBase = SeriesFactory.getInstance().getSeriesList();
         mSeries = new ArrayList<>();
-        if (series != null) {
-            mSeries.addAll(series);
+        if (seriesDataBase != null) {
+            mSeries.addAll(seriesDataBase);
         }
     }
 
@@ -43,6 +44,19 @@ public class SeriesMock {
             instance = new SeriesMock();
         }
         return instance;
+    }
+
+
+    public void filterByName(String seriesName) {
+        List<Series> result = new ArrayList<>();
+        getSeriesDataBase().forEach(series -> {
+            if (series.getName().toLowerCase().contains(seriesName.toLowerCase())) {
+                result.add(series);
+            }
+        });
+
+        mSeries = result;
+        notifyAllObservers();
     }
 
     public  Series getNewSeries() {
@@ -64,7 +78,7 @@ public class SeriesMock {
 
 
 
-    private void notifyAllObservers() {
+    void notifyAllObservers() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mObservers.iterator().forEachRemaining(SeriesMockObserver::update);
         }
@@ -77,6 +91,24 @@ public class SeriesMock {
     public List<Series> getAllSeries() {
         return mSeries;
     }
+
+    public Series getByName(String seriesName) {
+        Series[] result = {null};
+        mSeries.forEach(series -> {
+            if (series.getName().equalsIgnoreCase(seriesName)) {
+                result[0] = series;
+            }
+        });
+
+        return result[0];
+
+
+    }
+
+    List<Series> getSeriesDataBase() {
+        return seriesDataBase;
+    }
+
 }
 
 

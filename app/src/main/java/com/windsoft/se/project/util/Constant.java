@@ -16,6 +16,9 @@ public class Constant {
     public static final String FAVORITE = "favorite";
     public static final String TRUE = "true";
     public static final String ANSWERED = "answered";
+    public static final String JPG = "jpg";
+    public static final String PNG = "png";
+    public static final String AUTHORITY = "com.windsoft.se.project";
     public static int ONE_SECOND = 1000;
     public static int TWO_SECONDS = 2000;
     public static String THUMBNAIL = "thumbnail";

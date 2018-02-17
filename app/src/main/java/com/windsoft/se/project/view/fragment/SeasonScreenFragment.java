@@ -87,7 +87,7 @@ public class SeasonScreenFragment extends Fragment {
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
                 .replace(R.id.mainFragment, new QuizFragment())
-                .commit();
+                .commitAllowingStateLoss();
     }
 
 }

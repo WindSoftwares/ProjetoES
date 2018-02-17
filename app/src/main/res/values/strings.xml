@@ -16,4 +16,9 @@
     <string name="wants_to_reset_the_quiz">Deseja reiniciar o quiz?</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="app_label">ProjetoES</string>
+    <string name="search_hint">Buscar séries</string>
+    <string name="no_series_found">No Series Found</string>
+    <string name="necessary_storage_permissio">Storage permission is necessary.</string>
+    <string name="no_network_access">No network access.</string>
 </resources>

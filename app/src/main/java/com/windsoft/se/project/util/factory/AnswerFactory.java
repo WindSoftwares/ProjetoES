@@ -1,16 +1,11 @@
-package com.windsoft.se.project.model.series.factory;
-
-import android.view.inputmethod.CorrectionInfo;
+package com.windsoft.se.project.util.factory;
 
 import com.google.firebase.database.DataSnapshot;
 import com.windsoft.se.project.model.series.Answer;
 import com.windsoft.se.project.model.series.Correctness;
-import com.windsoft.se.project.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.windsoft.se.project.util.Constant.ANSWER;
 
 /**
  * Created by GersonSales on 2/9/2018.
