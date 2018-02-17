@@ -3,11 +3,9 @@ package com.windsoft.se.project.view.fragment;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +16,12 @@ import android.widget.TextView;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.model.series.Answer;
-import com.windsoft.se.project.quiz.Quiz;
 import com.windsoft.se.project.util.StaticFlow;
-
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.windsoft.se.project.util.Constant.FIVE_SECONDS;
 import static com.windsoft.se.project.util.Constant.TWO_SECONDS;
 
 public class QuizFragment extends Fragment {
@@ -91,10 +83,13 @@ public class QuizFragment extends Fragment {
 
     @SuppressLint("ResourceType")
     synchronized private void goToTheNextQuestion() {
+        StaticFlow.getActualQuiz().getPopQuestion();
         handler.postDelayed(() -> {
+            if (getActivity() != null)
                 getActivity().getFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                        .remove(this)
                         .replace(R.id.mainFragment, new QuizFragment())
                         .commitAllowingStateLoss();
         }, TWO_SECONDS);
@@ -118,19 +113,16 @@ public class QuizFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (!(savedInstanceState == null)) return getView();
-
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
         enableInteraction();
         ButterKnife.bind(this, view);
-        bindQuiz();
-
+        bindNewQuiz();
         return view;
     }
 
-    private void bindQuiz() {
+    private void bindNewQuiz() {
         if (StaticFlow.getActualQuiz().hasNext()) {
-            mActualQuestion = StaticFlow.getActualQuiz().getNextQuestion();
+            mActualQuestion = StaticFlow.getActualQuiz().getPeekQuestion();
             mActualQuestion.shuffle();
             questionText.setText(mActualQuestion.getDescription());
             mCorrectAnswer = mActualQuestion.getCorrectAnswer();
@@ -142,6 +134,7 @@ public class QuizFragment extends Fragment {
             goToScoreScreen();
         }
     }
+
 
     @SuppressLint("ResourceType")
     private void goToScoreScreen() {

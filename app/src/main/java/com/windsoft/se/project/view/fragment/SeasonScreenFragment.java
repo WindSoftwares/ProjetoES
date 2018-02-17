@@ -37,8 +37,6 @@ public class SeasonScreenFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (!(savedInstanceState == null)) return getView();
-
         View view =  inflater.inflate(R.layout.fragment_series_season, container, false);
         getActivity().setTitle(StaticFlow.getActualSeries().getName());
 

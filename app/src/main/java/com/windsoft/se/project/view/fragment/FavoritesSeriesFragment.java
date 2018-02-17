@@ -27,8 +27,6 @@ public class FavoritesSeriesFragment extends SeriesScreenFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (!(savedInstanceState == null)) return getView();
-
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

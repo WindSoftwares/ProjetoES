@@ -30,18 +30,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setSupportActionBar(findViewById(R.id.app_toolbar));
-        bindFragment();
-
+            setContentView(R.layout.activity_main);
+            setSupportActionBar(findViewById(R.id.app_toolbar));
+        if (savedInstanceState == null) {
+            bindFragment();
+        }
     }
 
 
 
     private void bindFragment() {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mainFragment, new SeriesScreenFragment());
-        fragmentTransaction.commit();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.mainFragment, new SeriesScreenFragment())
+                .commitAllowingStateLoss();
     }
 
 
