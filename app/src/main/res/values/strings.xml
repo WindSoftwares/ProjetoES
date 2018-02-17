@@ -16,4 +16,6 @@
     <string name="wants_to_reset_the_quiz">Deseja reiniciar o quiz?</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="out_quiz">Deseja sair do jogo?</string>
+    <string name="warning_about_quiz">Você irá perder sua pontuação atual</string>
 </resources>

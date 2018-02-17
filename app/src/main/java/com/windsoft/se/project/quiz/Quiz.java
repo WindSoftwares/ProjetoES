@@ -68,6 +68,8 @@ public class Quiz {
         mGatheredScore++;
     }
 
+
+
     public int getGatheredScore() {
         int[] count = {0};
         mQuestions.forEach(question -> count[0] = question.isCorrectAnswered() ? ++count[0] : count[0]);

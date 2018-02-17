@@ -26,6 +26,7 @@ import butterknife.OnClick;
 public class ScoreFragment extends Fragment {
 
 
+
     @BindView(R.id.congrats_textView)
     TextView congratsText;
 

@@ -2,6 +2,7 @@ package com.windsoft.se.project.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -41,6 +42,7 @@ public class QuizFragment extends Fragment {
     @BindView(R.id.fourthAlternative_button)
     Button fourthAlternativeButton;
 
+    public static boolean endOrNot;
 
     private Answer mCorrectAnswer;
 //    private static Season mOwner;
@@ -50,6 +52,25 @@ public class QuizFragment extends Fragment {
     @OnClick(R.id.firstAlternative_button)
     void firstAlternativeChosen() {
         checkButtonResponse(firstAlternativeButton);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        endOrNot = true;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        endOrNot = true;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        endOrNot = true;
     }
 
     @OnClick(R.id.secondAlternative_button)
@@ -91,6 +112,7 @@ public class QuizFragment extends Fragment {
                     .commit();
         }, TWO_SECONDS);
     }
+
 
     private void disableInteraction() {
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
