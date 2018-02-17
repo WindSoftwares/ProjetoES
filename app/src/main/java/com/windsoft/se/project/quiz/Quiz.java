@@ -47,9 +47,13 @@ public class Quiz {
      * Retorna a próxima questão do quiz.
      * @return Question
      */
-    public Question getNextQuestion(){
+    public Question getPopQuestion(){
         return mQuestionsStack.pop();
+    }
 
+
+    public Question getPeekQuestion() {
+        return mQuestionsStack.peek();
     }
 
     public boolean hasNext() {
