@@ -3,6 +3,7 @@ package com.windsoft.se.project.view.fragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,9 @@ public class SeasonScreenFragment extends Fragment {
 
     @BindView(R.id.seasonView_recyclerView)
     RecyclerView seasonView;
+
+
+    public static boolean backOrNot = false;
 
     public SeasonScreenFragment() {
     }
@@ -79,6 +83,32 @@ public class SeasonScreenFragment extends Fragment {
 
 
         };
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        System.out.println("saiu aqui ou n");
+        backOrNot = true;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        backOrNot = false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        backOrNot = false;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        backOrNot = false;
     }
 
     @SuppressLint("ResourceType")
