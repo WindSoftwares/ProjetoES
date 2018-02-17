@@ -118,6 +118,8 @@ public class QuizFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (!(savedInstanceState == null)) return getView();
+
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
         enableInteraction();
         ButterKnife.bind(this, view);

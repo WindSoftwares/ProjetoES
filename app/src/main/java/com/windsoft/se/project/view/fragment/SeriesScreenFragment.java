@@ -40,9 +40,11 @@ public class SeriesScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (!(savedInstanceState == null)) return getView();
         View view = inflater.inflate(R.layout.view_serie_screen, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
+        getActivity().setTitle(R.string.app_label);
 
         mSeriesGridView.setAdapter(getNewAdapter());
 
