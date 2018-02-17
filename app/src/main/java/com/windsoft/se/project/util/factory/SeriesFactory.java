@@ -43,28 +43,17 @@ public class SeriesFactory {
     }
 
     public List<Series> getSeriesList() {
-        if (mSeriesSnapshot == null) return null;
+        return mSeries;
+    }
 
-        List<Series> seriesList = new ArrayList<>();
-        if (!FileUtil.isPermissionGranted()) {
-            FileUtil.requestPermission();
+    private Bitmap getBitmap(String seriesName, String thumbnailLink) {
+        Bitmap thumbnail = FileUtil.getSeriesThumbnail(seriesName);
+        if (thumbnail != null) {
+            return thumbnail;
         }
-
-        Map<String, Bitmap> thumbnails = new HashMap<>();
-
-        for (DataSnapshot seriesSnapshot : mSeriesSnapshot.getChildren()) {
-
-            String seriesName = seriesSnapshot.getKey();
-            String thumbnailLink = seriesSnapshot.child(THUMBNAIL).getValue().toString();
-            Bitmap seriesThumbnail = MediaUtil.getBitmapFromURL2(thumbnailLink);
-            FileUtil.persistBitmap(seriesName, seriesThumbnail);
-            boolean isFavorite = seriesSnapshot.child(FAVORITE).getValue().toString().equals(TRUE);
-            ArrayList<Season> seasons = getSeasonListFrom(seriesSnapshot);
-            Series series = new Series(seriesName, seriesThumbnail, seasons, isFavorite);//TODO
-            seriesList.add(series);
-        }
-
-        return seriesList;
+        thumbnail = MediaUtil.getBitmapFromURL2(thumbnailLink);
+        FileUtil.persistBitmap(seriesName, thumbnail);
+        return thumbnail;
     }
 
     private ArrayList<Season> getSeasonListFrom(DataSnapshot seriesSnapshot) {
@@ -78,6 +67,28 @@ public class SeriesFactory {
 
     public void setSeriesSnapshot(DataSnapshot seriesDatabase) {
         mSeriesSnapshot = seriesDatabase;
+        loadSeries();
     }
 
+    public void loadSeries() {
+        if (mSeries == null) {
+            mSeries = new ArrayList<>();
+        }
+
+        if (mSeriesSnapshot == null) return;
+
+        for (DataSnapshot seriesSnapshot : mSeriesSnapshot.getChildren()) {
+
+            String seriesName = seriesSnapshot.getKey();
+            String thumbnailLink = seriesSnapshot.child(THUMBNAIL).getValue().toString();
+            Bitmap seriesThumbnail = getBitmap(seriesName, thumbnailLink);
+            boolean isFavorite = seriesSnapshot.child(FAVORITE).getValue().toString().equals(TRUE);
+            ArrayList<Season> seasons = getSeasonListFrom(seriesSnapshot);
+            Series series = new Series(seriesName, seriesThumbnail, seasons, isFavorite);//TODO
+            mSeries.add(series);
+        }
+
+
+
+    }
 }

@@ -1,40 +1,29 @@
 package com.windsoft.se.project.util;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.os.Environment;
-import android.os.storage.StorageManager;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 
-import com.windsoft.se.project.Manifest;
 import com.windsoft.se.project.model.series.Series;
-import com.windsoft.se.project.view.SplashScreenActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static android.Manifest.permission.RECORD_AUDIO;
-import static android.media.MediaRecorder.VideoSource.CAMERA;
-import static android.support.v4.content.PermissionChecker.checkSelfPermission;
-import static com.windsoft.se.project.util.Constant.JPG;
+import static com.windsoft.se.project.util.Constant.AUTHORITY;
 import static com.windsoft.se.project.util.Constant.PNG;
 
 /**
@@ -43,9 +32,9 @@ import static com.windsoft.se.project.util.Constant.PNG;
 
 public class FileUtil{
 
-    private static SharedPreferences sharedPreferences;
-    private static Context context;
-    private static Activity activity;
+
+    private static Map<String, Bitmap> thumbnailMap;
+    private static File externalFileDir;
 
     public static void persistSeries(String tag, List<Series> series)  {
         try {
@@ -96,33 +85,24 @@ public class FileUtil{
         return result;
     }
 
-    public static void setSharedPreferences(SharedPreferences sharedPreferences) {
-        FileUtil.sharedPreferences = sharedPreferences;
+    private static Map<String, Bitmap> getAllThumbnails() {
+        Map<String, Bitmap> result = new HashMap<>();
+
+        File dir = externalFileDir;
+        if (dir == null) return result;
+        for (File file : dir.listFiles()) {
+            result.put(file.getName(), getBitmapFromFile(file.getAbsolutePath()));
+        }
+
+        return result;
     }
 
-    public static boolean isPermissionGranted() {
-        return PackageManager.PERMISSION_GRANTED == checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                && PackageManager.PERMISSION_GRANTED == checkSelfPermission(context, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-    }
-
-    public static void requestPermission() {
-        String[] permissions = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE};
-        ActivityCompat.requestPermissions(activity, permissions, 0);
+    private static File createImageFile(String fileName) {
+        return createMediaFile(externalFileDir,fileName,  PNG);
     }
 
 
-    public static void setContext(Context context) {
-        FileUtil.context = context;
 
-    }
-
-    public static void setActivity(Activity activity) {
-        FileUtil.activity = activity;
-    }
-
-    public static File createImageFile(String fileName) {
-        return createMediaFile(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),fileName,  PNG);
-    }
 
     private static File createMediaFile(File storageDirectory, String fileName, String extension)  {
         File mediaFile = null;
@@ -139,7 +119,7 @@ public class FileUtil{
         }
         return mediaFile;
     }
-    
+
     public static void persistBitmap(String fileName, Bitmap bitmap) {
         FileOutputStream out = null;
         try {
@@ -156,6 +136,35 @@ public class FileUtil{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            thumbnailMap = null;
         }
+    }
+
+    public static Uri getUriFromFile(Context context, File file) {
+        return FileProvider.getUriForFile(context, AUTHORITY, file);
+    }
+
+    private static Bitmap getBitmapFromFile(String path) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        return BitmapFactory.decodeFile(path, options);
+    }
+
+
+    public static Bitmap getSeriesThumbnail(String seriesName) {
+        if (thumbnailMap == null) {
+            thumbnailMap = getAllThumbnails();
+        }
+
+        for (String path: thumbnailMap.keySet()) {
+            if (path.contains(seriesName) ) {
+                return thumbnailMap.get(path);
+            }
+        }
+        return null;
+    }
+
+    public static void setExternalFileDir(File externalFileDir) {
+        FileUtil.externalFileDir = externalFileDir;
     }
 }
