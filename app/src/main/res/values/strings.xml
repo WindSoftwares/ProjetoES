@@ -19,4 +19,6 @@
     <string name="app_label">ProjetoES</string>
     <string name="search_hint">Buscar séries</string>
     <string name="no_series_found">No Series Found</string>
+    <string name="necessary_storage_permissio">Storage permission is necessary.</string>
+    <string name="no_network_access">No network access.</string>
 </resources>

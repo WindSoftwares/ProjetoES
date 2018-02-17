@@ -1,7 +1,6 @@
-package com.windsoft.se.project.model.series.factory;
+package com.windsoft.se.project.util.factory;
 
 
-import com.windsoft.se.project.model.quiz.LEVEL;
 import com.windsoft.se.project.model.quiz.Question;
 import com.windsoft.se.project.quiz.Quiz;
 import com.windsoft.se.project.util.StaticFlow;

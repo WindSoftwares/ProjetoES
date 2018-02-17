@@ -1,4 +1,4 @@
-package com.windsoft.se.project.model.series.factory;
+package com.windsoft.se.project.util.factory;
 
 import com.google.firebase.database.DataSnapshot;
 import com.windsoft.se.project.model.quiz.Question;

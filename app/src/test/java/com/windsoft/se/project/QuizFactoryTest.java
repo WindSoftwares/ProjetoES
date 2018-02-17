@@ -6,7 +6,7 @@ package com.windsoft.se.project;
 
 import com.windsoft.se.project.model.quiz.LEVEL;
 import com.windsoft.se.project.model.quiz.Question;
-import com.windsoft.se.project.model.series.factory.QuizFactory;
+import com.windsoft.se.project.util.factory.QuizFactory;
 import com.windsoft.se.project.quiz.Quiz;
 
 import org.junit.BeforeClass;

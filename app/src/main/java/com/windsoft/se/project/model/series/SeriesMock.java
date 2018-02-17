@@ -2,7 +2,7 @@ package com.windsoft.se.project.model.series;
 
 import android.os.Build;
 
-import com.windsoft.se.project.model.series.factory.SeriesFactory;
+import com.windsoft.se.project.util.factory.SeriesFactory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,7 +21,7 @@ public class SeriesMock {
     private  int count;
     private  Set<SeriesMockObserver> mObservers = new HashSet<>();
     List<Series> mSeries = new ArrayList<>();
-
+    private List<Series> seriesList;
 
 
     private SeriesMock() {
@@ -108,6 +108,7 @@ public class SeriesMock {
     List<Series> getSeriesDataBase() {
         return seriesDataBase;
     }
+
 }
 
 

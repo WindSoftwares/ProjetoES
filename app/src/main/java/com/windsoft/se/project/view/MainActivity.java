@@ -3,8 +3,10 @@ package com.windsoft.se.project.view;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.app_toolbar));
-
         bindFragment();
     }
 
