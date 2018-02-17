@@ -56,6 +56,25 @@ public class SeriesScreenFragment extends Fragment {
         mNoSeriesFound.setVisibility(mSeriesGridView.getAdapter().isEmpty() ? VISIBLE : GONE);
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.removeItem(R.id.action_home);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_favorites:
+                goToFavoriteSeriesScreen();
+                return true;
+
+                default: return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
     @NonNull
     SeriesViewAdapter getNewAdapter() {
         return new SeriesViewAdapter();
@@ -79,9 +98,6 @@ public class SeriesScreenFragment extends Fragment {
     }
 
 
-    @OnItemClick(R.id.series_gridView)
-    public void onGridItemClick(int position) {
-    }
 
 
     @Override
@@ -89,6 +105,7 @@ public class SeriesScreenFragment extends Fragment {
         inflater.inflate(R.menu.menu__main_search, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
+
         SearchView searchView = (SearchView) menuItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -109,6 +126,15 @@ public class SeriesScreenFragment extends Fragment {
 
     void filterSeriesByName(String newText) {
         SeriesMock.getInstance().filterByName(newText);
+    }
+
+    @SuppressLint("ResourceType")
+    private void goToFavoriteSeriesScreen() {
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                .replace(R.id.mainFragment, new FavoritesSeriesFragment())
+                .addToBackStack("favoriteScreen")
+                .commit();
     }
 
 }

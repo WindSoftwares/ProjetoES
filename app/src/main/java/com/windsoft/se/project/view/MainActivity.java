@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+
+
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -61,14 +63,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("ResourceType")
-    private void goToFavoriteSeriesScreen() {
-        getFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_top, R.anim.exit_to_bottom)
-                .replace(R.id.mainFragment, new FavoritesSeriesFragment())
-                .addToBackStack("favoriteScreen")
-                .commit();
-    }
+
 
 
     @SuppressLint("ResourceType")
