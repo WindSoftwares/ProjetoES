@@ -21,8 +21,14 @@ public class Quiz {
     private int mGatheredScore;
 
 
-    public Quiz(Difficulty difficulty, ArrayList<Question> questions ){
+    public Quiz(List<Question> questions, Difficulty difficulty){
+        this (questions);
         mDifficulty = difficulty;
+
+
+    }
+
+    public Quiz(List<Question> questions) {
         mQuestions  = questions;
         mQuestionsStack = new Stack<>();
         mQuestions.forEach(question -> {
@@ -32,7 +38,6 @@ public class Quiz {
         });
 
         mGatheredScore = 0;
-
     }
 
 

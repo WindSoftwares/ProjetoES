@@ -68,7 +68,7 @@ public class MediaUtil {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        return ThumbnailUtils.extractThumbnail(result, 100,150);
+        return ThumbnailUtils.extractThumbnail(result, 350,550);
 //        return scaleDown(result, 1000, true);
 
     }

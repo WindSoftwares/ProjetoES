@@ -37,19 +37,27 @@ public class QuizFactory {
 //     * @param season - Season of the mSeries, when it is 0, the quiz is about all seasons
      * @return Quiz
      */
-    public Quiz createQuiz(Difficulty difficulty){
+    public Quiz createQuizByDifficulty(Difficulty difficulty){
 
         /** TODO: Get questions from bd
          *  by: Maiana
          */
         // Set<Question> allQuestions = bd.getQuestions(name, season);
         List<Question> allQuestions = StaticFlow.getActualSeason().getQuestions();
-        ArrayList<Question> questionsSelected = selectQuestions(allQuestions, difficulty);
+        ArrayList<Question> questionsSelected = selectQuestionsByDifficulty(allQuestions, difficulty);
 
-        Quiz quiz = new Quiz(difficulty, questionsSelected);
+        Quiz quiz = new Quiz(questionsSelected, difficulty);
         quiz.shuffleQuiz();
 
         return quiz;
+    }
+
+    public Quiz createQuiz() {
+
+        List<Question> questions = StaticFlow.getActualSeason().getQuestions();
+
+        return new Quiz(questions);
+
     }
 
     /** This method select n questions according level.
@@ -57,7 +65,7 @@ public class QuizFactory {
      * @param questions All question where that will be select.
      * @return The selected questions.
      */
-    private ArrayList<Question> selectQuestions(List<Question> questions, Difficulty difficulty){
+    private ArrayList<Question> selectQuestionsByDifficulty(List<Question> questions, Difficulty difficulty){
         ArrayList<Question> selects = new ArrayList<>();
 
         for ( Question question : questions) {
@@ -86,7 +94,7 @@ public class QuizFactory {
         this.NUMBER_QUESTION = number;
     }
 
-    public static Quiz createQuiz(List<Question> questions) {
+    public static Quiz createQuizByDifficulty(List<Question> questions) {
         return null;
     }
 }
