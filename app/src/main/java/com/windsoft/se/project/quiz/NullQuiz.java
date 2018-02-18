@@ -8,6 +8,6 @@ import java.util.ArrayList;
 
 public class NullQuiz extends Quiz {
     public NullQuiz() {
-        super(null, new ArrayList<>());
+        super(new ArrayList<>());
     }
 }

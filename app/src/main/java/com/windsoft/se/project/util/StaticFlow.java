@@ -39,7 +39,7 @@ public class StaticFlow {
 
     public static void setActualSeason(Season actualSeason) {
         mActualSeason = actualSeason;
-        StaticFlow.setActualQuiz(QuizFactory.getInstance().createQuiz(Difficulty.EASY)); // TODO
+        StaticFlow.setActualQuiz(QuizFactory.getInstance().createQuiz()); // TODO
     }
 
     public static Quiz getActualQuiz() {
