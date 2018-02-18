@@ -38,9 +38,6 @@ public class ScoreFragment extends Fragment {
     @BindView(R.id.targetScore_textView)
     TextView targetScore;
 
-    @BindView(R.id.backToHome_button)
-    ImageButton homeButton;
-
     @BindView(R.id.nextQuiz_button)
     ImageButton nextQuizButton;
 
@@ -90,16 +87,6 @@ public class ScoreFragment extends Fragment {
             congratsText.setText(R.string.fail_congrats);
             congratsMessageText.setText(R.string.you_know_anything);
         }
-    }
-    @SuppressLint("ResourceType")
-    @OnClick(R.id.backToHome_button)
-    public void onClickHome() {
-        getActivity()
-                .getFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                .replace(R.id.mainFragment, new SeriesScreenFragment())
-                .commit();
     }
 
     @SuppressLint("ResourceType")
