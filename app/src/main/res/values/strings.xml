@@ -22,4 +22,9 @@
     <string name="necessary_storage_permissio">Storage permission is necessary.</string>
     <string name="no_network_access">No network access.</string>
     <string name="action_search">Search</string>
+    <string name="you_are_the_best">You are the best!</string>
+    <string name="you_need_to_practice">You need to practice!</string>
+    <string name="you_are_rust">You are rust!</string>
+    <string name="almost_there">Almost there!</string>
+    <string name="ten_number">10</string>
 </resources>
