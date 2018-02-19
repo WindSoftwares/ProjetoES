@@ -1,7 +1,10 @@
 package com.windsoft.se.project.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -14,16 +17,21 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.adapter.SeriesViewAdapter;
 import com.windsoft.se.project.model.series.Series;
 import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.util.StaticFlow;
+import com.windsoft.se.project.view.SeriesDetailsActivity;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
+import butterknife.OnItemLongClick;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -49,7 +57,6 @@ public class SeriesScreenFragment extends Fragment {
 
 
         updateNoSeriesFound();
-        tempGridBinder();
         return view;
     }
 
@@ -82,24 +89,33 @@ public class SeriesScreenFragment extends Fragment {
     }
 
 
+    @OnItemLongClick(R.id.series_gridView)
+    boolean onItemLongClick(int position) {
+        StaticFlow.setActualSeries((Series) mSeriesGridView.getAdapter().getItem(position));
+        Intent intent = new Intent(getActivity(), SeriesDetailsActivity.class);
+        getActivity().startActivity(intent);
 
-    @SuppressLint("ResourceType")
-    private void tempGridBinder() {
-        filterSeriesByName("");//TODO
-        mSeriesGridView.setOnItemClickListener((parent, view, position, id) -> {
-            Series series = (Series) mSeriesGridView.getAdapter().getItem(position);
-            StaticFlow.setActualSeries(series);
-            getActivity()
-                    .getFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(R.id.mainFragment, new SeasonScreenFragment())
-                    .commit();
-        });
+//        new AlertDialog.Builder(getActivity())
+//                .setTitle("title")
+//                .setMessage("message")
+//                .setPositiveButton("positive", ((dialog, which) -> {}))
+//                .setNegativeButton("negative", ((dialog, which) -> {}))
+//                .show();
+        return true; //if return false, the onItemClick() will be invoked when touch up
     }
 
-
-
+    @SuppressLint("ResourceType")
+    @OnItemClick(R.id.series_gridView)
+    void onItemClick(int position) {
+        Series series = (Series) mSeriesGridView.getAdapter().getItem(position);
+        StaticFlow.setActualSeries(series);
+        getActivity()
+                .getFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                .replace(R.id.mainFragment, new SeasonScreenFragment())
+                .commit();
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
