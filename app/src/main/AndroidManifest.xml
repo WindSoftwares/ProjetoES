@@ -15,16 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity
-            android:name=".view.SplashScreenActivity">
+        <activity android:name=".view.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MainActivity"
-            android:theme="@style/AppTheme"
-            >
+        <activity
+            android:name=".view.MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -42,6 +42,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity
+            android:name=".view.SeriesDetailsActivity"
+            android:theme="@style/Theme.AppCompat.Dialog" />
     </application>
 
 </manifest>

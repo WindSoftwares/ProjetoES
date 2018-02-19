@@ -72,7 +72,7 @@ public class Series {
         return mFavorite;
     }
 
-    public void setAsFavorite() {
-        mFavorite = true;
+    public void setAsFavorite(boolean isFavorite) {
+        mFavorite = isFavorite;
     }
 }

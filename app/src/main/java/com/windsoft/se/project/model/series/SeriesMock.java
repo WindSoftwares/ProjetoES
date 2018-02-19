@@ -64,8 +64,10 @@ public class SeriesMock {
     }
 
     public  void addSeries(Series series) {
-        mSeries.add(series);
-        notifyAllObservers();
+        if (!mSeries.contains(series)) {
+            mSeries.add(series);
+            notifyAllObservers();
+        }
     }
 
     public  Series getByPosition(int position) {
@@ -109,6 +111,10 @@ public class SeriesMock {
         return seriesDataBase;
     }
 
+    public void removeSeries(Series series) {
+        mSeries.remove(series);
+        notifyAllObservers();
+    }
 }
 
 

@@ -39,4 +39,16 @@ public class FavoriteSeriesMock extends SeriesMock {
     List<Series> getSeriesDataBase() {
         return newMSeries;
     }
+
+    public void update() {
+        List<Series> result = new ArrayList<>();
+        getAllSeries().forEach(series -> {
+            if (series.isFavorite()) {
+                result.add(series);
+            }
+        });
+
+        mSeries = result;
+        notifyAllObservers();
+    }
 }
