@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,15 +44,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void bindFragment() {
         getFragmentManager().beginTransaction()
                 .replace(R.id.mainFragment, new SeriesScreenFragment())
                 .commitAllowingStateLoss();
     }
-
-
 
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
@@ -65,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage(R.string.warning_about_quiz).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Quiz atual  = StaticFlow.getActualQuiz();
                 goToSeriesScreen();
 
             }
@@ -83,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_home:
-
+//                dialogQuiz();
                 goToSeriesScreen();
                 return true;
             default:
