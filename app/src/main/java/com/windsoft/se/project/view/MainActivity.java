@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.mainFragment, new FavoritesSeriesFragment())
                 .addToBackStack("favoriteScreen")
                 .commit();
-        mOnHomeScreen = false;
-        mOnFavoritesScreen = true;
     }
 
 
