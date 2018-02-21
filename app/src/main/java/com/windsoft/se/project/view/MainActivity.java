@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
+import com.windsoft.se.project.view.fragment.ScoreFragment;
+import com.windsoft.se.project.view.fragment.SeasonScreenFragment;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
@@ -63,6 +65,28 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if(SeasonScreenFragment.backOrNot){
+            goToSeriesScreen(R.anim.enter_from_bottom, R.anim.exit_to_top);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    
+    @SuppressLint("ResourceType")
+    private void goToFavoriteSeriesScreen() {
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_top, R.anim.exit_to_bottom)
+                .replace(R.id.mainFragment, new FavoritesSeriesFragment())
+                .addToBackStack("favoriteScreen")
+                .commit();
+        mOnHomeScreen = false;
+        mOnFavoritesScreen = true;
     }
 
 
