@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-<<<<<<< HEAD
     @Override
     public void onBackPressed() {
         if(SeasonScreenFragment.backOrNot){
@@ -92,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         mOnHomeScreen = false;
         mOnFavoritesScreen = true;
     }
-=======
->>>>>>> ec7a853537d23ea06bb419c30abcf36eb643dded
+
+
 
 
     @SuppressLint("ResourceType")
