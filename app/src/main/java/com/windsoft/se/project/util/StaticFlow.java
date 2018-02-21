@@ -2,8 +2,8 @@ package com.windsoft.se.project.util;
 
 import com.windsoft.se.project.model.series.NullSeries;
 import com.windsoft.se.project.model.series.Series;
-import com.windsoft.se.project.model.series.factory.Difficulty;
-import com.windsoft.se.project.model.series.factory.QuizFactory;
+import com.windsoft.se.project.util.factory.Difficulty;
+import com.windsoft.se.project.util.factory.QuizFactory;
 import com.windsoft.se.project.model.series.season.NullSeason;
 import com.windsoft.se.project.model.series.season.Season;
 import com.windsoft.se.project.quiz.NullQuiz;
@@ -39,7 +39,7 @@ public class StaticFlow {
 
     public static void setActualSeason(Season actualSeason) {
         mActualSeason = actualSeason;
-        StaticFlow.setActualQuiz(QuizFactory.getInstance().createQuiz(Difficulty.EASY)); // TODO
+        StaticFlow.setActualQuiz(QuizFactory.getInstance().createQuiz()); // TODO
     }
 
     public static Quiz getActualQuiz() {

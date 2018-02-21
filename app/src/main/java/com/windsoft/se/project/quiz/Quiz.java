@@ -2,7 +2,7 @@ package com.windsoft.se.project.quiz;
 
 
 import com.windsoft.se.project.model.quiz.Question;
-import com.windsoft.se.project.model.series.factory.Difficulty;
+import com.windsoft.se.project.util.factory.Difficulty;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,8 +21,14 @@ public class Quiz {
     private int mGatheredScore;
 
 
-    public Quiz(Difficulty difficulty, ArrayList<Question> questions ){
+    public Quiz(List<Question> questions, Difficulty difficulty){
+        this (questions);
         mDifficulty = difficulty;
+
+
+    }
+
+    public Quiz(List<Question> questions) {
         mQuestions  = questions;
         mQuestionsStack = new Stack<>();
         mQuestions.forEach(question -> {
@@ -32,7 +38,6 @@ public class Quiz {
         });
 
         mGatheredScore = 0;
-
     }
 
 
@@ -47,9 +52,13 @@ public class Quiz {
      * Retorna a próxima questão do quiz.
      * @return Question
      */
-    public Question getNextQuestion(){
+    public Question getPopQuestion(){
         return mQuestionsStack.pop();
+    }
 
+
+    public Question getPeekQuestion() {
+        return mQuestionsStack.peek();
     }
 
     public boolean hasNext() {

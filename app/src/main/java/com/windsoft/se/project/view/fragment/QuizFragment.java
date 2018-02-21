@@ -46,6 +46,7 @@ public class QuizFragment extends Fragment {
 //    private static Season mOwner;
     private static int mGatheredScore;
     private Question mActualQuestion;
+    private Handler handler = new Handler();
 
     @OnClick(R.id.firstAlternative_button)
     void firstAlternativeChosen() {
@@ -82,15 +83,19 @@ public class QuizFragment extends Fragment {
 
     @SuppressLint("ResourceType")
     synchronized private void goToTheNextQuestion() {
-        Handler handler = new Handler();
+        StaticFlow.getActualQuiz().getPopQuestion();
         handler.postDelayed(() -> {
-            getActivity().getFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(R.id.mainFragment, new QuizFragment())
-                    .commit();
+            if (getActivity() != null)
+                getActivity().getFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                        .remove(this)
+                        .replace(R.id.mainFragment, new QuizFragment())
+                        .commitAllowingStateLoss();
         }, TWO_SECONDS);
+
     }
+
 
     private void disableInteraction() {
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -111,14 +116,13 @@ public class QuizFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
         enableInteraction();
         ButterKnife.bind(this, view);
-        bindQuiz();
-
+        bindNewQuiz();
         return view;
     }
 
-    private void bindQuiz() {
+    private void bindNewQuiz() {
         if (StaticFlow.getActualQuiz().hasNext()) {
-            mActualQuestion = StaticFlow.getActualQuiz().getNextQuestion();
+            mActualQuestion = StaticFlow.getActualQuiz().getPeekQuestion();
             mActualQuestion.shuffle();
             questionText.setText(mActualQuestion.getDescription());
             mCorrectAnswer = mActualQuestion.getCorrectAnswer();
@@ -131,6 +135,7 @@ public class QuizFragment extends Fragment {
         }
     }
 
+
     @SuppressLint("ResourceType")
     private void goToScoreScreen() {
         getActivity()
@@ -138,7 +143,7 @@ public class QuizFragment extends Fragment {
                 .beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
                 .replace(R.id.mainFragment, new ScoreFragment())
-                .commit();
+                .commitAllowingStateLoss();
     }
 
 

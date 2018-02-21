@@ -10,16 +10,17 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/questionLayout_constraint"
-        android:layout_width="0dp"
+        android:layout_width="301dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:background="@color/colorDivider"
         android:padding="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/choicesLayout_constraint"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -27,9 +28,9 @@
             android:id="@+id/question_text"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:textSize="24sp"
             android:gravity="center"
             android:text="@string/quiz_question"
+            android:textSize="24sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,9 +45,11 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toEndOf="@+id/questionLayout_constraint"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/firstAlternative_button"

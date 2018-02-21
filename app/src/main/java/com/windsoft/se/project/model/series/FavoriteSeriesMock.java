@@ -1,8 +1,5 @@
 package com.windsoft.se.project.model.series;
 
-import com.google.firebase.FirebaseApp;
-import com.windsoft.se.project.model.series.factory.SeriesFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +9,9 @@ import java.util.List;
 
 public class FavoriteSeriesMock extends SeriesMock {
     private static FavoriteSeriesMock instance;
+    private  ArrayList<Series> newMSeries;
+
+
 
     public static FavoriteSeriesMock getInstance() {
         if (instance == null) {
@@ -23,7 +23,7 @@ public class FavoriteSeriesMock extends SeriesMock {
 
     private FavoriteSeriesMock() {
         super(SeriesMock.getInstance().getAllSeries());
-        List<Series> newMSeries = new ArrayList<>();
+        newMSeries = new ArrayList<>();
         if (mSeries != null) {
             mSeries.forEach(seriesItem -> {
                 if (seriesItem.isFavorite()) {
@@ -31,8 +31,24 @@ public class FavoriteSeriesMock extends SeriesMock {
                 }
             });
         }
-        System.out.println(newMSeries);
-
         mSeries = newMSeries;
+    }
+
+
+    @Override
+    List<Series> getSeriesDataBase() {
+        return newMSeries;
+    }
+
+    public void update() {
+        List<Series> result = new ArrayList<>();
+        getAllSeries().forEach(series -> {
+            if (series.isFavorite()) {
+                result.add(series);
+            }
+        });
+
+        mSeries = result;
+        notifyAllObservers();
     }
 }

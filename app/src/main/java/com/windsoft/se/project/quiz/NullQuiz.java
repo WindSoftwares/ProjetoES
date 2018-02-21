@@ -1,7 +1,5 @@
 package com.windsoft.se.project.quiz;
 
-import com.windsoft.se.project.model.series.factory.Difficulty;
-
 import java.util.ArrayList;
 
 /**
@@ -10,6 +8,6 @@ import java.util.ArrayList;
 
 public class NullQuiz extends Quiz {
     public NullQuiz() {
-        super(null, new ArrayList<>());
+        super(new ArrayList<>());
     }
 }

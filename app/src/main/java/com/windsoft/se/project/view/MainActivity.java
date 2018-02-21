@@ -3,17 +3,24 @@ package com.windsoft.se.project.view;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
-import android.content.ClipData;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
+<<<<<<< HEAD
 import com.windsoft.se.project.view.fragment.ScoreFragment;
 import com.windsoft.se.project.view.fragment.SeasonScreenFragment;
+=======
+>>>>>>> ec7a853537d23ea06bb419c30abcf36eb643dded
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
@@ -23,30 +30,31 @@ import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 public class MainActivity extends AppCompatActivity {
 
 
-    private boolean mOnFavoritesScreen = false;
-    private boolean mOnHomeScreen = true;
-    MenuItem favoriteIcon;
+    private SearchView mSeriesSearch;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setSupportActionBar(findViewById(R.id.app_toolbar));
-
-        bindFragment();
+            setContentView(R.layout.activity_main);
+            setSupportActionBar(findViewById(R.id.app_toolbar));
+        if (savedInstanceState == null) {
+            bindFragment();
+        }
     }
+
+
 
     private void bindFragment() {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mainFragment, new SeriesScreenFragment());
-        fragmentTransaction.commit();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.mainFragment, new SeriesScreenFragment())
+                .commitAllowingStateLoss();
     }
+
+
 
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        favoriteIcon = menu.findItem(R.id.action_favorites);
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -57,23 +65,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_home:
                 goToSeriesScreen();
                 return true;
-
-            case R.id.action_favorites:
-                if (mOnFavoritesScreen) {
-                    item.setIcon(R.drawable.ic_star_border_black_24dp);
-                    goToSeriesScreen(R.anim.enter_from_bottom, R.anim.exit_to_top);
-                } else {
-                    item.setIcon(R.drawable.ic_star_black_24dp);
-                    goToFavoriteSeriesScreen();
-                }
-                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
 
+<<<<<<< HEAD
     @Override
     public void onBackPressed() {
         if(SeasonScreenFragment.backOrNot){
@@ -94,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         mOnHomeScreen = false;
         mOnFavoritesScreen = true;
     }
+=======
+>>>>>>> ec7a853537d23ea06bb419c30abcf36eb643dded
 
 
     @SuppressLint("ResourceType")
@@ -106,9 +106,5 @@ public class MainActivity extends AppCompatActivity {
                 .setCustomAnimations(enterAnimation, exitAnimation)
                 .replace(R.id.mainFragment, new SeriesScreenFragment())
                 .commit();
-
-        mOnHomeScreen = true;
-        mOnFavoritesScreen = false;
-        favoriteIcon.setIcon(R.drawable.ic_star_border_black_24dp);
     }
 }

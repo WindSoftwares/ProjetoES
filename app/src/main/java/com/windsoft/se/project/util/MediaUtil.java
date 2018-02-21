@@ -68,22 +68,23 @@ public class MediaUtil {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+        return ThumbnailUtils.extractThumbnail(result, 350,550);
+//        return scaleDown(result, 1000, true);
 
-        return scaleDown(result, 250, true);
     }
 
 
     private static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
                                    boolean filter) {
+        if (realImage == null) return null;
         float ratio = Math.min(
-                (float) maxImageSize / realImage.getWidth(),
-                (float) maxImageSize / realImage.getHeight());
-        int width = Math.round((float) ratio * realImage.getWidth());
-        int height = Math.round((float) ratio * realImage.getHeight());
+                maxImageSize / realImage.getWidth(),
+                maxImageSize / realImage.getHeight());
+        int width = Math.round(ratio * realImage.getWidth());
+        int height = Math.round(ratio * realImage.getHeight());
 
-        Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
+        return Bitmap.createScaledBitmap(realImage, width,
                 height, filter);
-        return newBitmap;
     }
 
     public static Bitmap getBitmapFromURL(String src) {
@@ -130,5 +131,25 @@ public class MediaUtil {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+
+    public static void persistBitmap(Bitmap bitmap) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(bitmap.toString());
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

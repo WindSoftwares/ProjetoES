@@ -1,10 +1,5 @@
 package com.windsoft.se.project.model.quiz;
 
-import com.windsoft.se.project.model.series.factory.Difficulty;
-
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * Created by GersonSales on 1/27/2018.
  */
