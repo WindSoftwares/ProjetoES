@@ -1,6 +1,7 @@
 package com.windsoft.se.project.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +12,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareButton;
+import com.facebook.share.widget.ShareDialog;
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.util.MediaUtil;
 import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
@@ -100,5 +106,29 @@ public class ScoreFragment extends Fragment {
                 .commit();
     }
 
+    @OnClick(R.id.shareScore_button)
+    public void onClickShareScore() {
+        publishScore();
+    }
 
+
+    public void publishScore() {
+        ShareDialog shareDialog = new ShareDialog(this);
+
+        if (ShareDialog.canShow(SharePhotoContent.class)) {
+            SharePhoto sharePhoto = new SharePhoto.Builder()
+                    .setBitmap(MediaUtil.getScreenShot(getView()))
+                    .build();
+
+            SharePhotoContent photoContent = new SharePhotoContent.Builder()
+                    .addPhoto(sharePhoto)
+                    .build();
+            shareDialog.show(photoContent, ShareDialog.Mode.AUTOMATIC);
+        } else {
+            new AlertDialog.Builder(getContext()).
+                    setTitle("Error").
+                    setMessage("You need to have the Facebook App installed")
+                    .show();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.windsoft.se.project.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,7 +11,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.NetworkOnMainThreadException;
+import android.provider.MediaStore;
+import android.view.View;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -69,9 +73,24 @@ public class MediaUtil {
             e.printStackTrace();
         }
         return ThumbnailUtils.extractThumbnail(result, 350,550);
-//        return scaleDown(result, 1000, true);
-
     }
+
+    public static Bitmap getScreenShot(View view) {
+        View screenView = view.getRootView();
+        screenView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
+        screenView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    public static Uri getUriFromBitmap(Context context, Bitmap bitmap) {
+        if (context == null || bitmap == null) return null;
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, bitmap.toString(), null);
+        return Uri.parse(path);
+    }
+
 
 
     private static Bitmap scaleDown(Bitmap realImage, float maxImageSize,

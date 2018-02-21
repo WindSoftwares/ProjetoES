@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Do I Know?</string>
     <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">188590648408479</string>
+    <string name="fb_login_protocol_scheme">fb188590648408479</string>
+
     <string name="do_i_know">Do I Know</string>
     <string name="tv_shows">TV Shows</string>
     <string name="quiz_question">Questão do quiz</string>
