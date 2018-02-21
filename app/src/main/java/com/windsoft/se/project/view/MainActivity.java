@@ -16,11 +16,8 @@ import android.widget.Toast;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
-<<<<<<< HEAD
 import com.windsoft.se.project.view.fragment.ScoreFragment;
 import com.windsoft.se.project.view.fragment.SeasonScreenFragment;
-=======
->>>>>>> ec7a853537d23ea06bb419c30abcf36eb643dded
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
 
 /**
