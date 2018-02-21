@@ -57,6 +57,7 @@ public class SeasonScreenFragment extends Fragment {
     }
 
 
+
     private OnClickSeasonListener getOnClickListener() {
         return position -> {
 
