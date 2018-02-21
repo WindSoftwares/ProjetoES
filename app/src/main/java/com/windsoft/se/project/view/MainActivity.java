@@ -2,12 +2,15 @@ package com.windsoft.se.project.view;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 import com.windsoft.se.project.R;
 import com.windsoft.se.project.model.series.SeriesMock;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
+import com.windsoft.se.project.view.fragment.QuizFragment;
 import com.windsoft.se.project.view.fragment.ScoreFragment;
 import com.windsoft.se.project.view.fragment.SeasonScreenFragment;
 import com.windsoft.se.project.view.fragment.SeriesScreenFragment;
@@ -55,11 +59,31 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void dialogQuiz(){
+        AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.out_quiz);
+        builder.setMessage(R.string.warning_about_quiz).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Quiz atual  = StaticFlow.getActualQuiz();
+                goToSeriesScreen();
+
+            }
+        }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create();
+        builder.show();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_home:
+
                 goToSeriesScreen();
                 return true;
             default:
