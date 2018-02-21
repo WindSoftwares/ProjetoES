@@ -3,11 +3,8 @@ package com.windsoft.se.project.view.fragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +12,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.share.Sharer;
-import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
-import com.windsoft.se.project.FacebookButtonClassTest;
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.util.MediaUtil;
 import com.windsoft.se.project.util.StaticFlow;
 
 import butterknife.BindView;
@@ -113,50 +108,27 @@ public class ScoreFragment extends Fragment {
 
     @OnClick(R.id.shareScore_button)
     public void onClickShareScore() {
-        publicar("20");
+        publishScore();
     }
 
 
-    public void publicar(String pontuacao) {
-
+    public void publishScore() {
         ShareDialog shareDialog = new ShareDialog(this);
-        CallbackManager callbackManager = CallbackManager.Factory.create();
 
-        // this part is optional
-        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-            @Override
-            public void onSuccess(Sharer.Result result) {
-                Log.i("Script", "Ok");
-            }
-
-            @Override
-            public void onCancel() {
-                Log.i("Script", "onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                Log.i("Script", e.getMessage());
-            }
-        });
-        // caso a condição do if seja true, cria um content do tipo sharelink, que abre caixa de texto para usuario digitar
-        // o que quer e publicar.
-        // caso contrário abre um alert dialog dizendo que não consegue compartilhar
-
-        //OBS ESCOLHER LINK E TROCAR PELO WWW.GOOGLE.COM ou pode trocar o endereço url por de uma foto.
-        if (ShareDialog.canShow(ShareLinkContent.class)) {
-            ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                    .setContentUrl(Uri.parse("www.google.com"))
-                    .setContentDescription("Sua pontuação foi: " + pontuacao)
+        if (ShareDialog.canShow(SharePhotoContent.class)) {
+            SharePhoto sharePhoto = new SharePhoto.Builder()
+                    .setBitmap(MediaUtil.getScreenShot(getView()))
                     .build();
-            shareDialog.show(linkContent);
+
+            SharePhotoContent photoContent = new SharePhotoContent.Builder()
+                    .addPhoto(sharePhoto)
+                    .build();
+            shareDialog.show(photoContent, ShareDialog.Mode.AUTOMATIC);
         } else {
             new AlertDialog.Builder(getContext()).
                     setTitle("Error").
-                    setMessage("Não conseguiu Compartilhar")
+                    setMessage("You need to have the Facebook App installed")
                     .show();
         }
     }
-
-
 }

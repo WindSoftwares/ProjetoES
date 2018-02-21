@@ -72,7 +72,7 @@ public class FacebookButtonClassTest extends FragmentActivity {
 
     public void publicar(String pontuacao) {
         // caso a condição do if seja true, cria um content do tipo sharelink, que abre caixa de texto para usuario digitar
-        // o que quer e publicar.
+        // o que quer e publishScore.
         // caso contrário abre um alert dialog dizendo que não consegue compartilhar
 
         //OBS ESCOLHER LINK E TROCAR PELO WWW.GOOGLE.COM ou pode trocar o endereço url por de uma foto.

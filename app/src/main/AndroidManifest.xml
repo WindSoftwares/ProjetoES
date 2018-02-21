@@ -44,6 +44,12 @@
 
         <activity android:name="com.windsoft.se.project.FacebookButtonClassTest">
         </activity>
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider188590648408479"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.windsoft.se.project"
