@@ -76,7 +76,7 @@ public class FacebookButtonClassTest extends FragmentActivity {
         // o que quer e publicar.
         // caso contrário abre um alert dialog dizendo que não consegue compartilhar
 
-        //OBS ESCOLHER LINK E TROCAR PELO WWW.GOOGLE.COM
+        //OBS ESCOLHER LINK E TROCAR PELO WWW.GOOGLE.COM ou pode trocar o endereço url por de uma foto.
         if (ShareDialog.canShow(ShareLinkContent.class)) {
             ShareLinkContent linkContent = new ShareLinkContent.Builder()
                     .setContentUrl(Uri.parse("www.google.com"))
