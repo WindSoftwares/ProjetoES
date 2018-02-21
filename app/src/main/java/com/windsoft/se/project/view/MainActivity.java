@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.windsoft.se.project.R;
+import com.windsoft.se.project.quiz.Quiz;
 import com.windsoft.se.project.util.StaticFlow;
 import com.windsoft.se.project.view.fragment.FavoritesSeriesFragment;
 import com.windsoft.se.project.view.fragment.QuizFragment;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage(R.string.warning_about_quiz).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Quiz atual  = StaticFlow.getActualQuiz();
                 goToSeriesScreen();
 
             }
@@ -79,19 +81,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_home:
-                if(QuizFragment.endOrNot){
-                    dialogQuiz();
-                    return true;
-                }
+
                 goToSeriesScreen();
                 return true;
 
             case R.id.action_favorites:
-                if(QuizFragment.endOrNot){
-                    dialogQuiz();
-                    return true;
-                }
-                else if (mOnFavoritesScreen) {
+
+                 if (mOnFavoritesScreen) {
                     item.setIcon(R.drawable.ic_star_border_black_24dp);
                     goToSeriesScreen(R.anim.enter_from_bottom, R.anim.exit_to_top);
                 } else {
@@ -105,14 +101,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-       if(QuizFragment.endOrNot){
-           dialogQuiz();
-       }else{
-           super.onBackPressed();
-       }
-    }
 
 
 
