@@ -30,4 +30,6 @@
     <string name="you_are_rust">You are rust!</string>
     <string name="almost_there">Almost there!</string>
     <string name="ten_number">10</string>
+    <string name="warning_about_quiz">Sua pontuação não será zerada</string>
+    <string name="out_quiz">Deseja realmente sair?</string>
 </resources>
