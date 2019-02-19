@@ -1,6 +1,6 @@
 package com.windsoft.se.project.contracts;
 
-import com.windsoft.se.project.series.Serie;
+import com.windsoft.se.project.model.series.Series;
 
 import java.util.Set;
 
@@ -10,9 +10,9 @@ import java.util.Set;
 
 public interface ISeriesManager {
 
-    public Serie getSerie(String seriesName);
-    public Set<Serie> getSeries();
-    public Set<Serie> getStarredSeries();
+    public Series getSerie(String seriesName);
+    public Set<Series> getSeries();
+    public Set<Series> getStarredSeries();
     public void starASerie(String seriesName);
     public void unstarASerie(String seriesName);
     public String getSerieInformation(String seriesName);

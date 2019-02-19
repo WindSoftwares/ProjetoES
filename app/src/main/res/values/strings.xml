@@ -1,4 +1,35 @@
 <resources>
-    <string name="app_name">ProjetoES</string>
+    <string name="app_name">Do I Know?</string>
     <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">188590648408479</string>
+    <string name="fb_login_protocol_scheme">fb188590648408479</string>
+
+    <string name="do_i_know">Do I Know</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="quiz_question">Questão do quiz</string>
+    <string name="first_alternative">Resposta 1</string>
+    <string name="alternative">Alternativa</string>
+    <string name="slash">/</string>
+    <string name="no_text">NO_TEXT</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="fail_congrats">Fail</string>
+    <string name="you_are_great">You are great!</string>
+    <string name="you_know_anything">You do not know anything!</string>
+    <string name="action_favorite">favorite</string>
+    <string name="wants_to_reset_the_quiz">Deseja reiniciar o quiz?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="app_label">Do I Know?</string>
+    <string name="search_hint">Buscar séries</string>
+    <string name="no_series_found">No Series Found</string>
+    <string name="necessary_storage_permissio">Storage permission is necessary.</string>
+    <string name="no_network_access">No network access.</string>
+    <string name="action_search">Search</string>
+    <string name="you_are_the_best">You are the best!</string>
+    <string name="you_need_to_practice">You need to practice!</string>
+    <string name="you_are_rust">You are rust!</string>
+    <string name="almost_there">Almost there!</string>
+    <string name="ten_number">10</string>
+    <string name="warning_about_quiz">Sua pontuação não será zerada</string>
+    <string name="out_quiz">Deseja realmente sair?</string>
 </resources>
